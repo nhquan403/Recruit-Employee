@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Be_Vietnam_Pro, Noto_Sans } from 'next/font/google';
 import { ToastProvider } from '@/components/ui/toast';
+import { AuthProvider } from '@/lib/auth-context';
+import { Navbar } from '@/components/navbar';
 import './globals.css';
 
 const beVietnamPro = Be_Vietnam_Pro({
@@ -24,7 +26,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="vi" className={`${beVietnamPro.variable} ${notoSans.variable}`}>
       <body className="min-h-screen bg-page font-sans text-slate-900 antialiased">
-        <ToastProvider>{children}</ToastProvider>
+        <AuthProvider>
+          <ToastProvider>
+            <Navbar />
+            {children}
+          </ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );
