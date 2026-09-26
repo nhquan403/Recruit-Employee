@@ -5,7 +5,13 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { Button } from '@/components/ui/button';
 import { Job } from '@/lib/job-types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+// Server-side fetch (this file only) — inside Docker Compose the frontend container
+// must reach the backend via its service name, not "localhost". API_URL_INTERNAL is a
+// plain runtime env var (never inlined into the client bundle, unlike NEXT_PUBLIC_*),
+// set to http://backend:4000 in docker-compose.yml; everywhere else it falls back to
+// the same public URL the browser uses.
+const API_URL =
+  process.env.API_URL_INTERNAL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
 interface JobsResponse {
   items: Job[];

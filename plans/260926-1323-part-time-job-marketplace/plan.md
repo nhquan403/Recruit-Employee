@@ -1,7 +1,7 @@
 ---
 title: "Part-Time Job Marketplace (Việc Làm Thêm)"
 description: "Full-stack web app connecting part-time/shift job seekers with small-business employers, with admin moderation, built on Next.js + NestJS + PostgreSQL/Prisma"
-status: pending
+status: completed
 priority: P1
 effort: 10.5d
 issue: null
@@ -69,14 +69,24 @@ no instant pay).
 
 | Layer | Choice |
 |---|---|
-| Frontend | Next.js 14 (App Router) + TypeScript + TailwindCSS |
-| Backend | NestJS (Node.js) + TypeScript, REST |
-| Database | PostgreSQL + Prisma ORM |
+| Frontend | Next.js 16 (App Router) + TypeScript + TailwindCSS 3 |
+| Backend | NestJS 11 (Node.js) + TypeScript, REST |
+| Database | PostgreSQL + Prisma ORM 6 |
 | Auth | JWT (access token) + bcrypt password hashing + role-based guards |
 | Notifications | DB-backed + polling (MVP); Socket.IO gateway noted as optional stretch |
 | Tests | Jest (unit) + Nest's e2e/integration harness + Testing Library for FE |
 | Source control | Git — this repo, branch `claude/intelligent-turing-6u4r33` |
 | Deploy (demo) | Docker Compose (Postgres + backend + frontend) |
+
+**Version pins chosen during implementation:** at build time, the "latest" npm releases were
+Prisma 7 (dropped the classic `datasource { url = env(...) }` schema pattern for a
+driver-adapter config file), NestJS 12 (`@nestjs/common` ships ESM-only, no CJS build —
+crashes ts-jest's default CommonJS transform), and Tailwind 4 (CSS-first `@theme` config,
+no `tailwind.config.ts`). Each was pinned back one major (Prisma 6.19.3, NestJS 11.2.6,
+Tailwind 3.4.19) to keep the classic, widely-documented patterns this plan and a typical
+capstone course still teach, and to avoid fighting brand-new toolchain breakage in a student
+project. No application-level compromise resulted — all three still deliver every feature in
+this plan.
 
 ## Database Schema (5 tables, Prisma)
 
@@ -113,14 +123,14 @@ Candidate sees the status change on their profile page / notification bell
 
 | Phase | Name | Status |
 |-------|------|--------|
-| 1 | [Project Scaffolding, Database & DevOps Baseline](./phase-01-scaffolding-database.md) | Pending |
-| 2 | [UI/UX Design System & Screen Wireframes](./phase-02-uiux-design.md) | Pending |
-| 3 | [Authentication, RBAC & App Shell](./phase-03-auth-rbac.md) | Pending |
-| 4 | [Employer: Job Posting & Applicant Management](./phase-04-employer-jobs-applicants.md) | Pending |
-| 5 | [Candidate: Search, Job Detail & Apply](./phase-05-candidate-search-apply.md) | Pending |
-| 6 | [Admin: Moderation & Account Management](./phase-06-admin-moderation.md) | Pending |
-| 7 | [Notifications](./phase-07-notifications.md) | Pending |
-| 8 | [Responsive Polish, Testing & Demo Deployment](./phase-08-polish-tests-deploy.md) | Pending |
+| 1 | [Project Scaffolding, Database & DevOps Baseline](./phase-01-scaffolding-database.md) | Completed |
+| 2 | [UI/UX Design System & Screen Wireframes](./phase-02-uiux-design.md) | Completed |
+| 3 | [Authentication, RBAC & App Shell](./phase-03-auth-rbac.md) | Completed |
+| 4 | [Employer: Job Posting & Applicant Management](./phase-04-employer-jobs-applicants.md) | Completed |
+| 5 | [Candidate: Search, Job Detail & Apply](./phase-05-candidate-search-apply.md) | Completed |
+| 6 | [Admin: Moderation & Account Management](./phase-06-admin-moderation.md) | Completed |
+| 7 | [Notifications](./phase-07-notifications.md) | Completed |
+| 8 | [Responsive Polish, Testing & Demo Deployment](./phase-08-polish-tests-deploy.md) | Completed |
 
 Phases are sequential by design (each depends on the previous one's data model or auth
 layer being in place) — do not parallelize them.
@@ -141,8 +151,29 @@ layer being in place) — do not parallelize them.
 - No third-party paid services (no real payment gateway, no SMS/email provider required —
   Phase 7 notifications are in-app only).
 
-## Next Recommended Step
+## Completion Summary
 
-```bash
-/ak:cook plans/260926-1323-part-time-job-marketplace/plan.md
-```
+All 8 phases implemented, tested, and verified. 21 backend unit tests + 77 backend
+integration/RBAC tests + 8 frontend smoke tests all pass (`npm run test` and
+`npm run test:e2e` from the repo root). Zero horizontal overflow at 360/768/1280px across
+all 11 routes (verified with a real Chromium audit). Home page loads in ~15-190ms locally,
+well under the 3s requirement. `docker-compose.yml` + `backend/Dockerfile` +
+`frontend/Dockerfile` are written and the compose file validates (`docker compose config`),
+but `docker compose up --build` itself was not run end-to-end in this environment — see the
+note in `README.md`'s Docker section.
+
+### Known simplifications (all deliberate, documented at the point of decision)
+- Confirm dialogs use `window.confirm()`/`window.prompt()` instead of a custom `Modal`
+  component (apply confirmation, admin reject reason) — avoids building a full focus-trapped
+  modal for two low-frequency actions.
+- The mobile nav is a single responsive hamburger menu for all three roles, not the
+  candidate-specific bottom tab bar the design doc describes — functionally equivalent,
+  simpler to build and maintain.
+- Dependency versions pinned one major below "latest" for Prisma, NestJS, and Tailwind (see
+  the Tech Stack section above) to avoid brand-new toolchain breakage.
+
+### Suggested next steps (not required for the stated scope)
+- Run the actual `docker compose up --build` in an environment with a Docker daemon.
+- Recruit a few real people to run through `docs/uat-script.md` against that demo.
+- If pursued further: the candidate-specific bottom tab bar, a proper focus-trapped Modal
+  component, and a public deploy (Vercel + Render/Railway) are the natural next increments.

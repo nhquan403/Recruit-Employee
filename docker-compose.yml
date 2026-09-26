@@ -16,5 +16,41 @@ services:
       timeout: 5s
       retries: 10
 
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://parttime:parttime_dev_pw@db:5432/parttime_jobs?schema=public"
+      JWT_SECRET: "change-me-for-any-real-deployment"
+      JWT_EXPIRES_IN: "7d"
+      PORT: 4000
+      SEED_ADMIN_EMAIL: "admin@example.com"
+      SEED_ADMIN_PASSWORD: "Admin@12345"
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: "http://localhost:4000"
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      # Browser-side calls use NEXT_PUBLIC_API_URL (baked in at build time above, since
+      # the browser always reaches the backend via the host's published port). This is
+      # a separate, server-only runtime var for the one server-side fetch (the home page)
+      # so it can reach the backend over the Compose network instead of "localhost".
+      API_URL_INTERNAL: "http://backend:4000"
+    ports:
+      - "3000:3000"
+
 volumes:
   db-data:
