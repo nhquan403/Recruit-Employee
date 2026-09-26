@@ -82,7 +82,7 @@ export class JobsService {
   }
 
   async update(id: string, dto: UpdateJobDto): Promise<Job> {
-    const existing = await this.prisma.job.findUniqueOrThrow({ where: { id } });
+    const existing = await this.getJobOrThrow404(id);
     this.assertSalaryRange(
       dto.salaryMin ?? existing.salaryMin,
       dto.salaryMax ?? existing.salaryMax,
@@ -100,15 +100,26 @@ export class JobsService {
   }
 
   async remove(id: string): Promise<void> {
+    await this.getJobOrThrow404(id);
     await this.prisma.application.deleteMany({ where: { jobId: id } });
     await this.prisma.job.delete({ where: { id } });
   }
 
   async setStatus(id: string, status: JobStatus, rejectReason: string | null): Promise<Job> {
+    await this.getJobOrThrow404(id);
+
     return this.prisma.job.update({
       where: { id },
       data: { status, rejectReason },
     });
+  }
+
+  private async getJobOrThrow404(id: string): Promise<Job> {
+    const job = await this.prisma.job.findUnique({ where: { id } });
+    if (!job) {
+      throw new NotFoundException('Không tìm thấy tin tuyển dụng');
+    }
+    return job;
   }
 
   private assertSalaryRange(min?: number | null, max?: number | null): void {

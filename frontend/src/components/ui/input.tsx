@@ -18,7 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const helperId = `${inputId}-helper`;
 
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex min-w-0 flex-1 flex-col gap-1">
         {label && (
           <label htmlFor={inputId} className="text-sm font-medium text-slate-900">
             {label} {required && <span className="text-muted">(Bắt buộc)</span>}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
@@ -13,8 +14,12 @@ import { useToast } from '@/components/ui/toast';
 
 const statuses: StatusBadgeStatus[] = ['pending', 'viewed', 'interview', 'approved', 'rejected'];
 
-// Dev-only kitchen-sink page — remove or gate before final submission (see Phase 8).
+// Dev-only kitchen-sink page, gated out of production builds (see Phase 8).
 export default function DesignPreviewPage() {
+  if (process.env.NODE_ENV === 'production') {
+    notFound();
+  }
+
   const { showToast } = useToast();
   const [selected, setSelected] = useState(false);
 
