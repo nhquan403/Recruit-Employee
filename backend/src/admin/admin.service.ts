@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { JobsService } from '../jobs/jobs.service';
+import { NotificationsService } from '../notifications/notifications.service';
 import { ListAdminJobsDto } from './dto/list-admin-jobs.dto';
 
 @Injectable()
@@ -8,6 +9,7 @@ export class AdminService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jobsService: JobsService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async listJobs(filters: ListAdminJobsDto) {
@@ -31,11 +33,29 @@ export class AdminService {
   }
 
   async approveJob(id: string) {
-    return this.jobsService.setStatus(id, 'APPROVED', null);
+    const job = await this.jobsService.setStatus(id, 'APPROVED', null);
+
+    await this.notificationsService.create({
+      userId: job.employerId,
+      type: 'JOB_APPROVED',
+      message: `Tin "${job.title}" đã được duyệt và hiển thị công khai`,
+      link: '/nha-tuyen-dung/tin-cua-toi',
+    });
+
+    return job;
   }
 
   async rejectJob(id: string, reason: string | undefined) {
-    return this.jobsService.setStatus(id, 'REJECTED', reason ?? null);
+    const job = await this.jobsService.setStatus(id, 'REJECTED', reason ?? null);
+
+    await this.notificationsService.create({
+      userId: job.employerId,
+      type: 'JOB_REJECTED',
+      message: `Tin "${job.title}" đã bị từ chối${reason ? `: ${reason}` : ''}`,
+      link: '/nha-tuyen-dung/tin-cua-toi',
+    });
+
+    return job;
   }
 
   async listUsers() {

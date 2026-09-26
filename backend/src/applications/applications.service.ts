@@ -6,14 +6,24 @@ import {
 } from '@nestjs/common';
 import { Application, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { NotificationsService } from '../notifications/notifications.service';
 import { EmployerSettableStatus } from './dto/update-application-status.dto';
 import { CreateApplicationDto } from './dto/create-application.dto';
 
 const PRISMA_UNIQUE_CONSTRAINT_ERROR_CODE = 'P2002';
 
+const STATUS_LABELS: Record<EmployerSettableStatus, string> = {
+  VIEWED: 'Đã xem',
+  INTERVIEW: 'Mời phỏng vấn',
+  REJECTED: 'Từ chối',
+};
+
 @Injectable()
 export class ApplicationsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   async create(candidateId: string, dto: CreateApplicationDto): Promise<Application> {
     const job = await this.prisma.job.findUnique({ where: { id: dto.jobId } });
@@ -21,8 +31,9 @@ export class ApplicationsService {
       throw new ConflictException('Tin tuyển dụng không còn nhận hồ sơ ứng tuyển');
     }
 
+    let application: Application;
     try {
-      return await this.prisma.application.create({
+      application = await this.prisma.application.create({
         data: { jobId: dto.jobId, candidateId, message: dto.message },
       });
     } catch (error) {
@@ -34,6 +45,15 @@ export class ApplicationsService {
       }
       throw error;
     }
+
+    await this.notificationsService.create({
+      userId: job.employerId,
+      type: 'APPLICATION_CREATED',
+      message: `Có ứng viên mới ứng tuyển vào "${job.title}"`,
+      link: `/nha-tuyen-dung/tin/${job.id}/ung-vien`,
+    });
+
+    return application;
   }
 
   async findMine(candidateId: string) {
@@ -97,9 +117,18 @@ export class ApplicationsService {
       throw new ForbiddenException('Bạn không có quyền cập nhật hồ sơ ứng tuyển này');
     }
 
-    return this.prisma.application.update({
+    const updated = await this.prisma.application.update({
       where: { id: applicationId },
       data: { status },
     });
+
+    await this.notificationsService.create({
+      userId: application.candidateId,
+      type: 'APPLICATION_STATUS_CHANGED',
+      message: `Đơn ứng tuyển "${application.job.title}" đã chuyển sang trạng thái: ${STATUS_LABELS[status]}`,
+      link: '/ho-so',
+    });
+
+    return updated;
   }
 }

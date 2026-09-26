@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { Button } from '@/components/ui/button';
+import { NotificationBell } from '@/components/notification-bell';
 
 interface NavLink {
   href: string;
@@ -56,6 +57,7 @@ export function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           {user ? (
             <>
+              <NotificationBell />
               <span className="text-sm text-muted">{user.fullName}</span>
               <Button variant="ghost" onClick={logout}>
                 Đăng xuất
@@ -73,17 +75,20 @@ export function Navbar() {
           )}
         </div>
 
-        <button
-          type="button"
-          className="min-h-11 min-w-11 md:hidden"
-          aria-label="Mở menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="block h-0.5 w-6 bg-slate-900" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-slate-900" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-slate-900" />
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          {user && <NotificationBell />}
+          <button
+            type="button"
+            className="min-h-11 min-w-11"
+            aria-label="Mở menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="block h-0.5 w-6 bg-slate-900" />
+            <span className="mt-1.5 block h-0.5 w-6 bg-slate-900" />
+            <span className="mt-1.5 block h-0.5 w-6 bg-slate-900" />
+          </button>
+        </div>
       </div>
 
       {menuOpen && (
