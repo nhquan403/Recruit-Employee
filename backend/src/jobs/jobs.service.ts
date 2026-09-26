@@ -1,8 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { Job, JobStatus } from '@prisma/client';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Job, JobStatus, Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { AuthenticatedUser } from '../auth/auth.types';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { ListJobsDto } from './dto/list-jobs.dto';
 
 @Injectable()
 export class JobsService {
@@ -28,8 +30,55 @@ export class JobsService {
     });
   }
 
-  async findOneOwned(id: string): Promise<Job | null> {
-    return this.prisma.job.findUnique({ where: { id } });
+  async findPublic(filters: ListJobsDto) {
+    const page = filters.page ?? 1;
+    const limit = filters.limit ?? 10;
+
+    const where: Prisma.JobWhereInput = {
+      status: 'APPROVED',
+      ...(filters.area ? { area: filters.area } : {}),
+      ...(filters.shift ? { shift: filters.shift } : {}),
+      ...(filters.q
+        ? {
+            OR: [
+              { title: { contains: filters.q, mode: 'insensitive' } },
+              { description: { contains: filters.q, mode: 'insensitive' } },
+            ],
+          }
+        : {}),
+      ...(filters.salaryMin != null ? { salaryMax: { gte: filters.salaryMin } } : {}),
+      ...(filters.salaryMax != null ? { salaryMin: { lte: filters.salaryMax } } : {}),
+    };
+
+    const [items, total] = await Promise.all([
+      this.prisma.job.findMany({
+        where,
+        orderBy: { createdAt: 'desc' },
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+      this.prisma.job.count({ where }),
+    ]);
+
+    return { items, total, page, limit };
+  }
+
+  async findOneForViewer(id: string, viewer: AuthenticatedUser | undefined): Promise<Job> {
+    const job = await this.prisma.job.findUnique({ where: { id } });
+
+    if (!job) {
+      throw new NotFoundException('Không tìm thấy tin tuyển dụng');
+    }
+
+    const isVisible =
+      job.status === 'APPROVED' ||
+      (viewer && (viewer.id === job.employerId || viewer.role === 'ADMIN'));
+
+    if (!isVisible) {
+      throw new NotFoundException('Không tìm thấy tin tuyển dụng');
+    }
+
+    return job;
   }
 
   async update(id: string, dto: UpdateJobDto): Promise<Job> {

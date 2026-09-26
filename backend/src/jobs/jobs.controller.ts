@@ -1,5 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OptionalJwtAuthGuard } from '../auth/guards/optional-jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
@@ -7,6 +18,7 @@ import { AuthenticatedUser } from '../auth/auth.types';
 import { JobsService } from './jobs.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { ListJobsDto } from './dto/list-jobs.dto';
 import { JobOwnerGuard } from './guards/job-owner.guard';
 
 @Controller('jobs')
@@ -25,6 +37,17 @@ export class JobsController {
   @Roles('EMPLOYER')
   findMine(@CurrentUser() user: AuthenticatedUser) {
     return this.jobsService.findMine(user.id);
+  }
+
+  @Get()
+  findPublic(@Query() query: ListJobsDto) {
+    return this.jobsService.findPublic(query);
+  }
+
+  @Get(':id')
+  @UseGuards(OptionalJwtAuthGuard)
+  findOne(@Param('id') id: string, @CurrentUser() user: AuthenticatedUser | undefined) {
+    return this.jobsService.findOneForViewer(id, user);
   }
 
   @Patch(':id')

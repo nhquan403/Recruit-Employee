@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -7,10 +7,25 @@ import { AuthenticatedUser } from '../auth/auth.types';
 import { JobOwnerGuard } from '../jobs/guards/job-owner.guard';
 import { ApplicationsService } from './applications.service';
 import { UpdateApplicationStatusDto } from './dto/update-application-status.dto';
+import { CreateApplicationDto } from './dto/create-application.dto';
 
 @Controller()
 export class ApplicationsController {
   constructor(private readonly applicationsService: ApplicationsService) {}
+
+  @Post('applications')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('CANDIDATE')
+  create(@CurrentUser() user: AuthenticatedUser, @Body() dto: CreateApplicationDto) {
+    return this.applicationsService.create(user.id, dto);
+  }
+
+  @Get('applications/mine')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('CANDIDATE')
+  findMine(@CurrentUser() user: AuthenticatedUser) {
+    return this.applicationsService.findMine(user.id);
+  }
 
   @Get('jobs/:id/applications')
   @UseGuards(JwtAuthGuard, RolesGuard, JobOwnerGuard)
