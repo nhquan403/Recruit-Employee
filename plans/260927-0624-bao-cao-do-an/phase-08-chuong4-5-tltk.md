@@ -1,7 +1,7 @@
 ---
 phase: 8
 title: "Viết CHƯƠNG 4 (Kết quả nghiên cứu), CHƯƠNG 5, Tài liệu tham khảo, Phụ lục"
-status: pending
+status: completed
 priority: P1
 effort: "1d"
 dependencies: [7]

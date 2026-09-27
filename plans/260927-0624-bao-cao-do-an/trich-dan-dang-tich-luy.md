@@ -1,3 +1,7 @@
+> **ĐÃ HOÀN TẤT Ở PHASE 8** — danh mục cuối cùng, đã sắp theo thứ tự từ điển và đổi số `[n]`
+> khắp Chương 1-3, nằm ở `docs/bao-cao/07-tai-lieu-tham-khao.md`. File này chỉ còn giá trị lịch
+> sử (ghi lại số tạm lúc viết), không dùng để tra cứu số trích dẫn cuối cùng nữa.
+
 # Trích dẫn đang tích luỹ qua các chương (nháp làm việc cho Phase 8)
 
 File tạm, không phải nội dung báo cáo — Phase 8 sẽ gom hết vào

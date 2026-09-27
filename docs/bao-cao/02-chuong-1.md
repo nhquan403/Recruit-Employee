@@ -9,13 +9,13 @@ Mục này khảo sát cả hai nhóm kênh nói trên để làm rõ khoảng t
 
 ## 1.2. Các nền tảng tuyển dụng phổ biến hiện nay
 
-TopCV [1] và VietnamWorks [2] là hai nền tảng tuyển dụng trực tuyến lớn tại Việt Nam, mạnh về
+TopCV [12] và VietnamWorks [13] là hai nền tảng tuyển dụng trực tuyến lớn tại Việt Nam, mạnh về
 việc làm toàn thời gian với hồ sơ ứng viên (CV) chi tiết, quy trình đăng tin và duyệt hồ sơ khá
 đầy đủ nhưng cũng vì vậy mà khá nặng đối với một quán ăn hay cửa hàng nhỏ cần tuyển gấp nhân sự
-cho một ca làm việc. JobStreet [3] có phạm vi hoạt động ở nhiều quốc gia Đông Nam Á, giao diện
+cho một ca làm việc. JobStreet [4] có phạm vi hoạt động ở nhiều quốc gia Đông Nam Á, giao diện
 tìm kiếm phong phú nhưng chưa tối ưu bộ lọc theo khung giờ làm việc linh hoạt kiểu bán thời
 gian. Ở một số thị trường nước ngoài, các nền tảng chuyên biệt cho việc làm thời vụ như Instawork
-[4] và Wonolo [5] cho thấy rõ hơn xu hướng tách riêng thị trường việc làm thời vụ, theo ca khỏi
+[3] và Wonolo [14] cho thấy rõ hơn xu hướng tách riêng thị trường việc làm thời vụ, theo ca khỏi
 thị trường việc làm toàn thời gian — hiển thị trực tiếp mức lương và khung giờ ngay trên danh
 sách tin, cho phép ứng tuyển nhanh trong một thao tác.
 

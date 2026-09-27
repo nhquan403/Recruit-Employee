@@ -13,12 +13,12 @@ Trong hai mô hình render phổ biến của một ứng dụng client-server �
 server-side rendering) và render phía client (CSR, client-side rendering) — Next.js App Router
 cho phép kết hợp cả hai trong cùng một dự án: trang chủ (danh sách tin tuyển dụng) được render
 phía máy chủ để tải nhanh và thân thiện với công cụ tìm kiếm, trong khi các thao tác tương tác
-(lọc, ứng tuyển, cập nhật trạng thái) xử lý phía client sau khi trang đã tải [6].
+(lọc, ứng tuyển, cập nhật trạng thái) xử lý phía client sau khi trang đã tải [7].
 
 ## 2.2. Giao thức và kiến trúc API RESTful
 
 REST (Representational State Transfer) là kiểu kiến trúc API sử dụng các phương thức HTTP chuẩn
-(GET, POST, PATCH, DELETE) để thao tác trên tài nguyên [7]. Mỗi loại tài nguyên trong hệ thống —
+(GET, POST, PATCH, DELETE) để thao tác trên tài nguyên [2]. Mỗi loại tài nguyên trong hệ thống —
 tin tuyển dụng, hồ sơ ứng tuyển, thông báo — có một nhóm endpoint riêng, ví dụ `GET /jobs` để
 lấy danh sách tin, `POST /applications` để tạo một hồ sơ ứng tuyển mới, `PATCH
 /applications/:id` để nhà tuyển dụng cập nhật trạng thái hồ sơ. Dữ liệu trao đổi ở định dạng
@@ -27,11 +27,11 @@ cho nhiều loại giao diện sau này nếu hệ thống mở rộng sang ứn
 
 ## 2.3. Framework front-end và back-end
 
-Next.js [6] (dựa trên React) được chọn cho front-end vì hỗ trợ định tuyến theo cấu trúc thư mục
+Next.js [7] (dựa trên React) được chọn cho front-end vì hỗ trợ định tuyến theo cấu trúc thư mục
 (App Router), tách trang thành các route rõ ràng như đã cài đặt trong dự án (`/viec-lam`,
 `/nha-tuyen-dung`, `/quan-tri`), đồng thời hỗ trợ render phía máy chủ giúp trang chủ tải nhanh.
 
-NestJS [8] (dựa trên Node.js) được chọn cho back-end vì tổ chức mã nguồn theo module rõ ràng —
+NestJS [6] (dựa trên Node.js) được chọn cho back-end vì tổ chức mã nguồn theo module rõ ràng —
 mỗi nhóm chức năng của hệ thống (xác thực, tin tuyển dụng, hồ sơ ứng tuyển, thông báo, quản trị)
 là một module riêng gồm controller, service và, khi cần, guard — cùng cơ chế dependency
 injection sẵn có giúp tái sử dụng logic (ví dụ `RolesGuard` áp dụng lại cho nhiều controller
@@ -51,7 +51,7 @@ giảm lỗi cú pháp và dễ bảo trì khi mô hình dữ liệu thay đổi
 
 ### 2.5.1. Xác thực bằng JSON Web Token
 
-Hệ thống dùng JSON Web Token (JWT) [11] để xác thực người dùng sau khi đăng nhập thành công.
+Hệ thống dùng JSON Web Token (JWT) [5] để xác thực người dùng sau khi đăng nhập thành công.
 Một JWT gồm ba phần nối bằng dấu chấm:
 
 $$\text{JWT} = \text{base64url}(\text{header}) \;.\; \text{base64url}(\text{payload}) \;.\; \text{base64url}(\text{signature})$$
@@ -65,7 +65,7 @@ không cần gửi lại mật khẩu. Trong cấu hình thật của hệ thố
 
 ### 2.5.2. Băm mật khẩu bằng bcrypt
 
-Mật khẩu người dùng không được lưu ở dạng văn bản thuần mà được băm bằng bcrypt [12] trước khi
+Mật khẩu người dùng không được lưu ở dạng văn bản thuần mà được băm bằng bcrypt [11] trước khi
 lưu vào cột `passwordHash`. bcrypt là một hàm băm một chiều có tích hợp salt ngẫu nhiên và một
 hệ số công việc (cost factor) điều chỉnh được, sao cho số vòng lặp tính toán tăng theo cấp số
 nhân với cost factor:
@@ -81,7 +81,7 @@ nghiệm đăng ký/đăng nhập của người dùng thật.
 
 Hệ thống có ba vai trò cố định trong cột `role` của bảng `User`: `CANDIDATE` (ứng viên),
 `EMPLOYER` (nhà tuyển dụng), `ADMIN` (quản trị viên). Việc kiểm soát truy cập theo vai trò
-(role-based access control — RBAC) [13] được cài đặt bằng một decorator tùy chỉnh `@Roles(...)`
+(role-based access control — RBAC) [8] được cài đặt bằng một decorator tùy chỉnh `@Roles(...)`
 đánh dấu vai trò được phép trên từng route, kết hợp với một `RolesGuard` đọc lại metadata đó
 bằng `Reflector` của NestJS: nếu vai trò của người dùng đang đăng nhập không nằm trong danh sách
 được phép, guard trả về lỗi 403 (`ForbiddenException`) trước khi yêu cầu chạm tới logic nghiệp
@@ -92,7 +92,7 @@ vụ. Cách làm này tách rõ luật phân quyền ra khỏi từng hàm xử 
 
 Khi có sự kiện cần thông báo (có ứng viên mới nộp hồ sơ, hồ sơ được cập nhật trạng thái), hệ
 thống cần đưa thông tin đó tới đúng người dùng đang mở ứng dụng. Có hai hướng kỹ thuật phổ biến
-để làm việc này: WebSocket [14] — một giao thức giữ kết nối hai chiều liên tục giữa client và
+để làm việc này: WebSocket [1] — một giao thức giữ kết nối hai chiều liên tục giữa client và
 server để server có thể chủ động đẩy dữ liệu ngay khi sự kiện xảy ra; và polling — client tự
 động gọi lại API theo chu kỳ cố định để hỏi xem có gì mới không.
 

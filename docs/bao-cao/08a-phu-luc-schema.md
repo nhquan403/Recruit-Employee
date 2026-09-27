@@ -1,0 +1,108 @@
+# PHỤ LỤC A. TOÀN VĂN SCHEMA CƠ SỞ DỮ LIỆU
+
+Nội dung dưới đây copy nguyên văn từ `backend/prisma/schema.prisma` tại thời điểm viết báo cáo.
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CANDIDATE
+  EMPLOYER
+  ADMIN
+}
+
+enum JobStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ApplicationStatus {
+  PENDING
+  VIEWED
+  INTERVIEW
+  REJECTED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  role         Role
+  fullName     String
+  phone        String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  profile       Profile?
+  jobs          Job[]           @relation("EmployerJobs")
+  applications  Application[]
+  notifications Notification[]
+}
+
+model Job {
+  id           String    @id @default(uuid())
+  title        String
+  description  String
+  area         String
+  shift        String
+  salaryMin    Int?
+  salaryMax    Int?
+  salaryUnit   String    @default("VND/giờ")
+  requirements String?
+  status       JobStatus @default(PENDING)
+  rejectReason String?
+  employerId   String
+  employer     User      @relation("EmployerJobs", fields: [employerId], references: [id])
+  applications Application[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([status, area])
+}
+
+model Application {
+  id          String            @id @default(uuid())
+  jobId       String
+  job         Job               @relation(fields: [jobId], references: [id])
+  candidateId String
+  candidate   User              @relation(fields: [candidateId], references: [id])
+  status      ApplicationStatus @default(PENDING)
+  message     String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([jobId, candidateId])
+}
+
+model Profile {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id])
+  bio            String?
+  skills         String[] @default([])
+  preferredAreas String[] @default([])
+  avatarUrl      String?
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  message   String
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, isRead])
+}
+```
