@@ -27,7 +27,7 @@ Hình 2.2 thể hiện sơ đồ quan hệ thực thể (ERD) của hệ thống
 Nguồn: tự vẽ dựa trên backend/prisma/schema.prisma
 
 Cơ sở dữ liệu gồm 5 bảng. Bảng 3.1 đến Bảng 3.5 mô tả chi tiết từng bảng, copy nguyên trạng
-tên field và kiểu dữ liệu từ `schema.prisma` — không diễn giải lại theo suy đoán.
+tên field và kiểu dữ liệu từ `schema.prisma`, không diễn giải lại theo suy đoán.
 
 Bảng 3.1. Bảng `User`
 
@@ -143,7 +143,7 @@ thiết kế hệ thống:
    `status = PENDING`, đồng thời tạo một `Notification` gửi cho nhà tuyển dụng sở hữu tin đó.
 3. Nhà tuyển dụng mở trang "Quản lý ứng viên" (`GET /jobs/:id/applications`); lần xem đầu tiên
    này được đánh dấu chuyển trạng thái ứng dụng sang `VIEWED`.
-4. Nhà tuyển dụng chọn "Mời phỏng vấn" hoặc "Từ chối" — frontend gọi `PATCH
+4. Nhà tuyển dụng chọn "Mời phỏng vấn" hoặc "Từ chối", frontend gọi `PATCH
    /applications/:id/status`; backend cập nhật `status` thành `INTERVIEW` hoặc `REJECTED`, đồng
    thời tạo một `Notification` gửi cho ứng viên.
 5. Ứng viên thấy cập nhật thông qua vòng poll `GET /notifications/mine` tiếp theo (tối đa 20

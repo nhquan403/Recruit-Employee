@@ -92,6 +92,16 @@ def parse_file(duong_dan: Path) -> list[Node]:
             i += 1
             continue
 
+        if line == r"\danhmuchinh":
+            nodes.append(Node("danhmuchinh_directive"))
+            i += 1
+            continue
+
+        if line == r"\danhmucbang":
+            nodes.append(Node("danhmucbang_directive"))
+            i += 1
+            continue
+
         if line == r"\khoiky":
             # Khối ký tên: gom các dòng liền sau cho tới dòng trống, không được vỡ đôi khi in.
             i += 1
@@ -205,6 +215,8 @@ def parse_file(duong_dan: Path) -> list[Node]:
             r"\canle",
             r"\hetcanle",
             r"\khoangtrang",
+            r"\danhmuchinh",
+            r"\danhmucbang",
         ):
             para_lines.append(lines[i].strip())
             i += 1

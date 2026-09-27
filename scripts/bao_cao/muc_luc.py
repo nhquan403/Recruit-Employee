@@ -35,4 +35,33 @@ def dung_muc_luc(document, section, headings: list[tuple[int, str]], so_trang: d
             run.bold = True
         p.add_run("\t")
         trang = so_trang.get(text)
-        p.add_run(str(trang) if trang is not None else "…")
+        if trang is not None:
+            p.add_run(str(trang))
+        elif not so_trang:
+            # Lần xuất đầu (chưa đo số trang thật lần nào) — in dấu chờ đo, không gõ số đoán.
+            p.add_run("…")
+        # Đã đo thật (so_trang khác rỗng) nhưng heading này vẫn không có trong đó: đây là mục
+        # thật sự KHÔNG đánh số (VD "MỞ ĐẦU" và các mục con — theo đúng biểu mẫu BM5: "Bắt đầu
+        # đánh số trang từ chương 1", mọi trang trước đó không có số trang in ở chân trang) —
+        # để trống, không phải "chưa đo xong".
+
+
+def dung_danh_sach_co_so_trang(
+    document, section, muc: list[str], so_trang: dict[str, int] | None = None
+) -> None:
+    """Danh mục hình/bảng — cùng cơ chế dot-leader như mục lục, nhưng danh sách phẳng (không
+    thụt lề theo cấp) vì Hình/Bảng không có cấp con."""
+    so_trang = so_trang or {}
+    usable_width = section.page_width - section.left_margin - section.right_margin
+    for nhan in muc:
+        p = document.add_paragraph()
+        p.paragraph_format.tab_stops.add_tab_stop(
+            usable_width, WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS
+        )
+        p.add_run(nhan)
+        p.add_run("\t")
+        trang = so_trang.get(nhan)
+        if trang is not None:
+            p.add_run(str(trang))
+        elif not so_trang:
+            p.add_run("…")

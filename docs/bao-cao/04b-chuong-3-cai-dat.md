@@ -4,7 +4,7 @@ Việc đăng ký chỉ chấp nhận vai trò `CANDIDATE` hoặc `EMPLOYER`
 (`backend/src/auth/dto/register.dto.ts`); tài khoản `ADMIN` không tự đăng ký được mà chỉ được
 tạo sẵn qua script khởi tạo dữ liệu (`backend/prisma/seed.ts`). Mỗi route cần đăng nhập gắn
 `@UseGuards(JwtAuthGuard)` để xác thực token, và route cần giới hạn vai trò gắn thêm
-`@UseGuards(RolesGuard)` cùng decorator `@Roles(...)` như đã trình bày ở mục 2.5.3 — Chương 3
+`@UseGuards(RolesGuard)` cùng decorator `@Roles(...)` như đã trình bày ở mục 2.5.3. Chương 3
 chỉ nêu lại cách áp dụng thật, không lặp lại lý thuyết.
 
 ## 3.6. Cài đặt từng use case
@@ -80,7 +80,7 @@ async create(candidateId: string, dto: CreateApplicationDto) {
 ```
 
 Ràng buộc duy nhất `(jobId, candidateId)` ở cấp cơ sở dữ liệu (mục 3.2) đảm bảo một ứng viên
-không ứng tuyển trùng lặp vào cùng một tin — nếu vi phạm, backend bắt lỗi mã `P2002` của Prisma
+không ứng tuyển trùng lặp vào cùng một tin. Nếu vi phạm, backend bắt lỗi mã `P2002` của Prisma
 và trả về thông báo "Bạn đã ứng tuyển vào tin này rồi" thay vì để lỗi cơ sở dữ liệu lộ ra ngoài.
 
 Hình 1.3 thể hiện trang chi tiết một tin tuyển dụng, nơi ứng viên bấm ứng tuyển.
@@ -126,8 +126,11 @@ Nguồn: chụp từ hệ thống
 
 ## 3.7. Giao diện khác
 
-Ngoài các màn hình đã minh họa theo từng use case ở trên, Hình 3.5 thể hiện trang hồ sơ cá nhân
-của ứng viên (`/ho-so`), nơi ứng viên xem lại thông tin tài khoản của mình.
+Ngoài các màn hình đã minh họa theo từng use case ở trên, hệ thống còn có trang hồ sơ cá nhân
+của ứng viên.
+
+Hình 3.5 thể hiện trang hồ sơ cá nhân của ứng viên (`/ho-so`), nơi ứng viên xem lại thông tin
+tài khoản của mình.
 
 [Hình 3.5]
 Nguồn: chụp từ hệ thống

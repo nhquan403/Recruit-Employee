@@ -263,30 +263,26 @@ sót. Em mong nhận được góp ý của quý thầy cô để hoàn thiện 
 
 # DANH MỤC CÁC HÌNH
 
-(Đối chiếu đầy đủ sau khi Phase 5–8 hoàn tất nội dung — xem `docs/images/bao-cao/README.md`
-để có danh sách hình thật kèm cách tạo.)
+\danhmuchinh
 
 \pagebreak
 
 # DANH MỤC CÁC BẢNG
 
-(Đối chiếu đầy đủ sau khi Phase 5–8 hoàn tất nội dung.)
+\danhmucbang
 
 \pagebreak
 
 # KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT
 
-- RBAC: Role-Based Access Control (Kiểm soát truy cập theo vai trò)
-- JWT: JSON Web Token
 - API: Application Programming Interface
-- REST: Representational State Transfer
-- ORM: Object-Relational Mapping
-- UAT: User Acceptance Testing (Kiểm thử chấp nhận người dùng)
 - GVHD: Giảng viên hướng dẫn
-- SVTH: Sinh viên thực hiện
+- JWT: JSON Web Token
 - MSSV: Mã số sinh viên
-
-(Danh sách sẽ rà lại ở Phase 10 — chỉ giữ từ viết tắt thật sự xuất hiện trong nội dung.)
+- ORM: Object-Relational Mapping
+- RBAC: Role-Based Access Control (Kiểm soát truy cập theo vai trò)
+- REST: Representational State Transfer
+- SVTH: Sinh viên thực hiện
 
 \pagebreak
 

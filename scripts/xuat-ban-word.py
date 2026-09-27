@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -22,7 +23,7 @@ sys.path.insert(0, str(GOC_REPO / "scripts"))
 from bao_cao.cau_hinh import doc_quy_dinh  # noqa: E402
 from bao_cao.docx_builder import BaoCaoBuilder  # noqa: E402
 from bao_cao.markdown_parser import Node, parse_file  # noqa: E402
-from bao_cao.muc_luc import dung_muc_luc  # noqa: E402
+from bao_cao.muc_luc import dung_danh_sach_co_so_trang, dung_muc_luc  # noqa: E402
 
 # Thứ tự file đúng bố cục PDF quy định (mục 2) + kiến trúc thư mục đã chốt trong plan.md.
 FILE_PHAN_DAU = "00-phan-dau.md"
@@ -46,6 +47,34 @@ FILE_DANH_SO_TU_CHUONG_1 = [
 FILE_NOI_DUNG_THEO_THU_TU = FILE_CHUA_DANH_SO + FILE_DANH_SO_TU_CHUONG_1
 
 
+_NHAN_HINH_RE = re.compile(r"^(Hình\s+[\d.]+)\s+thể hiện\s+(.+?)\.?$")
+
+
+def thu_thap_hinh_bang(docs_dir: Path) -> tuple[list[str], list[str]]:
+    """Quét trước toàn bộ nội dung để gom nhãn ngắn cho Danh mục hình / Danh mục bảng — cùng
+    bài toán con gà quả trứng như mục lục (nhãn nằm trong 00-phan-dau.md nhưng Hình/Bảng nằm
+    ở các chương sau)."""
+    danh_sach_hinh: list[str] = []
+    danh_sach_bang: list[str] = []
+    for ten_file in FILE_NOI_DUNG_THEO_THU_TU:
+        duong_dan = docs_dir / ten_file
+        if not duong_dan.exists():
+            continue
+        doan_truoc: str | None = None
+        for node in parse_file(duong_dan):
+            if node.type == "image_placeholder" and node.data.get("caption"):
+                m = _NHAN_HINH_RE.match(node.data["caption"])
+                if m:
+                    danh_sach_hinh.append(f"{m.group(1)}. {m.group(2)[0].upper()}{m.group(2)[1:]}")
+                else:
+                    danh_sach_hinh.append(node.data["caption"])
+            if node.type == "table" and doan_truoc and re.match(r"^Bảng\s+[\d.]+\.", doan_truoc):
+                danh_sach_bang.append(doan_truoc)
+            if node.type == "paragraph":
+                doan_truoc = node.data["text"]
+    return danh_sach_hinh, danh_sach_bang
+
+
 def thu_thap_heading(docs_dir: Path) -> list[tuple[int, str]]:
     """Lượt 1 (chống bài toán con gà quả trứng của mục lục — Phase 2/9): đọc TOÀN BỘ file nội
     dung TRƯỚC khi build .docx, chỉ để lấy danh sách heading thật của mọi chương — mục lục
@@ -67,6 +96,8 @@ def xu_ly_node(
     thu_muc_anh: Path,
     toan_bo_heading: list[tuple[int, str]],
     muc_luc_du_lieu: dict[str, int] | None,
+    danh_sach_hinh: list[str] | None = None,
+    danh_sach_bang: list[str] | None = None,
 ) -> None:
     if node.type == "heading":
         builder.them_heading(node.data["level"], node.data["text"])
@@ -105,6 +136,14 @@ def xu_ly_node(
         builder.them_khoang_trang()
     elif node.type == "mucluc_directive":
         dung_muc_luc(builder.document, builder.document.sections[0], toan_bo_heading, muc_luc_du_lieu)
+    elif node.type == "danhmuchinh_directive":
+        dung_danh_sach_co_so_trang(
+            builder.document, builder.document.sections[0], danh_sach_hinh or [], muc_luc_du_lieu
+        )
+    elif node.type == "danhmucbang_directive":
+        dung_danh_sach_co_so_trang(
+            builder.document, builder.document.sections[0], danh_sach_bang or [], muc_luc_du_lieu
+        )
     else:
         raise ValueError(f"Loại node không xử lý được: {node.type}")
 
@@ -149,6 +188,7 @@ def main() -> None:
     # Lượt 1: chỉ thu thập heading của mọi chương — giải quyết bài toán con gà quả trứng của
     # mục lục (Phase 2/9): 00-phan-dau.md chứa `\mucluc` nhưng heading nằm ở các file sau nó.
     toan_bo_heading = thu_thap_heading(docs_dir)
+    danh_sach_hinh, danh_sach_bang = thu_thap_hinh_bang(docs_dir)
 
     quy_dinh = doc_quy_dinh()
     builder = BaoCaoBuilder(quy_dinh, thu_muc_anh)
@@ -163,7 +203,7 @@ def main() -> None:
             f"Chưa có {phan_dau_path} — chạy Phase 4 (viết phần đầu) trước khi xuất bản."
         )
     for node in parse_file(phan_dau_path):
-        xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu)
+        xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu, danh_sach_hinh, danh_sach_bang)
 
     thieu_file = []
     for ten_file in FILE_CHUA_DANH_SO:
@@ -172,7 +212,7 @@ def main() -> None:
             thieu_file.append(ten_file)
             continue
         for node in parse_file(duong_dan):
-            xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu)
+            xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu, danh_sach_hinh, danh_sach_bang)
         builder.ngat_trang()
 
     # --- Section 2: CHƯƠNG 1 trở đi — đánh số trang bắt đầu lại từ 1 (đúng BM5)
@@ -184,7 +224,7 @@ def main() -> None:
             thieu_file.append(ten_file)
             continue
         for node in parse_file(duong_dan):
-            xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu)
+            xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu, danh_sach_hinh, danh_sach_bang)
         builder.ngat_trang()
 
     if thieu_file:
