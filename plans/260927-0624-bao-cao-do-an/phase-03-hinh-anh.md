@@ -1,7 +1,7 @@
 ---
 phase: 3
 title: "Sinh tài sản hình ảnh thật"
-status: pending
+status: completed
 priority: P1
 effort: "1d"
 dependencies: []
