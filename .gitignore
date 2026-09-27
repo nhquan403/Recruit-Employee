@@ -18,3 +18,7 @@ backend/generated/
 
 __pycache__/
 *.pyc
+
+# Bản .docx/.pdf xuất ra từ scripts/xuat-ban-word.py — build artifact, tái tạo được từ
+# docs/bao-cao/*.md, không phải nguồn.
+/bao-cao/

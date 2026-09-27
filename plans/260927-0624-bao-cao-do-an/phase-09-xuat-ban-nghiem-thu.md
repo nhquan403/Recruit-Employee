@@ -1,7 +1,7 @@
 ---
 phase: 9
 title: "Xuất bản & nghiệm thu đo đạc thật"
-status: pending
+status: completed
 priority: P1
 effort: "1d"
 dependencies: [2, 4, 8]
