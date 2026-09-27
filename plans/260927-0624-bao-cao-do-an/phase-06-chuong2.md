@@ -1,7 +1,7 @@
 ---
 phase: 6
 title: "Viết CHƯƠNG 2. NGHIÊN CỨU LÝ THUYẾT"
-status: pending
+status: completed
 priority: P1
 effort: "1d"
 dependencies: [5]

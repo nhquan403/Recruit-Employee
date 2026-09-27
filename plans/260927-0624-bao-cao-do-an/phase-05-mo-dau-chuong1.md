@@ -1,7 +1,7 @@
 ---
 phase: 5
 title: "Viết MỞ ĐẦU + CHƯƠNG 1. TỔNG QUAN"
-status: pending
+status: completed
 priority: P1
 effort: "1d"
 dependencies: [3]
@@ -75,10 +75,12 @@ toàn bộ dựa trên phạm vi thật đã build, không thêm mục tiêu/tí
    vai trò) — ghi log các con số này để Phase 10 đối chiếu chéo với các chương khác.
 
 ## Todo List
-- [ ] MỞ ĐẦU viết xong, số mục tiêu đã đếm và ghi lại: ___ mục tiêu
-- [ ] CHƯƠNG 1 viết xong, số hệ thống tham khảo đã đếm: ___ hệ thống, đều có trích dẫn `[n]`
-- [ ] Không có câu mở bài sáo rỗng ("trong thời đại công nghệ 4.0" hoặc tương đương)
-- [ ] Không chèn ảnh chụp sản phẩm bên thứ ba
+- [x] MỞ ĐẦU viết xong, số mục tiêu đã đếm và ghi lại: **6 mục tiêu cụ thể**
+- [x] CHƯƠNG 1 viết xong, số hệ thống tham khảo đã đếm: **5 hệ thống** (TopCV, VietnamWorks,
+      JobStreet, Instawork, Wonolo), đều có trích dẫn `[n]` — xem
+      `../260927-0624-bao-cao-do-an/trich-dan-dang-tich-luy.md`
+- [x] Không có câu mở bài sáo rỗng ("trong thời đại công nghệ 4.0" hoặc tương đương)
+- [x] Không chèn ảnh chụp sản phẩm bên thứ ba
 
 ## Success Criteria
 - Mọi con số trong 2 file này (mục tiêu, hệ thống tham khảo, vai trò) khớp chính xác với số
