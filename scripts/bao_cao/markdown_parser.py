@@ -22,6 +22,7 @@ _CAPTION_HINT_RE = re.compile(r"Hình\s+([\d.]+)\s+thể hiện", re.UNICODE)
 _SOURCE_LINE_RE = re.compile(r"^Nguồn:\s*(.*)$")
 _COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 _BLOCK_MATH_START_RE = re.compile(r"^\$\$\s*$")
+_CODE_FENCE_RE = re.compile(r"^```(\w*)\s*$")
 
 
 @dataclass
@@ -170,6 +171,17 @@ def parse_file(duong_dan: Path) -> list[Node]:
             nodes.append(Node("number_list", {"items": items}))
             continue
 
+        if _CODE_FENCE_RE.match(line):
+            ngon_ngu = _CODE_FENCE_RE.match(line).group(1)
+            i += 1
+            code_lines = []
+            while i < len(lines) and lines[i].strip() != "```":
+                code_lines.append(lines[i])
+                i += 1
+            i += 1  # bỏ dòng ``` đóng
+            nodes.append(Node("code_block", {"ngon_ngu": ngon_ngu, "code": "\n".join(code_lines)}))
+            continue
+
         if _BLOCK_MATH_START_RE.match(line):
             i += 1
             math_lines = []
@@ -185,7 +197,7 @@ def parse_file(duong_dan: Path) -> list[Node]:
         i += 1
         while i < len(lines) and lines[i].strip() and not any(
             pat.match(lines[i].strip())
-            for pat in (_HEADING_RE, _BULLET_RE, _NUMBER_RE, _TABLE_ROW_RE, _IMAGE_PLACEHOLDER_RE, _MD_IMAGE_RE)
+            for pat in (_HEADING_RE, _BULLET_RE, _NUMBER_RE, _TABLE_ROW_RE, _IMAGE_PLACEHOLDER_RE, _MD_IMAGE_RE, _CODE_FENCE_RE, _BLOCK_MATH_START_RE)
         ) and lines[i].strip() not in (
             r"\pagebreak",
             r"\khoiky",

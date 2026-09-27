@@ -1,7 +1,7 @@
 ---
 phase: 7
 title: "Viết CHƯƠNG 3. HIỆN THỰC HÓA NGHIÊN CỨU"
-status: pending
+status: completed
 priority: P1
 effort: "1.5d"
 dependencies: [3, 6]

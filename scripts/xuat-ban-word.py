@@ -95,6 +95,8 @@ def xu_ly_node(
         builder.khoi_ky(node.data["lines"])
     elif node.type == "math_block":
         builder.them_cong_thuc_van_ban(node.data["latex"])
+    elif node.type == "code_block":
+        builder.them_khoi_ma(node.data["code"])
     elif node.type == "can_le_bat_dau":
         builder.bat_dau_can_giua()
     elif node.type == "can_le_ket_thuc":

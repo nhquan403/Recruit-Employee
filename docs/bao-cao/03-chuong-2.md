@@ -96,8 +96,8 @@ thống cần đưa thông tin đó tới đúng người dùng đang mở ứng
 server để server có thể chủ động đẩy dữ liệu ngay khi sự kiện xảy ra; và polling — client tự
 động gọi lại API theo chu kỳ cố định để hỏi xem có gì mới không.
 
-Hệ thống Việc Làm Thêm chọn phương án polling: phía front-end gọi định kỳ `GET /notifications`
-mỗi 20 giây (cài đặt trong `frontend/src/lib/use-polling-notifications.ts`) để lấy số thông báo
+Hệ thống Việc Làm Thêm chọn phương án polling: phía front-end gọi định kỳ `GET
+/notifications/mine` và `GET /notifications/mine/unread-count` mỗi 20 giây (cài đặt trong `frontend/src/lib/use-polling-notifications.ts`) để lấy số thông báo
 chưa đọc và danh sách thông báo mới. Lý do chọn polling thay vì WebSocket là để giữ toàn bộ giao
 tiếp trong cùng một giao thức REST đã dùng cho mọi chức năng khác, không phải duy trì thêm một
 kết nối máy chủ riêng (WebSocket gateway) chỉ để phục vụ một tính năng — phù hợp với quy mô một

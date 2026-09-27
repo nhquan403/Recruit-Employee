@@ -303,6 +303,31 @@ class BaoCaoBuilder:
         for p in paragraphs:
             p.paragraph_format.keep_together = True
 
+    def them_khoi_ma(self, code: str) -> None:
+        """Khối code — font Courier New đơn cách, giữ nguyên xuống dòng, có khung nhẹ để phân
+        biệt với văn bản thường (không dùng Table Grid — chỉ tô nền, không cần đường viền đủ 4
+        cạnh của một bảng)."""
+        p = self.document.add_paragraph()
+        p.paragraph_format.space_before = Pt(4)
+        p.paragraph_format.space_after = Pt(4)
+        shading = OxmlElement("w:shd")
+        shading.set(qn("w:val"), "clear")
+        shading.set(qn("w:fill"), "F2F2F2")
+        p.paragraph_format.element.get_or_add_pPr().append(shading)
+        for i, dong in enumerate(code.split("\n")):
+            if i > 0:
+                p.add_run().add_break()
+            run = p.add_run(dong if dong else " ")
+            run.font.name = "Courier New"
+            run.font.size = Pt(10)
+            rpr = run._r.get_or_add_rPr()
+            rFonts = rpr.find(qn("w:rFonts"))
+            if rFonts is None:
+                rFonts = OxmlElement("w:rFonts")
+                rpr.append(rFonts)
+            for attr in ("w:ascii", "w:hAnsi", "w:cs"):
+                rFonts.set(qn(attr), "Courier New")
+
     def them_cong_thuc_van_ban(self, latex: str) -> None:
         """Phương án B cho công thức (Bước 2 mục "công thức"): trình bày dạng văn bản có
         style, dùng khi không render ảnh matplotlib. Giữ nguyên cú pháp LaTeX làm chú thích."""

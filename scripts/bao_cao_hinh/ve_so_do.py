@@ -73,7 +73,7 @@ def ve_kien_truc_tong_quan() -> Path:
 
     polling = _hop(
         ax, (3.1, 1.0), 5.3, 1.0,
-        "Thông báo: frontend gọi GET /notifications mỗi 20 giây\n(DB-backed polling — KHÔNG dùng WebSocket)",
+        "Thông báo: frontend gọi GET /notifications/mine mỗi 20 giây\n(DB-backed polling — KHÔNG dùng WebSocket)",
         mau="#eef7ea", vien="#3f8a3f", fontsize=10,
     )
 
@@ -199,7 +199,7 @@ def ve_luong_ung_tuyen() -> Path:
         ("Nhà tuyển dụng", "Frontend", "Chọn \"Mời phỏng vấn\" / \"Từ chối\""),
         ("Frontend", "Backend API", "PATCH /applications/:id"),
         ("Backend API", "CSDL", "Cập nhật status + tạo Notification cho ứng viên"),
-        ("Ứng viên", "Frontend", "Poll GET /notifications mỗi 20s → thấy cập nhật"),
+        ("Ứng viên", "Frontend", "Poll GET /notifications/mine mỗi 20s → thấy cập nhật"),
     ]
 
     y = 5.1
