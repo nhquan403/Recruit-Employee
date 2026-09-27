@@ -1,7 +1,7 @@
 ---
 phase: 1
 title: "Chốt thông tin còn thiếu & đặc tả quy định máy đọc được"
-status: pending
+status: completed
 priority: P1
 effort: "0.5d"
 dependencies: []
@@ -38,6 +38,14 @@ dung, để không có chỗ nào trong dự án tự diễn giải khác nhau v
 - **TOÀN BỘ câu hỏi trắc nghiệm và thông tin cá nhân bên dưới đã được hỏi và trả lời trong quá
   trình lập kế hoạch (`/ak:plan`) — phase này khi chạy trong `/ak:cook` chỉ cần TRANSCRIBE các
   câu trả lời đã chốt vào `quy-dinh.md`, không cần hỏi lại người dùng lần nữa.**
+
+> **CẬP NHẬT (lúc chạy `/ak:cook`, sau khi có biểu mẫu BM5 chính thức):** người dùng gửi thêm
+> `../nguon/bieu-mau-bm5-trich-xuat.txt` — câu trả lời (a) ở câu hỏi 1 dưới đây ("chờ mẫu") đã
+> hết hiệu lực (mẫu đã có), và câu trả lời (a) ở câu hỏi 2 ("từ MỞ ĐẦU") đã bị **BM5 phủ định
+> trực tiếp** ("Bắt đầu đánh số trang từ chương 1") — người dùng đã đồng ý đổi lại. Chi tiết đầy
+> đủ các thay đổi này nằm ở `docs/bao-cao/quy-dinh.md` mục 3 (nguồn sự thật hiện hành — đọc
+> mục đó, không dùng lại các câu trả lời (a)/(a)/(b) ghi bên dưới làm quyết định cuối cùng, chỉ
+> giữ lại đây làm lịch sử quyết định).
 
 ## Requirements
 

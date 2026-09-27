@@ -1,7 +1,7 @@
 ---
 title: "Quy trình sinh Báo cáo Đồ án Cơ sở ngành từ Markdown → .docx"
 description: "Markdown-as-source pipeline (python-docx) sinh bản .docx ~45 trang cho đồ án Việc Làm Thêm, đúng quy định trình bày của khoa (đã đọc từ PDF) và bám sát đề cương chi tiết đã duyệt"
-status: pending
+status: in-progress
 priority: P1
 effort: 6d
 issue: null
@@ -230,13 +230,16 @@ docs/images/bao-cao/
 scripts/xuat-ban-word.py
 ```
 
-## Môi trường xuất bản — đã kiểm tra thật trong sandbox này
+## Môi trường xuất bản — đã kiểm tra và CÀI ĐẶT thật trong sandbox này (cập nhật ở Phase 2)
 
-| Công cụ | Trạng thái | Ghi chú |
+| Công cụ | Trạng thái sau khi cài | Ghi chú |
 |---|---|---|
-| `python-docx` | Chưa cài, `pip install` dry-run xác nhận tải được bản `1.2.0` | Cài ở Phase 2 |
-| `soffice`/`libreoffice` | **Đã có** (`/usr/bin/soffice`) | Dùng để .docx → .pdf đo số trang thật |
-| `pdfinfo` (poppler-utils) | **Không có** binary này (chỉ có thư viện `libpoppler134`) | Thay bằng `pypdf` (pip, thuần Python) để đếm trang — tương đương về bản chất "đo trên bản xuất thật", chỉ khác công cụ đo |
+| `python-docx` | **Đã cài** `1.2.0` (`pip install`) | `scripts/requirements.txt` |
+| `pypdf` | **Đã cài** `6.19.0` — cần `pip install --force-reinstall cffi` trước đó vì `cryptography` thiếu `_cffi_backend` | Dự phòng đếm trang bằng Python nếu `pdfinfo` không có trên máy khác |
+| `soffice`/`libreoffice-core` | Có sẵn (`/usr/bin/soffice`) nhưng **KHÔNG mở được file .docx/.doc** — thiếu hẳn gói `libreoffice-writer` (`libswdlo.so`), soffice báo "source file could not be loaded" dù exit code 0, không có thông báo lỗi rõ ràng. Xác nhận bằng `strace`. | **Đã cài** `apt-get install libreoffice-writer` — sau đó convert .docx→.pdf hoạt động đúng |
+| `pdfinfo`/`pdftoppm` (poppler-utils) | Ban đầu không có binary (chỉ có thư viện `libpoppler134`) | **Đã cài** `apt-get install poppler-utils` — `pdfinfo \| grep Pages` giờ chạy đúng nguyên văn Bước 6, không cần thay bằng `pypdf` nữa |
+
+**Bài học cho máy khác chạy lại pipeline này:** nếu `soffice --headless --convert-to pdf` báo "source file could not be loaded" mà không có lý do rõ ràng, khả năng cao là thiếu gói `libreoffice-writer` (một số bản cài Docker/CI chỉ có `libreoffice-core`) — cài thêm gói đó trước khi nghi ngờ file .docx bị hỏng.
 
 ## Bảng phase
 
@@ -258,19 +261,29 @@ viết bìa/nhận xét đúng). Phase 2-3 độc lập với nhau, có thể l�
 cần cả hai đã xong (nội dung tham chiếu hình `[Hình X.Y]` cần hình đã tồn tại; script cần
 sẵn để mỗi phase nội dung có thể xuất thử ngay, tránh dồn lỗi định dạng đến cuối).
 
-## Câu hỏi đã hỏi và đã chốt (không còn câu nào mở ở cuối vòng lập kế hoạch này)
+## Câu hỏi đã hỏi và đã chốt
 
-1. Bìa chính/bìa phụ/trang nhận xét "theo mẫu" — **đã chốt: chờ bạn gửi file mẫu (BM...) sau**;
-   Phase 4 tạm bỏ qua 3 trang này khi viết, ghi rõ "chờ mẫu BM chính thức" trong `quy-dinh.md`.
-2. Số trang bắt đầu đếm từ đâu — **đã chốt: bắt đầu từ MỞ ĐẦU = trang 1**, các trang trước đó
-   không đánh số.
-3. Nội dung chân trang — **đã chốt: GVHD bên trái · SVTH bên phải** (quy ước bạn chọn thêm,
-   không phải điều khoản bắt buộc của PDF quy định này — ghi rõ điều này trong `quy-dinh.md`).
-4. Thông tin cá nhân/đề tài — **đã có đủ từ đề cương chi tiết đã gửi** (xem bảng ở mục
-   "Nguồn tham chiếu thứ hai" phía trên): tên đề tài, SVTH, MSSV, lớp, GVHD, khoa, trường,
-   thời gian. Không cần hỏi lại.
-5. Loại đồ án — **đã chốt: Cơ sở ngành** (đề cương gợi ý, bạn xác nhận qua AskUserQuestion) →
-   tiền tố GitHub repo `csn-`.
+**Vòng 1 (lúc lập kế hoạch, trước khi có biểu mẫu BM5):**
+
+1. Bìa chính/bìa phụ/trang nhận xét "theo mẫu" — chờ bạn gửi file mẫu (BM...) sau.
+2. Số trang bắt đầu đếm từ đâu — bắt đầu từ MỞ ĐẦU = trang 1.
+3. Nội dung chân trang — GVHD bên trái · SVTH bên phải.
+4. Thông tin cá nhân/đề tài — đã có đủ từ đề cương chi tiết.
+5. Loại đồ án — Cơ sở ngành → tiền tố GitHub repo `csn-`.
+
+**Vòng 2 (lúc `/ak:cook`, sau khi bạn gửi biểu mẫu BM5 chính thức — 2 câu trả lời ở vòng 1 đã
+ĐỔI LẠI theo bằng chứng mới, xem `docs/bao-cao/quy-dinh.md` mục 3 để biết chi tiết đầy đủ):**
+
+1. Câu 1 (bìa/nhận xét) — **không còn "chờ mẫu"**, BM5 đã có, dùng nguyên văn.
+2. Câu 2 (số trang) — **ĐỔI LẠI: bắt đầu từ CHƯƠNG 1**, đúng BM5 ("Bắt đầu đánh số trang từ
+   chương 1"), không phải từ MỞ ĐẦU như chốt lần đầu.
+3. Câu 3 (chân trang) — giữ nguyên GVHD trái/SVTH phải, nay xác nhận đây LÀ đúng mẫu thật
+   (không còn là lựa chọn tự thêm).
+4. Trang nhận xét cơ quan thực tập (BM5 có, "nếu có") — **không thêm**, đồ án không thực tập
+   doanh nghiệp.
+5. Trang nhận xét GVHD/giảng viên chấm — **thêm cả 2 kiểu** (văn xuôi + biểu mẫu chấm điểm),
+   để trống cho GVHD tự điền tay.
+6. Trường "Khóa" (BM5 yêu cầu, đề cương không có) — **2023–2027**.
 
 **Còn đúng 1 điểm chưa chốt, không thuộc phạm vi định dạng/nội dung nên không chặn Phase 1-8:**
 shortname cho tên GitHub repo nộp bài (`csn-<malop>-<hotenkhongdau>-<shortname>`) — repo code

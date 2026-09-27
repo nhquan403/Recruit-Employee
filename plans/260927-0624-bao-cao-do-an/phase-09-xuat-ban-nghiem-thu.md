@@ -32,12 +32,13 @@ mô tả bằng lời.
   3. Cập nhật `docs/bao-cao/00-phan-dau.md` (hoặc file trung gian) với số trang thật, xuất bản
      lần 2 — đây mới là bản dùng để nghiệm thu cuối. Không được lấy số trang từ lần xuất đầu
      tiên trở lên làm số cuối vì sau khi điền số trang, tổng số trang có thể lệch đi vài dòng.
-- pdfinfo không có trong sandbox — dùng `pypdf` (`from pypdf import PdfReader;
-  len(PdfReader("x.pdf").pages)`) thay thế, đã xác nhận khả dụng ở Phase 2. Ghi rõ trong log
-  nghiệm thu là đã dùng pypdf thay pdfinfo, không giấu sự thay thế này.
+- **Cập nhật ở Phase 2:** `pdfinfo`/`pdftoppm` (poppler-utils) ban đầu không có trong sandbox,
+  nhưng đã cài được bằng `apt-get install poppler-utils` — `pdfinfo | grep Pages` giờ chạy
+  đúng nguyên văn Bước 6, dùng làm công cụ đếm trang CHÍNH. Giữ `pypdf` làm phương án dự phòng
+  (đã cài, đã kiểm chứng hoạt động) nếu chạy trên máy khác không cài được poppler-utils.
 - Toàn bộ 6 bước của "Bước 6" gốc phải chạy tuần tự và dán output thật:
   1. `python3 scripts/xuat-ban-word.py ...` → xuất `.docx`
-  2. `soffice --headless --convert-to pdf ...` rồi đếm trang bằng `pypdf` (thay `pdfinfo`)
+  2. `soffice --headless --convert-to pdf ...` rồi `pdfinfo <file>.pdf | grep Pages`
   3. Đối chiếu số trang với trần trong `quy-dinh.md`
   4. `unzip -p output.docx word/document.xml | grep ...` kiểm font/lề/giãn dòng
   5. Đếm lại mọi con số khẳng định trong bài (mục tiêu, use case, use case, hình, bảng) bằng
@@ -67,8 +68,10 @@ mô tả bằng lời.
 ## Implementation Steps
 1. Chạy xuất bản lần 1, dán nguyên văn lệnh + output (kể cả nếu có warning).
 2. Chuyển PDF bằng `soffice --headless --convert-to pdf`, dán output.
-3. Đếm số trang bằng `pypdf`, dán đoạn script + kết quả số trang thật.
-4. Trích text từng trang bằng `pypdf` để xác định trang bắt đầu của mỗi heading cấp 1, dựng
+3. Đếm số trang bằng `pdfinfo <file>.pdf | grep Pages`, dán kết quả thật.
+4. Trích text từng trang bằng `pypdf` (`PdfReader(...).pages[i].extract_text()`) để xác định
+   trang bắt đầu của mỗi heading cấp 1 — `pdfinfo` chỉ cho tổng số trang, không trích được text
+   từng trang, nên vẫn cần `pypdf` cho riêng bước này — dựng
    bảng "heading → số trang thật".
 5. Cập nhật mục lục trong nguồn Markdown/metadata với số trang thật vừa đo, xuất bản lần 2.
 6. Lặp lại bước 2-3 cho bản xuất lần 2, xác nhận số trang mục lục lần 2 khớp bản xuất lần 2
@@ -89,7 +92,7 @@ mô tả bằng lời.
 
 ## Todo List
 - [ ] Xuất bản lần 1 thành công, output đã dán
-- [ ] Số trang lần 1 đo bằng pypdf, đã dán
+- [ ] Số trang lần 1 đo bằng `pdfinfo`, đã dán
 - [ ] Bảng heading → số trang thật đã dựng từ trích xuất text PDF
 - [ ] Mục lục cập nhật số trang thật, xuất bản lần 2 (và lần 3 nếu cần), ổn định
 - [ ] Font/lề/giãn dòng grep từ `document.xml` khớp `quy-dinh.md`, output đã dán

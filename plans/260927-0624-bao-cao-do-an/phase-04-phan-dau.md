@@ -29,9 +29,26 @@ từ `docs/bao-cao/quy-dinh.md` do Phase 1 tạo ra — không tự đặt tên/
 - Đây là phase **chặn cứng** bởi Phase 1 — không có tên đề tài/SVTH/GVHD thật thì không viết
   được bìa, và viết bìa với tên giả rồi "sửa sau" đúng là kiểu lỗi người dùng đã từng gặp
   (thông tin sai lọt vào bản nộp).
-- Nếu Phase 1 trả về quyết định (a) cho câu hỏi bìa (chờ file mẫu chính thức của trường) —
-  phase này CHỈ viết lời cảm ơn, danh mục, tóm tắt; bìa/nhận xét để trống có ghi chú rõ
-  "chờ mẫu BM chính thức" trong `docs/bao-cao/00-phan-dau.md`, không tự vẽ bìa thay.
+- **CẬP NHẬT sau khi có biểu mẫu BM5 chính thức** (`../nguon/bieu-mau-bm5-trich-xuat.txt`,
+  đọc toàn bộ) — không còn "chờ mẫu" nữa:
+  - Bìa chính/bìa phụ dùng ĐÚNG bố cục và câu chữ BM5 (trường/khoa in đậm size 16 → tên đề
+    tài in đậm size 18-30 tùy độ dài → GVHD/SVTH/MSSV/Lớp/**Khóa** in hoa đậm size 14 → địa
+    điểm-thời gian size 13). BM5 ghi "ĐỒ ÁN THỰC TẬP CHUYÊN NGÀNH"/"CƠ SỞ NGÀNH" tùy trang mẫu
+    — đồ án này là **cơ sở ngành** nên dùng "ĐỒ ÁN THỰC TẬP CƠ SỞ NGÀNH" ở CẢ bìa chính và bìa
+    phụ (BM5 dùng 2 chữ khác nhau ở 2 trang mẫu chỉ vì đó là ví dụ minh họa chung, không phải
+    2 loại bìa khác nhau).
+  - KHÔNG thêm trang "NHẬN XÉT của cơ quan thực tập" (BM5 ghi "nếu có" — đồ án không thực tập
+    doanh nghiệp, người dùng xác nhận bỏ).
+  - Thêm ĐỦ CẢ 2 kiểu trang nhận xét GVHD: (a) văn xuôi ngắn "NHẬN XÉT" và (b) biểu mẫu đầy đủ
+    "BẢN NHẬN XÉT ĐỒ ÁN THỰC TẬP CƠ SỞ NGÀNH (Của giảng viên hướng dẫn)" có tiêu đề "UBND TỈNH
+    TRÀ VINH / TRƯỜNG ĐẠI HỌC TRÀ VINH — CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM / Độc lập – Tự do
+    – Hạnh Phúc" và 8 mục chấm điểm — CẢ HAI để TRỐNG hoàn toàn phần nội dung nhận xét/điểm/ký
+    tên, chỉ có khung + nhãn mục, GVHD tự điền tay. Tương tự cho "NHẬN XÉT của giảng viên chấm"
+    (văn xuôi) + "BẢN NHẬN XÉT... (Của cán bộ chấm đồ án)" (biểu mẫu I-III).
+  - Mục lục: tối đa 4 cấp tiểu mục; tiêu đề chương và mục lớn (cấp 1) in đậm in hoa — khớp với
+    những gì `docx_builder.py`/`muc_luc.py` (Phase 2) đã làm (bold cấp 1, heading gõ sẵn hoa).
+  - Danh mục hình: dòng "Nguồn:" dưới mỗi hình là **bắt buộc thật theo BM5**, không chỉ là yêu
+    cầu tự thêm của người dùng như ghi nhầm ở bản nháp `quy-dinh.md` đầu tiên.
 - Mục lục ở bước này chỉ là khung (danh sách heading, chưa có số trang) — số trang thật chỉ
   có được sau khi xuất bản lần đầu ở Phase 9 (vấn đề "con gà quả trứng" đã ghi trong Phase 2).
   Không điền số trang đoán trước ở đây.
