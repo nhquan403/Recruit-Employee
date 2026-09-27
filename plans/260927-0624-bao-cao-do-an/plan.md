@@ -1,6 +1,6 @@
 ---
-title: "Quy trình sinh Báo cáo Đồ án Chuyên ngành từ Markdown → .docx"
-description: "Markdown-as-source pipeline (python-docx) sinh bản .docx ~45 trang cho đồ án Việc Làm Thêm, đúng quy định trình bày của khoa (đã đọc từ PDF, không suy đoán)"
+title: "Quy trình sinh Báo cáo Đồ án Cơ sở ngành từ Markdown → .docx"
+description: "Markdown-as-source pipeline (python-docx) sinh bản .docx ~45 trang cho đồ án Việc Làm Thêm, đúng quy định trình bày của khoa (đã đọc từ PDF) và bám sát đề cương chi tiết đã duyệt"
 status: pending
 priority: P1
 effort: 6d
@@ -12,21 +12,30 @@ blocks: []
 created: 2026-09-27
 ---
 
-# Quy trình sinh Báo cáo Đồ án Chuyên ngành — Kế hoạch triển khai
+# Quy trình sinh Báo cáo Đồ án Cơ sở ngành — Kế hoạch triển khai
 
 ## Tổng quan
 
 Dựng một pipeline "Markdown là nguồn, Word là bản xuất": toàn bộ nội dung báo cáo đồ án
-chuyên ngành cho dự án **Việc Làm Thêm** (đã code xong 8 phase — xem
+cơ sở ngành cho dự án **Việc Làm Thêm** (đã code xong 8 phase — xem
 `plans/260926-1323-part-time-job-marketplace/`) được viết bằng Markdown trong
 `docs/bao-cao/`, và một script Python (`scripts/xuat-ban-word.py`, dùng `python-docx`)
 dựng ra file `.docx` nộp được — đúng font/lề/giãn dòng/đánh số/mục lục/bảng biểu theo quy
-định của khoa, không sửa tay trong Word.
+định của khoa, không sửa tay trong Word, và bám sát nội dung/cấu trúc của đề cương chi tiết
+đã duyệt (xem mục "Nguồn tham chiếu thứ hai" bên dưới).
 
 Đây KHÔNG phải là kế hoạch viết code sản phẩm (đã xong) — đây là kế hoạch viết **tài liệu
 học thuật** (~45 trang, có hình ảnh chụp thật từ hệ thống, có công thức kỹ thuật) và
 **công cụ xuất bản** nó, dựa 100% trên mã nguồn/schema/API/test đã tồn tại trong repo —
 không bịa số liệu, không suy diễn tính năng chưa build.
+
+**Đối chiếu số trang mục tiêu:** người dùng yêu cầu ~45 trang; PDF quy định cho phép 30-50
+trang nội dung; đề cương tự ước lượng ~55 trang (đề cương ghi rõ đây chỉ là ước lượng, "sẽ
+điều chỉnh theo quy định của khoa"). Dùng ~45 trang của người dùng làm mục tiêu thật (nằm
+trong khung PDF), và dùng tỷ trọng trang giữa các chương trong đề cương (mục 11: Mở đầu 3 ·
+Chương 1 7 · Chương 2 12 · Chương 3+4 gộp 25 · Kết luận 3, tổng 50/55 ≈ đã bỏ phần dư) làm tỷ
+lệ tương đối khi phân bổ ~45 trang thật cho từng chương ở Phase 5-8, không copy nguyên số
+trang tuyệt đối của đề cương.
 
 ## Nguồn quy định (đã đọc trực tiếp, trích dẫn nguyên văn — không suy đoán)
 
@@ -82,11 +91,105 @@ bạn quyết" ở cuối. Cover/bìa chính, bìa phụ, trang nhận xét đ�
 này không kèm file mẫu — cũng cần bạn xác nhận.
 
 ### 4-5. Thực hiện/nộp & Tổ chức báo cáo (mục 4-5)
-Quy định về quản lý GitHub repo (đặt tên `cn-<malop>-<hotenkhongdau>-<shortname>` vì đây là
-đồ án **chuyên ngành**, mời GVHD làm Collaborator, `progress-report/`, cấu trúc `thesis/`)
-và quy trình Hội đồng chấm — không ảnh hưởng đến script/định dạng .docx, nhưng Phase 10 sẽ
-đối chiếu repo hiện tại (`Recruit-Employee`) với cấu trúc thư mục này và báo cáo phần nào
-khớp/thiếu, vì đây cũng là một phần "quy định" của cùng tài liệu.
+Quy định về quản lý GitHub repo (mời GVHD làm Collaborator, `progress-report/`, cấu trúc
+`thesis/`) và quy trình Hội đồng chấm — không ảnh hưởng đến script/định dạng .docx, nhưng
+Phase 10 sẽ đối chiếu repo hiện tại (`Recruit-Employee`) với cấu trúc thư mục này và báo cáo
+phần nào khớp/thiếu, vì đây cũng là một phần "quy định" của cùng tài liệu.
+
+**Tên GitHub repo (mục 4.1 PDF, trích nguyên văn 2 cú pháp):**
+- Cơ sở ngành: `<csn>-<malop>-<hotenkhongdau>-<shortname>` — ví dụ PDF cho:
+  `csn-da21tta-nguyenngocduyen-doixe-nodejs`
+- Chuyên ngành: `<cn>-<malop>-<hotenkhongdau>-<shortname>` — ví dụ PDF cho:
+  `cn-da20tta-letuananh-eshop-springboot`
+
+Đồ án này đã được xác nhận (sau khi đối chiếu với đề cương chi tiết — xem mục dưới) là
+**đồ án cơ sở ngành** → dùng tiền tố `csn-`, KHÔNG phải `cn-` như bản nháp đầu tiên của kế
+hoạch này từng giả định.
+
+## Nguồn tham chiếu thứ hai: Đề cương chi tiết đã có (đọc toàn bộ, trích nguyên văn)
+
+File: `Bui_Anh_Khoa_-_170123594.docx` — "ĐỀ CƯƠNG CHI TIẾT — XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI
+TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG" (12 mục, đã đọc toàn bộ qua trích xuất XML thật, lưu
+bản sao tại `./nguon/de-cuong-chi-tiet-trich-xuat.txt` và 2 hình nhúng tại
+`./nguon/de-cuong-hinh-1.jpeg` (logo Trường Đại học Trà Vinh) và `./nguon/de-cuong-hinh-2.png`
+(sơ đồ kiến trúc gốc trong đề cương)). Người dùng yêu cầu rõ: báo cáo cuối "đừng làm khác
+[đề cương] quá" — đề cương này là khung nội dung bắt buộc phải bám sát, PDF quy định (mục
+trên) là khung hình thức trình bày bắt buộc. Hai nguồn không mâu thuẫn nhau về hình
+thức/font/lề — chỉ khác nhau ở cách chia chương, đã ánh xạ ở bảng dưới.
+
+**Thông tin cá nhân/đề tài (trích nguyên văn từ trang bìa đề cương — dùng thẳng cho
+`quy-dinh.md` ở Phase 1, không cần hỏi lại người dùng):**
+
+| Trường | Giá trị (nguyên văn đề cương) |
+|---|---|
+| Trường | TRƯỜNG ĐẠI HỌC TRÀ VINH (logo xác nhận qua `de-cuong-hinh-1.jpeg`) — đơn vị trực thuộc: TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ |
+| Khoa | KHOA CÔNG NGHỆ THÔNG TIN |
+| Tên đề tài | XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG |
+| SVTH | Bùi Anh Khoa |
+| MSSV | 170123594 |
+| Lớp | DX23TT11 |
+| GVHD | ThS. Trầm Hoàng Nam |
+| Địa điểm - thời gian | Vĩnh Long, tháng 9 năm 2026 |
+| Loại đồ án | Cơ sở ngành (xác nhận qua AskUserQuestion sau khi đề cương gợi ý điều này ở mục 1 — xem "Điều đã sửa lại" bên dưới) |
+
+**Đề xuất shortname repo:** đề cương không tự đặt shortname — cần hỏi người dùng riêng nếu
+họ muốn khác gợi ý `vieclamthem` (repo thật đang tên `Recruit-Employee`, không nhất thiết
+phải trùng tên GitHub repo yêu cầu của quy định — đây là 2 repo khác mục đích: một cái nộp
+theo yêu cầu môn học, một cái là repo code thật đang dùng. Cần hỏi người dùng có tạo repo
+riêng theo đúng cú pháp `csn-...` để nộp, hay dùng lại chính `Recruit-Employee` và đổi tên).
+
+**Ánh xạ cấu trúc đề cương (mục 11, 4 chương) → cấu trúc PDF bắt buộc (5 chương):**
+
+| Đề cương (đã duyệt) | PDF bắt buộc | Ghi chú |
+|---|---|---|
+| Mở đầu (~3tr) | MỞ ĐẦU | Khớp thẳng |
+| Chương 1. Tổng quan (~7tr) | CHƯƠNG 1. TỔNG QUAN | Khớp thẳng — dùng lại mục 4.1-4.4 đề cương |
+| Chương 2. Cơ sở lý thuyết (~12tr) | CHƯƠNG 2. NGHIÊN CỨU LÝ THUYẾT | Khớp thẳng — dùng lại mục 5.1-5.6 đề cương |
+| Chương 3. Phân tích và thiết kế hệ thống (~13tr) | CHƯƠNG 3. HIỆN THỰC HÓA NGHIÊN CỨU (phần kiến trúc — `04a`) | PDF gộp thiết kế+cài đặt vào 1 chương; đề cương tách 2 chương — giữ đúng đề cương bằng cách chia CHƯƠNG 3 của PDF thành 2 file `04a`/`04b` (đã có sẵn trong kiến trúc thư mục dưới đây), KHÔNG đổi tên chương trên bìa/mục lục so với PDF |
+| Chương 4. Cài đặt và kiểm thử (~12tr) | CHƯƠNG 3 (phần cài đặt — `04b`) + CHƯƠNG 4. KẾT QUẢ NGHIÊN CỨU (phần kết quả kiểm thử) | Phần "cài đặt" → `04b`; phần "kết quả kiểm thử" (đề cương mục 7.4, 10.2) → tách sang CHƯƠNG 4 PDF |
+| Kết luận và hướng phát triển (~3tr) | CHƯƠNG 5. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN | Khớp thẳng — dùng lại hướng phát triển đã liệt kê ở mục 11 đề cương |
+| Tài liệu tham khảo, phụ lục | DANH MỤC TÀI LIỆU THAM KHẢO + PHỤ LỤC | Đề cương đã có sẵn 12 tài liệu tham khảo thật, dùng lại nguyên văn — xem dưới |
+
+**Tài liệu tham khảo đã có sẵn trong đề cương (12 mục, IEEE, IETF RFC thật, sách thật) — dùng
+lại NGUYÊN VĂN ở Phase 8, không tự bịa thêm hay đổi nội dung, chỉ được thêm citation mới nếu
+Chương 1-3 cần trích dẫn nguồn mà 12 mục này chưa đủ:**
+Fielding (luận án REST) · Fowler (*Patterns of Enterprise Application Architecture*) ·
+NestJS Docs · Next.js Docs · OWASP Top 10:2021 · PostgreSQL 16 Docs · Prisma Docs ·
+Fette & Melnikov (IETF RFC 6455, WebSocket) · Schwaber & Sutherland (Scrum Guide) ·
+Sommerville (*Software Engineering*, 10th ed) · Jones/Bradley/Sakimura (IETF RFC 7519, JWT) ·
+Martin (*Clean Architecture*). Toàn văn 12 mục nằm trong
+`./nguon/de-cuong-chi-tiet-trich-xuat.txt` (mục 12).
+
+**Chỉ tiêu định lượng đề xuất trong đề cương (mục 10.2) — CHƯƠNG 4 phải đối chiếu số liệu
+THẬT với đúng các chỉ tiêu này, không tự đặt chỉ tiêu khác:**
+
+| Chỉ tiêu (đề cương đề xuất) | Mức đề xuất |
+|---|---|
+| Số use case hoàn thành (trên 7 use case mục 7.2) | Tối thiểu 6/7 |
+| Thời gian tải trang chủ (demo) | Không quá 3 giây |
+| Tỷ lệ kịch bản kiểm thử pass | Từ 90% trở lên |
+| Khả năng dùng trên điện thoại | Hiển thị đúng, thao tác được |
+
+**Điều đã sửa lại so với bản nháp đầu của kế hoạch này (do đề cương cung cấp bằng chứng
+mới, không phải suy đoán):**
+1. Loại đồ án: đề cương ghi "phù hợp quy mô một đồ án **cơ sở ngành**" ở mục 1 — khác với
+   giả định "chuyên ngành" ở bản nháp đầu. Đã hỏi lại người dùng qua AskUserQuestion và được
+   xác nhận: **đúng là đồ án cơ sở ngành** → toàn bộ tham chiếu `cn-` trong kế hoạch này đã
+   sửa thành `csn-`.
+2. Kiến trúc thông báo: sơ đồ gốc trong đề cương (`de-cuong-hinh-2.png`) vẽ "Dịch vụ thông
+   báo (WebSocket / email)" — nhưng hệ thống ĐÃ XÂY DỰNG THẬT dùng DB-backed polling (xem
+   "Kept Deliberately Simple" trong `plans/260926-1323-part-time-job-marketplace/plan.md`),
+   không dùng WebSocket lẫn email. Sơ đồ kiến trúc trong báo cáo (Phase 3, `hinh-2-1`) PHẢI vẽ
+   lại đúng cơ chế polling thật đã cài đặt, không dùng lại nguyên sơ đồ đề cương — đây là một
+   quyết định kỹ thuật đã thay đổi hợp lệ trong quá trình làm (đề cương mục 9 tự dự trù
+   trường hợp này: "Nếu tiến độ chậm, chức năng thông báo thời gian thực sẽ được thay bằng
+   thông báo hiển thị ngay trên giao diện thay vì đẩy tức thời"), Chương 3/4 nên nêu rõ đây là
+   một thay đổi có chủ đích so với đề cương ban đầu, không phải sai sót.
+3. Công nghệ UI: đề cương đề xuất "Ant Design hoặc TailwindCSS" — thực tế đã chọn TailwindCSS
+   3.4.19 (không dùng Ant Design). Chương 2/3 ghi đúng lựa chọn thật, có thể nhắc ngắn gọn lý
+   do chọn Tailwind thay vì liệt kê cả hai như đang cân nhắc.
+4. Triển khai: đề cương đề xuất "Vercel hoặc máy chủ ảo miễn phí" — thực tế dùng Docker
+   Compose làm mục tiêu demo chính (xem Tech Stack trong plan gốc). Ghi đúng lựa chọn thật.
 
 ## Scope Challenge (Bước 0 của kế hoạch)
 
@@ -155,19 +258,31 @@ viết bìa/nhận xét đúng). Phase 2-3 độc lập với nhau, có thể l�
 cần cả hai đã xong (nội dung tham chiếu hình `[Hình X.Y]` cần hình đã tồn tại; script cần
 sẵn để mỗi phase nội dung có thể xuất thử ngay, tránh dồn lỗi định dạng đến cuối).
 
-## Câu hỏi cần bạn quyết (không suy đoán, hỏi ở cuối theo đúng chuẩn ak-plan)
+## Câu hỏi đã hỏi và đã chốt (không còn câu nào mở ở cuối vòng lập kế hoạch này)
 
-Xem chi tiết và lựa chọn ở Phase 1 — tóm tắt:
-1. Bìa chính/bìa phụ/trang nhận xét "theo mẫu" — bạn có file mẫu (BM...) để gửi không?
-2. Số trang bắt đầu đếm từ đâu (PDF không nói)?
-3. Chân trang có cần nội dung gì không (PDF không yêu cầu)?
-4. Thông tin cá nhân/đề tài: tên đề tài chính thức, họ tên SVTH (kèm MSSV, lớp), họ tên
-   GVHD (kèm học hàm/học vị nếu có), tên khoa/trường, học kỳ - năm học, shortname dự án
-   dùng cho tên GitHub repo (`cn-<malop>-<hotenkhongdau>-<shortname>`).
+1. Bìa chính/bìa phụ/trang nhận xét "theo mẫu" — **đã chốt: chờ bạn gửi file mẫu (BM...) sau**;
+   Phase 4 tạm bỏ qua 3 trang này khi viết, ghi rõ "chờ mẫu BM chính thức" trong `quy-dinh.md`.
+2. Số trang bắt đầu đếm từ đâu — **đã chốt: bắt đầu từ MỞ ĐẦU = trang 1**, các trang trước đó
+   không đánh số.
+3. Nội dung chân trang — **đã chốt: GVHD bên trái · SVTH bên phải** (quy ước bạn chọn thêm,
+   không phải điều khoản bắt buộc của PDF quy định này — ghi rõ điều này trong `quy-dinh.md`).
+4. Thông tin cá nhân/đề tài — **đã có đủ từ đề cương chi tiết đã gửi** (xem bảng ở mục
+   "Nguồn tham chiếu thứ hai" phía trên): tên đề tài, SVTH, MSSV, lớp, GVHD, khoa, trường,
+   thời gian. Không cần hỏi lại.
+5. Loại đồ án — **đã chốt: Cơ sở ngành** (đề cương gợi ý, bạn xác nhận qua AskUserQuestion) →
+   tiền tố GitHub repo `csn-`.
+
+**Còn đúng 1 điểm chưa chốt, không thuộc phạm vi định dạng/nội dung nên không chặn Phase 1-8:**
+shortname cho tên GitHub repo nộp bài (`csn-<malop>-<hotenkhongdau>-<shortname>`) — repo code
+thật hiện đang tên `Recruit-Employee`. Cần bạn xác nhận: dùng lại chính repo này (đổi tên/thêm
+remote) hay tạo repo nộp riêng, và tên shortname cụ thể muốn dùng — hỏi ở đầu Phase 10 (không
+ảnh hưởng tới việc viết nội dung .docx trước đó).
 
 ## Next Recommended Step
 
 ```bash
 /ak:cook plans/260927-0624-bao-cao-do-an/plan.md
 ```
-(sau khi trả lời các câu hỏi ở Phase 1 — cook sẽ dừng lại hỏi lại nếu chưa có).
+Toàn bộ thông tin chặn Phase 1-9 đã có đủ — cook có thể chạy thẳng từ Phase 1. Chỉ Phase 10
+(đối chiếu quy ước đặt tên GitHub repo nộp bài) cần hỏi thêm 1 câu về shortname repo trước khi
+hoàn tất.

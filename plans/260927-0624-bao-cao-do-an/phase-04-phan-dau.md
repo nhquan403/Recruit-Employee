@@ -17,9 +17,13 @@ bản tiếng Anh nếu quy định/người dùng yêu cầu). Toàn bộ số 
 từ `docs/bao-cao/quy-dinh.md` do Phase 1 tạo ra — không tự đặt tên/MSSV/GVHD khác.
 
 ## Context Links
-- Nguồn thông tin cá nhân/quyết định hình thức: `docs/bao-cao/quy-dinh.md` (Phase 1)
+- Nguồn thông tin cá nhân/quyết định hình thức: `docs/bao-cao/quy-dinh.md` (Phase 1) — toàn bộ
+  thông tin (trường, khoa, đề tài, SVTH, GVHD...) đã có sẵn từ đề cương, xem bảng trong
+  `plan.md` mục "Nguồn tham chiếu thứ hai" và `./phase-01-chot-thong-tin.md`.
 - Cấu trúc bố cục 5 chương xác nhận từ PDF quy định: `./plan.md`
 - Nội dung tổng quan dự án dùng cho tóm tắt: `plans/260926-1323-part-time-job-marketplace/plan.md`
+  và mục 1-2 của `./nguon/de-cuong-chi-tiet-trich-xuat.txt` (ĐẶT VẤN ĐỀ, MỤC TIÊU) — tóm tắt
+  nên khớp giọng văn và trọng tâm với đoạn ĐẶT VẤN ĐỀ đã có trong đề cương, không lệch hướng.
 
 ## Key Insights
 - Đây là phase **chặn cứng** bởi Phase 1 — không có tên đề tài/SVTH/GVHD thật thì không viết

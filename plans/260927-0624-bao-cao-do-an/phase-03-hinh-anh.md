@@ -20,6 +20,8 @@ từ script (ghi lại script/nguồn dữ liệu).
 - Quy ước đặt tên & vị trí: `./plan.md` (mục Kiến trúc thư mục)
 - Schema/luồng cần vẽ: `plans/260926-1323-part-time-job-marketplace/plan.md` (Database Schema,
   Apply-Flow Contract), `backend/prisma/schema.prisma`
+- Sơ đồ kiến trúc gốc trong đề cương (tham khảo bố cục, KHÔNG dùng nguyên vì đã lỗi thời so
+  với cài đặt thật — xem "Điều đã sửa lại" trong `./plan.md`): `./nguon/de-cuong-hinh-2.png`
 - Playwright đã dùng thành công trong dự án gốc ở Phase 8 của plan Việc Làm Thêm (screenshot
   responsive audit) — tái dùng đúng cấu hình đó, không dựng lại từ đầu.
 
@@ -33,7 +35,7 @@ từ script (ghi lại script/nguồn dữ liệu).
 - Sơ đồ kiến trúc/ERD/tuần tự KHÔNG chụp màn hình từ công cụ vẽ tay — sinh từ mô tả văn bản
   (Mermaid/PlantUML hoặc script Python) để có thể tái tạo lại giống hệt nếu schema đổi, và để
   không lệch với code thật theo thời gian.
-- Đồ án chuyên ngành không có yêu cầu "mỗi hình phải có dòng Nguồn" trong PDF gốc (khác quy
+- Đồ án cơ sở ngành không có yêu cầu "mỗi hình phải có dòng Nguồn" trong PDF gốc (khác quy
   định Trà Vinh ở lượt trước) — nhưng người dùng đã tự yêu cầu điều này ở Bước 2 của chỉ dẫn,
   nên đây là yêu cầu của **người dùng cho quy trình**, áp dụng dù PDF trường không bắt buộc.
 
@@ -63,7 +65,7 @@ hoặc bớt ảnh khi viết, quay lại phase này bổ sung, không tự chè
 ### Nhóm 2 — Sơ đồ kỹ thuật (sinh từ mô tả, không chụp tay)
 | # | File | Nội dung | Nguồn dựng |
 |---|---|---|---|
-| 9 | `hinh-2-1-kien-truc-tong-quan.png` | Sơ đồ khối FE/BE/DB/Docker | Vẽ tay bằng script (matplotlib/graphviz) dựa trên `docker-compose.yml` thật |
+| 9 | `hinh-2-1-kien-truc-tong-quan.png` | Sơ đồ khối FE/BE/DB/Docker | Vẽ tay bằng script (matplotlib/graphviz) dựa trên `docker-compose.yml` thật — **KHÔNG copy nguyên sơ đồ trong đề cương** (`plans/260927-0624-bao-cao-do-an/nguon/de-cuong-hinh-2.png`): sơ đồ đó vẽ "Dịch vụ thông báo (WebSocket / email)", nhưng hệ thống thật cài đặt DB-backed polling, không dùng WebSocket lẫn email — vẽ lại đúng cơ chế polling thật, có thể giữ bố cục tổng thể tương tự cho dễ đối chiếu |
 | 10 | `hinh-2-2-erd.png` | ERD 5 bảng (User/Job/Application/Profile/Notification) | Sinh từ `backend/prisma/schema.prisma` bằng `prisma-erd-generator` nếu cài được, hoặc vẽ tay đúng field/quan hệ đọc trực tiếp từ file schema |
 | 11 | `hinh-2-3-luong-ung-tuyen.png` | Sequence diagram luồng apply → notify → review → notify-back | Vẽ từ đúng "Apply-Flow Contract" trong plan gốc, không thêm bước không có trong code |
 

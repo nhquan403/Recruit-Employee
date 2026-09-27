@@ -21,7 +21,20 @@ Markdown trong `docs/bao-cao/` (00 đến 08b) phải hoàn chỉnh và sẵn s�
 - Số liệu kiểm thử thật: `plans/260926-1323-part-time-job-marketplace/plan.md` (Completion
   Summary), và kết quả chạy `npm run test` / `npm run test:e2e` thật tại thời điểm viết (không
   dùng số liệu cũ nếu test suite đã đổi từ lúc đó).
+- Chỉ tiêu định lượng phải đối chiếu: đề cương chi tiết mục 10.2 (Bảng 9) — xem bảng đầy đủ đã
+  trích lại trong `plan.md` (mục "Nguồn tham chiếu thứ hai"): tối thiểu 6/7 use case, tải
+  trang chủ ≤3s, ≥90% kịch bản kiểm thử pass, dùng được trên điện thoại. CHƯƠNG 4 phải nêu rõ
+  từng chỉ tiêu này đã đạt/chưa đạt bằng số liệu thật, không đặt chỉ tiêu khác.
+- Kết luận/hướng phát triển phải đối chiếu: đề cương mục 11 (đoạn cuối, sau Bảng 10) đã liệt
+  kê sẵn 4 hướng phát triển dự kiến (app di động, gợi ý việc làm theo lịch sử tìm kiếm, xác
+  thực danh tính, đánh giá hai chiều ứng viên-nhà tuyển dụng) — CHƯƠNG 5 dùng lại đúng 4 hướng
+  này làm khung, có thể bổ sung thêm hướng khác nếu có nhưng không được bỏ sót 4 hướng đã đề
+  xuất trong đề cương đã duyệt.
 - Toàn bộ trích dẫn `[n]` tích lũy từ Chương 1-3 (Phase 5-7).
+- Danh mục tài liệu tham khảo: đề cương đã có sẵn ĐÚNG 12 tài liệu thật (mục 12 của
+  `plans/260927-0624-bao-cao-do-an/nguon/de-cuong-chi-tiet-trich-xuat.txt`) — đây là danh mục
+  gốc phải dùng lại nguyên văn (tên tác giả, năm, NXB, URL), chỉ bổ sung thêm mục mới nếu
+  Chương 1-3 trích dẫn nguồn nào ngoài 12 mục này. Không tự bịa thêm dữ liệu cho 12 mục đã có.
 - Danh mục tài liệu tham khảo phải tuân IEEE + không bịa dữ liệu (Bước 4 và Bước 6 của
   chỉ dẫn gốc).
 

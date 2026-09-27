@@ -46,11 +46,23 @@ trong Word (theo đúng "Bước 7" của yêu cầu gốc).
 - Sau khi sửa xong văn phong, phải chạy lại toàn bộ hoặc một phần "Bước 6" (Phase 9) để xác
   nhận số trang/mục lục không bị lệch do nội dung thay đổi — không giả định sửa văn phong không
   ảnh hưởng số trang.
+- Trước các bước đo văn phong, hỏi người dùng câu còn thiếu duy nhất của toàn bộ kế hoạch
+  (xem `plan.md` mục "Câu hỏi đã hỏi và đã chốt"): `shortname` cho tên GitHub repo nộp bài
+  theo cú pháp `csn-<malop>-<hotenkhongdau>-<shortname>` (mục 4.1 PDF — malop=DX23TT11,
+  hotenkhongdau=buianhkhoa), và có tạo repo nộp riêng hay dùng lại chính `Recruit-Employee`.
+  Đối chiếu luôn repo hiện tại với cấu trúc thư mục PDF mục 4.3 yêu cầu (`setup/`, `scr/`,
+  `progress-report/` [bắt buộc], `thesis/` [bắt buộc, có `doc/pdf/html/abs/refs/`], `soft/`,
+  `docker/`) — báo cáo phần nào khớp/thiếu so với `Recruit-Employee` hiện tại, không tự tạo
+  lại toàn bộ cấu trúc này nếu người dùng không yêu cầu (đây là quy định nộp bài, không phải
+  yêu cầu bắt buộc phải tái cấu trúc repo code).
 - Tổng hợp danh sách "việc phải làm tay" — tối thiểu:
   - Ghép trang bìa/biểu mẫu chính thức của trường (nếu Phase 1 chọn phương án chờ mẫu/không có
     mẫu chính thức).
   - Trang nhận xét GVHD cần chữ ký tay thật, không thể tự động.
   - In bìa cứng theo yêu cầu nộp của trường (không kiểm chứng được trong sandbox này).
+  - Tạo/đổi tên GitHub repo theo đúng cú pháp `csn-...` và mời GVHD (ThS. Trầm Hoàng Nam) làm
+    Collaborator (mục 4.1b PDF) — đây là thao tác trên GitHub thật, không tự động hóa được.
+  - Nộp link GitHub repo qua Google Form của bộ môn (mục 4.2b PDF) khi có link biểu mẫu.
   - Bất kỳ trường tài liệu tham khảo còn để trống `[cần bổ sung]` từ Phase 8 — liệt kê đầy đủ
     tại đây để người dùng biết cần điền gì trước khi nộp.
   - Bất kỳ bước trong Phase 9 không chạy được (VD: font Times New Roman không có thật trong máy
@@ -63,6 +75,8 @@ trong Word (theo đúng "Bước 7" của yêu cầu gốc).
 - Update: file(s) Markdown trong `docs/bao-cao/` bị phát hiện vượt mật độ đáng ngờ.
 
 ## Implementation Steps
+0. Hỏi người dùng câu shortname repo còn lại (xem Requirements) trước khi viết phần đối chiếu
+   cấu trúc GitHub repo của báo cáo tổng kết.
 1. Viết `dem-van-phong.py`: mở `.docx` cuối bằng `python-docx`, duyệt `document.paragraphs`,
    với mỗi paragraph đếm số `run` có `run.bold`, đếm `paragraph.text.count("—")`, gom theo
    chương (dựa vào heading style `Heading 1`).

@@ -1,0 +1,385 @@
+TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ
+KHOA CÔNG NGHỆ THÔNG TIN
+
+
+
+
+  ĐỀ CƯƠNG CHI TIẾT
+XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG
+
+
+
+Giảng viên hướng dẫn: ThS. Trầm Hoàng Nam
+Sinh viên thực hiện
+Họ và tên: Bùi Anh Khoa
+MSSV: 170123594
+Lớp: DX23TT11
+
+
+
+
+
+Vĩnh Long, tháng 9 năm 2026
+
+MỤC LỤC
+1. ĐẶT VẤN ĐỀ3
+2. MỤC TIÊU NGHIÊN CỨU3
+2.1. Mục tiêu chung3
+2.2. Mục tiêu cụ thể4
+3. ĐỐI TƯỢNG VÀ PHẠM VI NGHIÊN CỨU4
+3.1. Đối tượng nghiên cứu4
+3.2. Phạm vi và các lựa chọn của đồ án4
+3.3. Những nội dung không thực hiện5
+4. TỔNG QUAN TÌNH HÌNH NGHIÊN CỨU5
+4.1. Các nền tảng tuyển dụng phổ biến hiện nay5
+4.2. Các kênh phi chính thức (mạng xã hội, nhóm chat)6
+4.3. So sánh và khoảng trống thị trường6
+4.4. Hướng tiếp cận của đồ án6
+5. CƠ SỞ LÝ THUYẾT7
+5.1. Kiến trúc ứng dụng web client - server7
+5.2. Giao thức và kiến trúc API RESTful7
+5.3. Framework front-end và back-end7
+5.4. Cơ sở dữ liệu quan hệ và ORM8
+5.5. Xác thực và phân quyền người dùng8
+5.6. Tìm kiếm, lọc và thông báo thời gian thực8
+6. NỘI DUNG VÀ PHƯƠNG PHÁP NGHIÊN CỨU8
+6.1. Quy trình phát triển phần mềm8
+6.2. Thu thập và phân tích yêu cầu8
+6.3. Đặc tả các vai trò người dùng9
+6.4. Thiết kế cơ sở dữ liệu9
+6.5. Công cụ và môi trường phát triển10
+7. THIẾT KẾ HỆ THỐNG10
+7.1. Biểu đồ use case tổng quát10
+7.2. Đặc tả các use case chính10
+7.3. Quy trình ứng tuyển11
+7.4. Kế hoạch kiểm thử11
+8. THIẾT KẾ GIAO DIỆN VÀ CHỨC NĂNG12
+8.1. Sơ đồ chức năng theo vai trò12
+8.2. Các màn hình chính12
+8.3. Luồng sử dụng tiêu biểu13
+8.4. Công nghệ triển khai13
+9. KẾ HOẠCH THỰC HIỆN13
+10. KẾT QUẢ DỰ KIẾN14
+10.1. Sản phẩm14
+10.2. Chỉ tiêu định lượng đề xuất15
+10.3. Đóng góp của đề tài15
+11. CẤU TRÚC BÁO CÁO DỰ KIẾN15
+12. TÀI LIỆU THAM KHẢO16
+
+1. ĐẶT VẤN ĐỀ
+Nhu cầu làm thêm của sinh viên và lao động thời vụ luôn ở mức cao: sinh viên cần thu nhập và kinh nghiệm, các quán ăn, cửa hàng, kho hàng và dịch vụ giao nhận thường xuyên thiếu nhân sự cho ca ngắn hạn, cuối tuần hoặc theo mùa vụ.
+Hiện nay việc tìm và đăng tin việc làm thêm chủ yếu qua các kênh phi chính thức, gây ra nhiều bất tiện:
+Tin tuyển dụng nằm rải rác trên nhiều nhóm Facebook, Zalo, khó tìm kiếm và dễ trôi tin sau vài giờ.
+Không có bộ lọc theo khu vực, khung giờ làm việc hoặc mức lương, người tìm việc phải đọc thủ công từng bài đăng.
+Thiếu cơ chế xác thực người đăng tin, dễ xuất hiện tin tuyển dụng giả hoặc lừa đảo thu phí.
+Nhà tuyển dụng khó theo dõi ai đã ứng tuyển, phải nhắn tin riêng lẻ và dễ bỏ sót ứng viên phù hợp.
+Các nền tảng tuyển dụng lớn như TopCV, VietnamWorks, JobStreet lại tập trung vào việc làm toàn thời gian, quy trình đăng tin và hồ sơ nặng, không phù hợp với các tin tuyển dụng làm thêm ngắn hạn, linh hoạt theo ca.
+Từ thực tế trên, đồ án chọn xây dựng một website kết nối người tìm việc làm thêm với nhà tuyển dụng, tập trung vào việc đăng tin nhanh, tìm kiếm và lọc theo tiêu chí phù hợp với công việc bán thời gian, cùng cơ chế ứng tuyển và quản lý ứng viên đơn giản, phù hợp quy mô một đồ án cơ sở ngành.
+2. MỤC TIÊU NGHIÊN CỨU
+2.1. Mục tiêu chung
+Xây dựng website kết nối người tìm việc làm thêm với nhà tuyển dụng, cho phép đăng tin, tìm kiếm, lọc và ứng tuyển việc làm bán thời gian một cách nhanh chóng, có quản lý tài khoản theo vai trò và trang quản trị kiểm duyệt tin đăng.
+2.2. Mục tiêu cụ thể
+Khảo sát và phân tích yêu cầu của hai nhóm người dùng chính: người tìm việc làm thêm và nhà tuyển dụng (cửa hàng, quán ăn, doanh nghiệp nhỏ).
+Thiết kế cơ sở dữ liệu quan hệ cho người dùng, tin tuyển dụng, hồ sơ ứng tuyển và thông báo.
+Xây dựng API RESTful cho các chức năng đăng tin, tìm kiếm và lọc, ứng tuyển, quản lý hồ sơ và kiểm duyệt.
+Xây dựng giao diện web cho ba vai trò: ứng viên, nhà tuyển dụng và quản trị viên.
+Cài đặt chức năng tìm kiếm, lọc theo khu vực, khung giờ, mức lương và thông báo khi có việc phù hợp hoặc khi hồ sơ được phản hồi.
+Kiểm thử hệ thống theo các kịch bản chính và triển khai một phiên bản chạy được để trình diễn.
+3. ĐỐI TƯỢNG VÀ PHẠM VI NGHIÊN CỨU
+3.1. Đối tượng nghiên cứu
+Người tìm việc làm thêm: chủ yếu là sinh viên và lao động phổ thông cần công việc bán thời gian, theo ca hoặc ngắn hạn.
+Nhà tuyển dụng: cửa hàng, quán ăn, kho hàng, doanh nghiệp nhỏ có nhu cầu tuyển nhân sự thời vụ hoặc bán thời gian.
+Kiến trúc và công nghệ xây dựng ứng dụng web: giao diện, API, cơ sở dữ liệu và xác thực người dùng.
+3.2. Phạm vi và các lựa chọn của đồ án
+Bảng 1. Phạm vi và các lựa chọn của đồ án
+Khía cạnh
+Lựa chọn của đồ án
+Lý do
+Nền tảng
+Website (web app), tối ưu cho cả máy tính và điện thoại
+Không cần cài đặt, triển khai và cập nhật nhanh
+Loại việc làm
+Việc làm thêm, bán thời gian, theo ca hoặc thời vụ
+Đúng nhu cầu thực tế của sinh viên và cửa hàng nhỏ
+Vai trò người dùng
+Ứng viên, nhà tuyển dụng, quản trị viên
+Phân tách rõ quyền hạn và luồng thao tác
+Xác thực
+Đăng ký/đăng nhập bằng email và mật khẩu, phân quyền theo vai trò
+Đơn giản, đủ dùng cho quy mô đồ án
+Kiểm duyệt
+Quản trị viên duyệt tin trước khi hiển thị công khai
+Hạn chế tin giả hoặc tin không phù hợp
+Phạm vi dữ liệu
+Dữ liệu mẫu tự tạo, khu vực demo giới hạn trong một vài thành phố
+Đủ để kiểm thử chức năng và trình diễn
+3.3. Những nội dung không thực hiện
+Ứng dụng di động (mobile app) riêng biệt; đồ án chỉ làm phiên bản web đáp ứng (responsive).
+Thanh toán lương hoặc ký hợp đồng lao động điện tử qua hệ thống.
+Chatbot hoặc gợi ý việc làm bằng trí tuệ nhân tạo; việc lọc và gợi ý dựa trên tiêu chí do người dùng chọn.
+Xác minh danh tính bằng giấy tờ tùy thân hoặc tích hợp cổng thanh toán thật; hệ thống chỉ dừng ở mức xác thực tài khoản cơ bản.
+4. TỔNG QUAN TÌNH HÌNH NGHIÊN CỨU
+Thị trường tuyển dụng trực tuyến tại Việt Nam hiện có nhiều nền tảng, nhưng phần lớn không tập trung vào việc làm thêm ngắn hạn, linh hoạt theo ca.
+4.1. Các nền tảng tuyển dụng phổ biến hiện nay
+TopCV, VietnamWorks, CareerBuilder: mạnh về việc làm toàn thời gian, hồ sơ CV chi tiết, phù hợp doanh nghiệp lớn hơn là quán ăn hay cửa hàng nhỏ cần tuyển gấp theo ca.
+JobStreet, Indeed: có phạm vi quốc tế, giao diện phong phú nhưng chưa tối ưu bộ lọc theo khung giờ làm việc linh hoạt kiểu bán thời gian.
+Các ứng dụng chuyên biệt việc làm thời vụ ở nước ngoài (ví dụ dạng Snagajob) cho thấy xu hướng tách riêng thị trường việc làm thời vụ khỏi việc làm toàn thời gian.
+4.2. Các kênh phi chính thức (mạng xã hội, nhóm chat)
+Phần lớn tin tuyển dụng làm thêm tại Việt Nam vẫn đăng trên các nhóm Facebook như "Việc làm thêm sinh viên", các kênh Zalo hoặc truyền miệng. Ưu điểm là miễn phí và dễ đăng tin, nhưng nhược điểm là tin trôi nhanh, không có công cụ tìm kiếm và lọc, khó kiểm chứng độ tin cậy của người đăng.
+4.3. So sánh và khoảng trống thị trường
+Bảng 2. So sánh các kênh tìm việc làm thêm hiện có
+Kênh
+Ưu điểm
+Hạn chế
+Nền tảng tuyển dụng lớn (TopCV, VietnamWorks)
+Uy tín, hồ sơ ứng viên đầy đủ, nhiều nhà tuyển dụng lớn
+Quy trình nặng, không tối ưu cho tin tuyển gấp, ca ngắn
+Nhóm Facebook, Zalo
+Miễn phí, đăng tin nhanh, tiếp cận cộng đồng sinh viên
+Không tìm kiếm/lọc được, tin trôi nhanh, khó xác thực
+Website của đồ án
+Tập trung vào việc làm thêm, lọc theo ca/khu vực/lương, có kiểm duyệt
+Phạm vi demo còn giới hạn, chưa có lượng người dùng thật
+4.4. Hướng tiếp cận của đồ án
+Từ khoảng trống trên, đồ án xây dựng một website chuyên biệt cho việc làm thêm: đăng tin nhanh gọn, tìm kiếm và lọc theo khu vực, khung giờ và mức lương, có bước kiểm duyệt tin của quản trị viên để giảm rủi ro tin giả, và luồng ứng tuyển đơn giản giúp nhà tuyển dụng theo dõi ứng viên tập trung tại một nơi thay vì nhắn tin rời rạc.
+5. CƠ SỞ LÝ THUYẾT
+5.1. Kiến trúc ứng dụng web client - server
+Ứng dụng web hiện đại thường tách thành ba phần: giao diện người dùng (client) chạy trên trình duyệt, máy chủ ứng dụng (server) xử lý nghiệp vụ và cơ sở dữ liệu lưu trữ thông tin. Client gọi đến server thông qua API, server truy vấn cơ sở dữ liệu rồi trả kết quả về dưới dạng dữ liệu (thường là JSON) để client hiển thị. Cách tách lớp này giúp phát triển, kiểm thử và mở rộng từng phần độc lập.
+
+Hình 1. Kiến trúc tổng thể của hệ thống
+5.2. Giao thức và kiến trúc API RESTful
+REST (Representational State Transfer) là kiểu kiến trúc API dùng các phương thức HTTP chuẩn (GET, POST, PUT, DELETE) để thao tác trên tài nguyên, ví dụ GET /jobs để lấy danh sách tin tuyển dụng, POST /jobs để tạo tin mới. Mỗi tài nguyên có một đường dẫn (endpoint) riêng, dữ liệu trao đổi ở định dạng JSON, giúp API rõ ràng, dễ kiểm thử và dễ dùng lại cho nhiều loại giao diện (web, di động) sau này.
+5.3. Framework front-end và back-end
+Next.js (dựa trên React): xây dựng giao diện theo component, hỗ trợ định tuyến trang và render phía máy chủ giúp tải trang nhanh và thân thiện với công cụ tìm kiếm.
+NestJS (dựa trên Node.js): tổ chức mã back-end theo module, controller và service rõ ràng, có sẵn cơ chế xác thực, kiểm tra dữ liệu đầu vào và tài liệu hóa API.
+5.4. Cơ sở dữ liệu quan hệ và ORM
+Cơ sở dữ liệu quan hệ (ở đây dùng PostgreSQL) tổ chức dữ liệu thành các bảng có quan hệ với nhau, ví dụ một tin tuyển dụng thuộc về một nhà tuyển dụng và có nhiều hồ sơ ứng tuyển. ORM (Object-Relational Mapping, ví dụ Prisma) cho phép thao tác với cơ sở dữ liệu bằng mã lệnh hướng đối tượng thay vì viết trực tiếp câu lệnh SQL, giúp giảm lỗi cú pháp và dễ bảo trì khi cấu trúc dữ liệu thay đổi.
+5.5. Xác thực và phân quyền người dùng
+Hệ thống dùng JWT (JSON Web Token) để xác thực: sau khi đăng nhập thành công, máy chủ cấp một mã token, client đính kèm mã này trong các yêu cầu tiếp theo để chứng minh danh tính mà không cần gửi lại mật khẩu. Phân quyền theo vai trò (role-based access control) quyết định một tài khoản được phép truy cập những chức năng nào: ứng viên chỉ xem và ứng tuyển tin, nhà tuyển dụng chỉ quản lý tin và ứng viên của mình, quản trị viên có quyền kiểm duyệt và quản lý toàn hệ thống.
+5.6. Tìm kiếm, lọc và thông báo thời gian thực
+Chức năng tìm kiếm kết hợp lọc theo nhiều tiêu chí (từ khóa, khu vực, khung giờ, mức lương) được cài đặt bằng truy vấn có điều kiện trên cơ sở dữ liệu. Thông báo thời gian thực (ví dụ khi hồ sơ được nhà tuyển dụng phản hồi) có thể dùng WebSocket để đẩy dữ liệu tức thời từ máy chủ đến trình duyệt mà không cần người dùng tải lại trang, hoặc dùng email làm phương án đơn giản hơn nếu thời gian hạn chế.
+6. NỘI DUNG VÀ PHƯƠNG PHÁP NGHIÊN CỨU
+6.1. Quy trình phát triển phần mềm
+Đồ án áp dụng quy trình phát triển lặp theo hướng Agile rút gọn: chia công việc thành các đợt ngắn (khoảng 1 đến 2 tuần), mỗi đợt hoàn thiện một nhóm chức năng, kiểm thử ngay sau khi cài đặt thay vì dồn kiểm thử vào cuối, giúp phát hiện lỗi sớm và điều chỉnh kịp thời trong thời gian làm đồ án.
+6.2. Thu thập và phân tích yêu cầu
+Yêu cầu được thu thập qua khảo sát nhanh một số sinh viên (vai trò ứng viên) và chủ quán/cửa hàng nhỏ quen thuộc (vai trò nhà tuyển dụng), kết hợp quan sát cách đăng tin hiện tại trên các nhóm mạng xã hội. Yêu cầu chức năng chính gồm: đăng ký/đăng nhập, đăng và quản lý tin tuyển dụng, tìm kiếm và lọc tin, ứng tuyển và theo dõi trạng thái, kiểm duyệt tin. Yêu cầu phi chức năng gồm: giao diện dùng được trên điện thoại, thời gian tải trang hợp lý, dữ liệu người dùng được bảo vệ bằng mật khẩu mã hóa.
+6.3. Đặc tả các vai trò người dùng
+Bảng 3. Vai trò người dùng và quyền hạn chính
+Vai trò
+Quyền hạn chính
+Ứng viên
+Đăng ký/đăng nhập, tìm kiếm và lọc tin, xem chi tiết tin, ứng tuyển, theo dõi trạng thái hồ sơ, cập nhật hồ sơ cá nhân
+Nhà tuyển dụng
+Đăng ký/đăng nhập, đăng và chỉnh sửa tin tuyển dụng, xem danh sách ứng viên đã ứng tuyển, cập nhật trạng thái hồ sơ (đã xem, hẹn phỏng vấn, từ chối)
+Quản trị viên
+Duyệt hoặc từ chối tin tuyển dụng mới, khóa tài khoản vi phạm, xem thống kê tổng quan hệ thống
+6.4. Thiết kế cơ sở dữ liệu
+Cơ sở dữ liệu gồm các bảng chính sau, có quan hệ khóa ngoại với nhau:
+Bảng 4. Các bảng dữ liệu chính
+Bảng
+Mô tả
+Quan hệ chính
+users
+Tài khoản người dùng: email, mật khẩu đã mã hóa, vai trò, thông tin cơ bản
+1 nhà tuyển dụng có nhiều tin tuyển dụng
+jobs
+Tin tuyển dụng: tiêu đề, mô tả, khu vực, khung giờ, mức lương, trạng thái duyệt
+Thuộc về 1 người dùng (nhà tuyển dụng)
+applications
+Hồ sơ ứng tuyển: liên kết ứng viên với tin tuyển dụng, trạng thái xử lý
+Thuộc về 1 ứng viên và 1 tin tuyển dụng
+profiles
+Thông tin bổ sung của ứng viên: kỹ năng, khu vực mong muốn, giới thiệu ngắn
+Thuộc về 1 người dùng (ứng viên)
+notifications
+Thông báo hệ thống gửi tới người dùng khi có cập nhật liên quan
+Thuộc về 1 người dùng
+6.5. Công cụ và môi trường phát triển
+Ngôn ngữ TypeScript cho cả front-end và back-end để thống nhất kiểu dữ liệu; Next.js và thư viện giao diện Ant Design hoặc TailwindCSS cho front-end; NestJS và Prisma ORM cho back-end; PostgreSQL cho cơ sở dữ liệu; Git và GitHub để quản lý mã nguồn; Jest cho kiểm thử; Docker để đóng gói môi trường chạy; Vercel hoặc một máy chủ ảo miễn phí để triển khai bản demo.
+7. THIẾT KẾ HỆ THỐNG
+7.1. Biểu đồ use case tổng quát
+Hệ thống có ba nhóm tác nhân tương ứng ba vai trò: ứng viên, nhà tuyển dụng và quản trị viên. Mỗi nhóm có tập use case riêng nhưng đều đi qua bước đăng ký/đăng nhập chung, mô tả trong bảng dưới đây.
+7.2. Đặc tả các use case chính
+Bảng 5. Danh sách use case chính
+Mã
+Tên use case
+Tác nhân chính
+UC01
+Đăng ký / đăng nhập tài khoản
+Ứng viên, nhà tuyển dụng
+UC02
+Đăng tin tuyển dụng
+Nhà tuyển dụng
+UC03
+Tìm kiếm và lọc tin tuyển dụng
+Ứng viên
+UC04
+Ứng tuyển vào tin tuyển dụng
+Ứng viên
+UC05
+Quản lý danh sách ứng viên đã ứng tuyển
+Nhà tuyển dụng
+UC06
+Duyệt hoặc từ chối tin tuyển dụng
+Quản trị viên
+UC07
+Nhận thông báo cập nhật hồ sơ
+Ứng viên, nhà tuyển dụng
+7.3. Quy trình ứng tuyển
+Quy trình ứng tuyển tiêu biểu, mô tả theo trình tự thao tác của ứng viên và phản hồi từ hệ thống:
+Ứng viên tìm kiếm và lọc tin tuyển dụng theo khu vực, khung giờ hoặc mức lương mong muốn.
+Ứng viên xem chi tiết tin và bấm ứng tuyển; hệ thống tạo một bản ghi hồ sơ ứng tuyển gắn với tin đó.
+Hệ thống gửi thông báo cho nhà tuyển dụng về hồ sơ ứng tuyển mới.
+Nhà tuyển dụng xem hồ sơ, cập nhật trạng thái (đã xem, hẹn phỏng vấn hoặc từ chối).
+Hệ thống gửi thông báo cập nhật trạng thái tới ứng viên.
+7.4. Kế hoạch kiểm thử
+Kiểm thử đơn vị (unit test) cho các hàm xử lý nghiệp vụ ở back-end, ví dụ tạo tin, tính kết quả tìm kiếm, kiểm tra quyền truy cập.
+Kiểm thử tích hợp cho các API chính: đăng ký, đăng nhập, đăng tin, ứng tuyển.
+Kiểm thử chấp nhận người dùng (UAT) bằng cách nhờ một số bạn sinh viên đóng vai ứng viên và nhà tuyển dụng thao tác thử trên bản demo, ghi nhận lỗi và góp ý giao diện.
+Kiểm thử bảo mật cơ bản: kiểm tra không thể truy cập chức năng của vai trò khác khi chưa đăng nhập đúng quyền.
+8. THIẾT KẾ GIAO DIỆN VÀ CHỨC NĂNG
+Giao diện được thiết kế đơn giản, ưu tiên thao tác nhanh trên điện thoại vì phần lớn người tìm việc làm thêm truy cập bằng điện thoại.
+8.1. Sơ đồ chức năng theo vai trò
+Bảng 6. Chức năng chính theo vai trò
+Vai trò
+Chức năng trên giao diện
+Ứng viên
+Trang chủ tìm kiếm, bộ lọc, chi tiết tin, nút ứng tuyển, trang hồ sơ cá nhân, danh sách tin đã ứng tuyển và trạng thái
+Nhà tuyển dụng
+Trang đăng tin, danh sách tin đã đăng, danh sách ứng viên theo từng tin, cập nhật trạng thái hồ sơ
+Quản trị viên
+Danh sách tin chờ duyệt, thao tác duyệt/từ chối, danh sách tài khoản, thống kê tổng quan
+8.2. Các màn hình chính
+Trang chủ: thanh tìm kiếm theo từ khóa, bộ lọc khu vực/khung giờ/mức lương, danh sách tin tuyển dụng nổi bật.
+Trang chi tiết tin tuyển dụng: mô tả công việc, yêu cầu, mức lương, khung giờ, nút ứng tuyển.
+Trang đăng tin (nhà tuyển dụng): biểu mẫu nhập thông tin tin tuyển dụng.
+Trang quản lý ứng viên (nhà tuyển dụng): danh sách hồ sơ ứng tuyển theo từng tin, nút cập nhật trạng thái.
+Trang hồ sơ cá nhân (ứng viên): thông tin cơ bản, kỹ năng, danh sách tin đã ứng tuyển.
+Trang quản trị: danh sách tin chờ duyệt và danh sách tài khoản.
+8.3. Luồng sử dụng tiêu biểu
+Một ứng viên mới truy cập trang chủ, tìm việc theo khu vực mong muốn, lọc theo khung giờ rảnh, mở một tin phù hợp, đăng ký tài khoản nếu chưa có rồi ứng tuyển; sau đó theo dõi trạng thái hồ sơ ở trang cá nhân và nhận thông báo khi nhà tuyển dụng phản hồi.
+8.4. Công nghệ triển khai
+Bảng 7. Công nghệ theo từng tầng của hệ thống
+Tầng
+Công nghệ
+Giao diện (front-end)
+Next.js, React, TailwindCSS hoặc Ant Design
+Máy chủ API (back-end)
+NestJS (Node.js), kiến trúc RESTful
+Cơ sở dữ liệu
+PostgreSQL, Prisma ORM
+Xác thực
+JWT, phân quyền theo vai trò
+Triển khai
+Docker, Vercel hoặc máy chủ ảo miễn phí
+9. KẾ HOẠCH THỰC HIỆN
+Đồ án thực hiện trong 8 tuần, chia thành ba giai đoạn: phân tích và thiết kế (tuần 1–2), xây dựng chức năng (tuần 3–6), kiểm thử, hoàn thiện báo cáo và bảo vệ (tuần 7–8).
+Bảng 8. Kế hoạch thực hiện theo tuần
+Tuần
+Công việc
+Sản phẩm đầu ra
+1
+Chốt đề tài, khảo sát nhanh nhu cầu, phân tích yêu cầu chức năng và phi chức năng, thiết kế use case
+Đề cương được duyệt; danh sách yêu cầu và use case
+2
+Thiết kế cơ sở dữ liệu, dựng khung dự án front-end và back-end, cài đặt xác thực đăng ký/đăng nhập
+Sơ đồ dữ liệu; khung dự án chạy được; chức năng đăng nhập
+3
+Cài đặt chức năng đăng tin, chỉnh sửa tin tuyển dụng (nhà tuyển dụng)
+Chức năng đăng và quản lý tin hoàn chỉnh
+4
+Cài đặt tìm kiếm, lọc tin theo khu vực/khung giờ/mức lương và trang chi tiết tin
+Chức năng tìm kiếm và lọc hoàn chỉnh
+5
+Cài đặt chức năng ứng tuyển, quản lý danh sách ứng viên và cập nhật trạng thái hồ sơ
+Luồng ứng tuyển đầu-cuối hoàn chỉnh
+6
+Cài đặt trang quản trị (duyệt tin, quản lý tài khoản), thông báo cập nhật trạng thái, hoàn thiện giao diện responsive
+Trang quản trị và thông báo hoàn chỉnh
+7
+Kiểm thử chức năng và UAT, sửa lỗi, triển khai bản demo, viết các chương còn lại của báo cáo
+Bản demo triển khai; bản nháp báo cáo
+8
+Hoàn thiện báo cáo theo góp ý, làm slide, tập dượt bảo vệ, chuẩn bị nộp
+Báo cáo, slide và mã nguồn để nộp và bảo vệ
+Các phần lý thuyết và tổng quan nên được viết song song với tuần 1 đến 4 để hai tuần cuối không bị dồn việc. Nếu tiến độ chậm, chức năng thông báo thời gian thực sẽ được thay bằng thông báo hiển thị ngay trên giao diện thay vì đẩy tức thời.
+10. KẾT QUẢ DỰ KIẾN
+10.1. Sản phẩm
+Báo cáo đồ án trình bày cơ sở lý thuyết, phân tích thiết kế, quá trình xây dựng và kiểm thử hệ thống.
+Mã nguồn front-end và back-end, kèm hướng dẫn cài đặt và chạy lại hệ thống.
+Cơ sở dữ liệu mẫu và tài liệu mô tả cấu trúc dữ liệu.
+Website chạy được với đầy đủ ba vai trò: ứng viên, nhà tuyển dụng và quản trị viên.
+10.2. Chỉ tiêu định lượng đề xuất
+Bảng 9. Chỉ tiêu định lượng đề xuất
+Chỉ tiêu
+Mức đề xuất
+Số chức năng chính hoàn thành (trong 7 use case ở mục 7.2)
+Tối thiểu 6/7
+Thời gian tải trang chủ (trên môi trường demo)
+Không quá 3 giây
+Tỷ lệ kịch bản kiểm thử chức năng đạt (pass)
+Từ 90% trở lên
+Khả năng sử dụng trên điện thoại
+Giao diện hiển thị đúng và thao tác được trên màn hình điện thoại phổ biến
+Các mức trên là đề xuất ban đầu, sẽ điều chỉnh lại cho sát thực tế sau khi có bản chạy thử ở tuần 4 và thống nhất với giảng viên hướng dẫn.
+10.3. Đóng góp của đề tài
+Một hệ thống demo chuyên biệt cho việc làm thêm, khác với các nền tảng tuyển dụng việc làm toàn thời gian hiện có.
+Bộ lọc theo khu vực, khung giờ và mức lương phù hợp đặc thù công việc bán thời gian, thời vụ.
+Một bộ mã nguồn và tài liệu thiết kế có thể tái sử dụng hoặc mở rộng cho các đồ án, dự án tương tự sau này.
+11. CẤU TRÚC BÁO CÁO DỰ KIẾN
+Báo cáo hoàn chỉnh dự kiến dài khoảng 55 trang, chưa tính tài liệu tham khảo và phụ lục. Số trang chỉ là ước lượng và sẽ điều chỉnh theo quy định của khoa.
+Bảng 10. Cấu trúc báo cáo dự kiến
+Phần
+Nội dung chính
+Số trang ước lượng
+Mở đầu
+Lý do chọn đề tài, mục tiêu, đối tượng và phạm vi, bố cục báo cáo
+3
+Chương 1. Tổng quan
+Thực trạng tìm việc làm thêm, các nền tảng liên quan, khoảng trống thị trường
+7
+Chương 2. Cơ sở lý thuyết
+Kiến trúc web, API RESTful, framework, cơ sở dữ liệu, xác thực
+12
+Chương 3. Phân tích và thiết kế hệ thống
+Yêu cầu, use case, thiết kế cơ sở dữ liệu, thiết kế giao diện
+13
+Chương 4. Cài đặt và kiểm thử
+Chi tiết cài đặt chức năng, kịch bản kiểm thử, kết quả
+12
+Kết luận và hướng phát triển
+Kết quả đạt được, hạn chế, hướng mở rộng
+3
+Tài liệu tham khảo, phụ lục
+Danh mục tài liệu, mã nguồn chính, sơ đồ chi tiết
+Theo nhu cầu
+Các hướng phát triển dự kiến nêu trong phần kết luận gồm: xây dựng ứng dụng di động, bổ sung gợi ý việc làm theo lịch sử tìm kiếm, tích hợp xác thực danh tính và đánh giá hai chiều giữa ứng viên và nhà tuyển dụng.
+12. TÀI LIỆU THAM KHẢO
+Danh mục xếp theo thứ tự từ điển (họ tác giả đầu tiên hoặc tên tổ chức), đánh số [1] đến [12] và trích dẫn trong bài theo số thứ tự này, theo định dạng IEEE. Các tài liệu kỹ thuật (tài liệu chính thức của framework, thư viện) cần kiểm tra lại đường dẫn và phiên bản trước khi đưa vào báo cáo chính thức.
+[1] R. T. Fielding, "Architectural styles and the design of network-based software architectures," Ph.D. dissertation, Univ. of California, Irvine, 2000.
+[2] M. Fowler, Patterns of Enterprise Application Architecture. Boston, MA: Addison-Wesley, 2002.
+[3] NestJS, "NestJS – A progressive Node.js framework," NestJS Documentation. [Online]. Available: https://docs.nestjs.com
+[4] Next.js, "Next.js Documentation," Vercel. [Online]. Available: https://nextjs.org/docs
+[5] OWASP Foundation, "OWASP Top 10:2021 – The ten most critical web application security risks," 2021. [Online]. Available: https://owasp.org/Top10
+[6] PostgreSQL Global Development Group, "PostgreSQL 16 Documentation," 2024. [Online]. Available: https://www.postgresql.org/docs
+[7] Prisma, "Prisma ORM Documentation," 2024. [Online]. Available: https://www.prisma.io/docs
+[8] I. Fette and A. Melnikov, "The WebSocket Protocol," IETF RFC 6455, Dec. 2011.
+[9] K. Schwaber and J. Sutherland, "The Scrum Guide: The definitive guide to Scrum," 2020. [Online]. Available: https://scrumguides.org
+[10] I. Sommerville, Software Engineering, 10th ed. Boston, MA: Pearson, 2015.
+[11] M. Jones, J. Bradley, and N. Sakimura, "JSON Web Token (JWT)," IETF RFC 7519, May 2015.
+[12] R. C. Martin, Clean Architecture: A Craftsman's Guide to Software Structure and Design. Boston, MA: Prentice Hall, 2017.
+
+
+NHẬN XÉT CỦA GIÁO VIÊN HƯỚNG DẪN
+
+
+
+
+
+
+
+
+
+Vĩnh Long, ngày ….. tháng …… năm ……
+Giáo viên hướng dẫn
+(Ký tên và ghi rõ họ tên)

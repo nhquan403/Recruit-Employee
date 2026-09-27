@@ -17,12 +17,21 @@ thuật liên quan khi có (băm mật khẩu, JWT, chuẩn hóa quan hệ CSDL)
 
 ## Context Links
 - Danh sách công nghệ thật: `plans/260926-1323-part-time-job-marketplace/plan.md` (Tech Stack)
+- Khung nội dung bắt buộc bám sát: đề cương chi tiết —
+  `plans/260927-0624-bao-cao-do-an/nguon/de-cuong-chi-tiet-trich-xuat.txt` mục 5.1-5.6 (kiến
+  trúc client-server, REST API, framework front-end/back-end, CSDL quan hệ và ORM, xác thực
+  JWT/RBAC, tìm kiếm-lọc-thông báo) — 6 mục con của Chương 2 trong file này ánh xạ 1:1 với 6
+  mục con đã liệt kê ở Requirements, khai triển đầy đủ hơn bản đề cương, không chỉ diễn giải
+  lại nguyên câu ngắn.
 - Chi tiết cài đặt để đối chiếu lý thuyết ↔ thực hành: `backend/src/auth/`,
   `backend/prisma/schema.prisma`
-- Quy định trích dẫn IEEE: `docs/bao-cao/quy-dinh.md`
+- Quy định trích dẫn IEEE: `docs/bao-cao/quy-dinh.md`; 12 tài liệu tham khảo đã có sẵn trong
+  đề cương (mục 12 của file trích xuất trên) — ưu tiên dùng lại các nguồn này khi trích dẫn
+  NestJS/Next.js/PostgreSQL/Prisma/JWT/OWASP, không tự tìm nguồn khác cho cùng một khái niệm
+  đã có sẵn trích dẫn thật trong đề cương.
 
 ## Key Insights
-- Chương lý thuyết trong đồ án chuyên ngành cấp trường thường bị viết lan man, sao chép
+- Chương lý thuyết trong đồ án cấp trường thường bị viết lan man, sao chép
   Wikipedia — rủi ro "giọng văn AI" cao nhất nằm ở chương này. Phải neo mọi đoạn lý thuyết vào
   một quyết định thiết kế cụ thể của dự án (VD: nói về bcrypt vì dự án dùng bcrypt, không nói
   chung chung về "các thuật toán băm phổ biến").

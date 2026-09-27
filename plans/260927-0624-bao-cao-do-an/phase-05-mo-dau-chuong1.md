@@ -16,8 +16,15 @@ toàn bộ dựa trên phạm vi thật đã build, không thêm mục tiêu/tí
 `plans/260926-1323-part-time-job-marketplace/plan.md`.
 
 ## Context Links
-- Nguồn nội dung: `plans/260926-1323-part-time-job-marketplace/plan.md` (Overview, Scope
-  Challenge, Tech Stack, Kept Deliberately Simple)
+- Nguồn nội dung sản phẩm: `plans/260926-1323-part-time-job-marketplace/plan.md` (Overview,
+  Scope Challenge, Tech Stack, Kept Deliberately Simple)
+- Nguồn khung nội dung bắt buộc bám sát: đề cương chi tiết đã duyệt —
+  `plans/260927-0624-bao-cao-do-an/nguon/de-cuong-chi-tiet-trich-xuat.txt` mục 1 (ĐẶT VẤN ĐỀ),
+  mục 2 (MỤC TIÊU, Bảng mục tiêu chung/cụ thể), mục 3 (ĐỐI TƯỢNG VÀ PHẠM VI — Bảng 1 "Phạm vi
+  và các lựa chọn", mục 3.3 "Những nội dung không thực hiện"), mục 4 (TỔNG QUAN TÌNH HÌNH
+  NGHIÊN CỨU — Bảng 2 so sánh kênh tìm việc). MỞ ĐẦU và CHƯƠNG 1 phải khai triển đầy đủ, bằng
+  lời văn báo cáo học thuật, đúng các mục này — KHÔNG chỉ tóm tắt lại ngắn như bản đề cương
+  (đề cương là outline ~10 trang tổng; báo cáo thật cần MỞ ĐẦU + CHƯƠNG 1 dài hơn nhiều lần).
 - Quy định hình thức: `docs/bao-cao/quy-dinh.md`
 - Ảnh hệ thống tương tự dùng minh họa (nếu cần): không chụp trực tiếp TopCV/Vieclam24h (không
   phải sản phẩm của mình, không đưa ảnh chụp màn hình sản phẩm bên thứ ba vào báo cáo nộp —

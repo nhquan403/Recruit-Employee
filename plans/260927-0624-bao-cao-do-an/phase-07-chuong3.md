@@ -20,6 +20,19 @@ mục đã chốt ở `plan.md`.
 - Ảnh minh họa: `docs/images/bao-cao/README.md` (Phase 3) — dùng đúng 11 ảnh đã có, không thêm
   placeholder ảnh chưa tồn tại.
 - Lý thuyết áp dụng: `docs/bao-cao/03-chuong-2.md` (Phase 6)
+- Khung nội dung bắt buộc bám sát: đề cương chi tiết —
+  `plans/260927-0624-bao-cao-do-an/nguon/de-cuong-chi-tiet-trich-xuat.txt`:
+  - mục 6 (NỘI DUNG VÀ PHƯƠNG PHÁP NGHIÊN CỨU: quy trình Agile rút gọn 6.1, thu thập/phân
+    tích yêu cầu 6.2, Bảng 3 vai trò-quyền hạn 6.3, Bảng 4 các bảng CSDL 6.4, công cụ/môi
+    trường 6.5) → dùng cho `04a-chuong-3-kien-truc.md`.
+  - mục 7 (THIẾT KẾ HỆ THỐNG: use case tổng quát 7.1, Bảng 5 danh sách UC01-07 7.2, quy trình
+    ứng tuyển 7.3, kế hoạch kiểm thử 7.4) → dùng cho `04a` (thiết kế) và `04b` (áp dụng vào
+    từng use case thật).
+  - mục 8 (THIẾT KẾ GIAO DIỆN: Bảng 6 chức năng theo vai trò 8.1, màn hình chính 8.2, luồng sử
+    dụng tiêu biểu 8.3, Bảng 7 công nghệ triển khai 8.4) → dùng cho `04b` (giao diện + ảnh).
+  - Bảng UC01-07 trong đề cương (mục 7.2) khớp gần như nguyên văn với bảng "Use Case → Phase
+    Map" của `plans/260926-1323-part-time-job-marketplace/plan.md` — dùng đúng 7 mã UC01-07
+    này xuyên suốt 04a/04b, không đặt mã use case khác.
 - Nguồn kỹ thuật thật: `backend/prisma/schema.prisma`, `backend/src/`, `frontend/src/`,
   `plans/260926-1323-part-time-job-marketplace/phase-*.md` (toàn bộ 8 phase file đã Completed)
 
