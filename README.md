@@ -7,6 +7,23 @@ khai. Xem kế hoạch triển khai đầy đủ tại
 tài liệu thiết kế UI/UX tại [`docs/design-guidelines.md`](./docs/design-guidelines.md), và
 kịch bản UAT tại [`docs/uat-script.md`](./docs/uat-script.md).
 
+## Thông tin đồ án
+
+Đồ án Thực tập Cơ sở ngành — Trường Đại học Trà Vinh, Trường Kỹ thuật và Công nghệ, Khoa
+Công nghệ Thông tin.
+
+| | |
+|---|---|
+| Tên đề tài | Xây dựng website kết nối người tìm việc làm thêm với nhà tuyển dụng |
+| Sinh viên thực hiện | Bùi Anh Khoa — MSSV 170123594 — Lớp DX23TT11 — Khóa 2023–2027 |
+| Giảng viên hướng dẫn | ThS. Trầm Hoàng Nam |
+| Liên hệ | nghong.quan403@gmail.com · điện thoại: _[cần bổ sung]_ |
+
+Bản báo cáo đồ án đầy đủ (`.docx`/`.pdf`, sinh tự động từ Markdown nguồn ở `docs/bao-cao/`):
+xem [`thesis/`](./thesis/). Báo cáo tiến độ: xem [`progress-report/`](./progress-report/)
+— **lưu ý đọc `progress-report/README.md` trước khi nộp**, có ghi chú quan trọng về lịch sử
+commit.
+
 ## Tech stack
 
 - **Frontend**: Next.js 16 (App Router) + TypeScript + TailwindCSS 3
@@ -84,11 +101,29 @@ environment with Docker before treating the container demo as verified.
 ## Project layout
 
 ```
-backend/    NestJS API (Prisma schema in backend/prisma/schema.prisma)
-frontend/   Next.js app (App Router, TailwindCSS)
-docs/       Design guidelines, UAT script, and other reference docs
-plans/      Implementation plan (phase-by-phase)
+backend/           NestJS API (Prisma schema in backend/prisma/schema.prisma)
+frontend/          Next.js app (App Router, TailwindCSS)
+docs/              Design guidelines, UAT script, bao-cao/ (báo cáo đồ án, Markdown nguồn)
+plans/             Implementation plans (phase-by-phase)
+scripts/           Pipeline sinh báo cáo .docx (scripts/xuat-ban-word.py) + script dựng ảnh
+thesis/            Bản .docx/.pdf cuối cùng của báo cáo đồ án (mục 4.3 quy định nộp bài)
+progress-report/   Báo cáo tiến độ (mục 4.3 quy định nộp bài)
 ```
+
+### Đối chiếu với cấu trúc nộp bài mục 4.3 (quy định đồ án)
+
+Quy định trình bày đồ án gợi ý một cấu trúc thư mục cho repo nộp bài. Repo này là code của
+sản phẩm thật (không phải repo nộp bài tạo riêng), nên bảng dưới đối chiếu cấu trúc gợi ý đó
+với vị trí tương ứng thật trong repo, thay vì tạo thêm thư mục trùng lặp không có nội dung:
+
+| Thư mục gợi ý (mục 4.3) | Trạng thái | Vị trí thật trong repo |
+|---|---|---|
+| `progress-report/` _(bắt buộc)_ | Có | [`progress-report/`](./progress-report/) |
+| `thesis/` _(bắt buộc)_ | Có | [`thesis/`](./thesis/) (`doc/`, `pdf/`, `refs/` — xem `thesis/README.md` để biết vì sao không có `html/`, `abs/`) |
+| `setup` | Tương đương | Mục "Local setup" / "Docker demo" trong README này + `.env.example` |
+| `scr` (mã nguồn) | Tương đương | `backend/`, `frontend/` |
+| `soft` | Không áp dụng | Không có phần mềm/thư viện ngoài cần đính kèm riêng |
+| `docker` | Tương đương | `docker-compose.yml` ở thư mục gốc |
 
 ## Testing
 
