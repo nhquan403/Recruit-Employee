@@ -107,6 +107,16 @@ def parse_file(duong_dan: Path) -> list[Node]:
             i += 1
             continue
 
+        if line == r"\thutle":
+            nodes.append(Node("thutle_bat_dau"))
+            i += 1
+            continue
+
+        if line == r"\hetthutle":
+            nodes.append(Node("thutle_ket_thuc"))
+            i += 1
+            continue
+
         if line == r"\tieudebia":
             # Tên đề tài trang bìa: gom các dòng liền sau cho tới dòng trống, giống \khoiky.
             i += 1
@@ -234,6 +244,8 @@ def parse_file(duong_dan: Path) -> list[Node]:
             r"\danhmucbang",
             r"\logo",
             r"\tieudebia",
+            r"\thutle",
+            r"\hetthutle",
         ):
             para_lines.append(lines[i].strip())
             i += 1

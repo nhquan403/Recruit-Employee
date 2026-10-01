@@ -54,6 +54,7 @@ class BaoCaoBuilder:
         self.headings: list[tuple[int, str]] = []  # dùng dựng mục lục (muc_luc.py)
         self._da_mo_section_noi_dung = False
         self._can_giua = False  # bật bởi \canle, tắt bởi \hetcanle — dùng cho trang bìa
+        self._thut_le = False  # bật bởi \thutle, tắt bởi \hetthutle — khối GVHD/SVTH trang bìa
         self._ap_dung_style_toan_cuc()
 
     def bat_dau_can_giua(self) -> None:
@@ -61,6 +62,12 @@ class BaoCaoBuilder:
 
     def ket_thuc_can_giua(self) -> None:
         self._can_giua = False
+
+    def bat_dau_thut_le(self) -> None:
+        self._thut_le = True
+
+    def ket_thuc_thut_le(self) -> None:
+        self._thut_le = False
 
     def them_khoang_trang(self) -> None:
         self.document.add_paragraph()
@@ -122,6 +129,15 @@ class BaoCaoBuilder:
             if rFonts is None:
                 rFonts = OxmlElement("w:rFonts")
                 rpr.append(rFonts)
+            # Style "Heading 1-4" mặc định của python-docx đã có sẵn rFonts trỏ theme
+            # (asciiTheme="majorHAnsi" v.v. — thường là font sans-serif như Calibri Light).
+            # Word/LibreOffice ưu tiên theme font hơn w:ascii tường minh khi CẢ HAI cùng có mặt
+            # trên một thẻ rFonts — chỉ set w:ascii/w:hAnsi/... như trước (không xoá theme attr)
+            # không đủ, chữ vẫn hiện sai font. Phải xoá hẳn 4 thuộc tính *Theme trước.
+            for theme_attr in ("w:asciiTheme", "w:eastAsiaTheme", "w:hAnsiTheme", "w:cstheme"):
+                qn_attr = qn(theme_attr)
+                if rFonts.get(qn_attr) is not None:
+                    del rFonts.attrib[qn_attr]
             for attr in ("w:ascii", "w:hAnsi", "w:eastAsia", "w:cs"):
                 rFonts.set(qn(attr), qd.font_name)
             style.paragraph_format.space_before = _Pt(qd.space_before_pt)
@@ -211,6 +227,8 @@ class BaoCaoBuilder:
         p = self.document.add_paragraph(style=style)
         if self._can_giua:
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        if self._thut_le:
+            p.paragraph_format.left_indent = Cm(2)
         self._them_run_co_dinh_dang(p, text)
 
     @staticmethod

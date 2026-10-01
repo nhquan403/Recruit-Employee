@@ -24,6 +24,8 @@ XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUY�
 
 \hetcanle
 
+\thutle
+
 Giảng viên hướng dẫn: **THS. TRẦM HOÀNG NAM**
 
 Sinh viên thực hiện: **BÙI ANH KHOA**
@@ -33,6 +35,8 @@ Mã số sinh viên: **170123594**
 Lớp: **DX23TT11**
 
 Khoá: **2023–2027**
+
+\hetthutle
 
 \canle
 
@@ -67,6 +71,8 @@ XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUY�
 
 \hetcanle
 
+\thutle
+
 Giảng viên hướng dẫn: **THS. TRẦM HOÀNG NAM**
 
 Sinh viên thực hiện: **BÙI ANH KHOA**
@@ -76,6 +82,8 @@ Mã số sinh viên: **170123594**
 Lớp: **DX23TT11**
 
 Khoá: **2023–2027**
+
+\hetthutle
 
 \canle
 

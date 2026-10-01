@@ -132,6 +132,10 @@ def xu_ly_node(
         builder.bat_dau_can_giua()
     elif node.type == "can_le_ket_thuc":
         builder.ket_thuc_can_giua()
+    elif node.type == "thutle_bat_dau":
+        builder.bat_dau_thut_le()
+    elif node.type == "thutle_ket_thuc":
+        builder.ket_thuc_thut_le()
     elif node.type == "khoang_trang":
         builder.them_khoang_trang()
     elif node.type == "mucluc_directive":
