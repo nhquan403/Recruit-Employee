@@ -102,6 +102,21 @@ def parse_file(duong_dan: Path) -> list[Node]:
             i += 1
             continue
 
+        if line == r"\logo":
+            nodes.append(Node("logo_directive"))
+            i += 1
+            continue
+
+        if line == r"\tieudebia":
+            # Tên đề tài trang bìa: gom các dòng liền sau cho tới dòng trống, giống \khoiky.
+            i += 1
+            block_lines = []
+            while i < len(lines) and lines[i].strip():
+                block_lines.append(lines[i].strip())
+                i += 1
+            nodes.append(Node("tieudebia", {"text": " ".join(block_lines)}))
+            continue
+
         if line == r"\khoiky":
             # Khối ký tên: gom các dòng liền sau cho tới dòng trống, không được vỡ đôi khi in.
             i += 1
@@ -217,6 +232,8 @@ def parse_file(duong_dan: Path) -> list[Node]:
             r"\khoangtrang",
             r"\danhmuchinh",
             r"\danhmucbang",
+            r"\logo",
+            r"\tieudebia",
         ):
             para_lines.append(lines[i].strip())
             i += 1

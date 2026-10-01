@@ -7,9 +7,7 @@ văn ở plans/260927-0624-bao-cao-do-an/nguon/bieu-mau-bm5-trich-xuat.txt) + qu
 
 # TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ
 
-\khoangtrang
-
-\khoangtrang
+\logo
 
 \khoangtrang
 
@@ -17,29 +15,26 @@ văn ở plans/260927-0624-bao-cao-do-an/nguon/bieu-mau-bm5-trich-xuat.txt) + qu
 
 \khoangtrang
 
-# XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG
+\tieudebia
+XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG
 
 \khoangtrang
 
 \khoangtrang
 
-\khoangtrang
+Giảng viên hướng dẫn: **THS. TRẦM HOÀNG NAM**
 
-Giảng viên hướng dẫn: ThS. Trầm Hoàng Nam
+Sinh viên thực hiện: **BÙI ANH KHOA**
 
-Sinh viên thực hiện: Bùi Anh Khoa
+Mã số sinh viên: **170123594**
 
-Mã số sinh viên: 170123594
+Lớp: **DX23TT11**
 
-Lớp: DX23TT11
-
-Khoá: 2023–2027
+Khoá: **2023–2027**
 
 \khoangtrang
 
-\khoangtrang
-
-Vĩnh Long, tháng 9 năm 2026
+**Vĩnh Long, tháng 9 năm 2026**
 
 \hetcanle
 
@@ -51,7 +46,7 @@ Vĩnh Long, tháng 9 năm 2026
 
 # TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ
 
-\khoangtrang
+\logo
 
 \khoangtrang
 
@@ -59,29 +54,26 @@ Vĩnh Long, tháng 9 năm 2026
 
 \khoangtrang
 
-# XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG
+\tieudebia
+XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG
 
 \khoangtrang
 
 \khoangtrang
 
-\khoangtrang
+Giảng viên hướng dẫn: **THS. TRẦM HOÀNG NAM**
 
-Giảng viên hướng dẫn: ThS. Trầm Hoàng Nam
+Sinh viên thực hiện: **BÙI ANH KHOA**
 
-Sinh viên thực hiện: Bùi Anh Khoa
+Mã số sinh viên: **170123594**
 
-Mã số sinh viên: 170123594
+Lớp: **DX23TT11**
 
-Lớp: DX23TT11
-
-Khoá: 2023–2027
+Khoá: **2023–2027**
 
 \khoangtrang
 
-\khoangtrang
-
-Vĩnh Long, tháng 9 năm 2026
+**Vĩnh Long, tháng 9 năm 2026**
 
 \hetcanle
 

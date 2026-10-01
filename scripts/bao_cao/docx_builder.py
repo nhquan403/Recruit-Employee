@@ -286,6 +286,28 @@ class BaoCaoBuilder:
             run.italic = True
             run.font.size = Pt(11)
 
+    def them_logo(self, duong_dan_anh: Path) -> None:
+        """Logo trường trên trang bìa — không đi qua `them_hinh()` vì đó dành cho hình minh
+        hoạ nội dung (rộng 14cm, có thể có caption/Nguồn:, được gom vào danh mục hình). Logo
+        chỉ là một ảnh nhỏ, không đánh số, không có chú thích — theo đúng mẫu BM5 (trang bìa/
+        trang lót), khổ ~3.5cm, canh giữa."""
+        from docx.shared import Cm as _Cm
+
+        self.document.add_picture(str(duong_dan_anh), width=_Cm(3.5))
+        self.document.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+    def them_tieu_de_bia(self, text: str) -> None:
+        """Tên đề tài trên trang bìa — theo đúng mẫu BM5: "Bold, size 18-30, tùy theo số chữ
+        của tên đề tài", lớn hơn cỡ 16pt dùng cho các dòng nhãn khác (TRƯỜNG.../ĐỒ ÁN...) nên
+        không dùng chung style Heading 1 (Heading 1 còn dùng cho tên chương, không được đổi cỡ
+        chung). Chọn 20pt — đầu dưới của khoảng 18-30, vì tên đề tài của đồ án này khá dài."""
+        p = self.document.add_paragraph()
+        if self._can_giua:
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        run = p.add_run(text)
+        run.bold = True
+        run.font.size = Pt(20)
+
     def ngat_trang(self) -> None:
         self.document.add_page_break()
 

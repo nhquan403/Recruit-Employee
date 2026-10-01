@@ -144,6 +144,16 @@ def xu_ly_node(
         dung_danh_sach_co_so_trang(
             builder.document, builder.document.sections[0], danh_sach_bang or [], muc_luc_du_lieu
         )
+    elif node.type == "logo_directive":
+        duong_dan_logo = thu_muc_anh / "logo-tvu.png"
+        if not duong_dan_logo.exists():
+            raise FileNotFoundError(
+                f"Không tìm thấy {duong_dan_logo} — logo trường trích từ biểu mẫu BM5, "
+                "kiểm tra lại đã copy vào docs/images/bao-cao/ chưa."
+            )
+        builder.them_logo(duong_dan_logo)
+    elif node.type == "tieudebia":
+        builder.them_tieu_de_bia(node.data["text"])
     else:
         raise ValueError(f"Loại node không xử lý được: {node.type}")
 
