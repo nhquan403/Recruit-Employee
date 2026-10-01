@@ -300,10 +300,11 @@ class BaoCaoBuilder:
         """Tên đề tài trên trang bìa — theo đúng mẫu BM5: "Bold, size 18-30, tùy theo số chữ
         của tên đề tài", lớn hơn cỡ 16pt dùng cho các dòng nhãn khác (TRƯỜNG.../ĐỒ ÁN...) nên
         không dùng chung style Heading 1 (Heading 1 còn dùng cho tên chương, không được đổi cỡ
-        chung). Chọn 20pt — đầu dưới của khoảng 18-30, vì tên đề tài của đồ án này khá dài."""
+        chung). Chọn 20pt — đầu dưới của khoảng 18-30, vì tên đề tài của đồ án này khá dài.
+        Canh TRÁI (không canh giữa dù nằm trong khối `\\canle`) — đối chiếu lại ảnh mẫu BM5
+        thật: dòng chấm chờ điền tên đề tài bắt đầu từ lề trái, không canh giữa như các dòng
+        TRƯỜNG.../ĐỒ ÁN... phía trên."""
         p = self.document.add_paragraph()
-        if self._can_giua:
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         run = p.add_run(text)
         run.bold = True
         run.font.size = Pt(20)
