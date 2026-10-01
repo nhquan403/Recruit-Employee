@@ -18,6 +18,7 @@ Công nghệ Thông tin.
 | Sinh viên thực hiện | Bùi Anh Khoa — MSSV 170123594 — Lớp DX23TT11 — Khóa 2023–2027 |
 | Giảng viên hướng dẫn | ThS. Trầm Hoàng Nam |
 | Liên hệ | nghong.quan403@gmail.com · điện thoại: _[cần bổ sung]_ |
+| Repo nộp bài (mục 4.1 PDF) | `csn-dx23tt11-buianhkhoa-parttime-jobs` _(tên đã chốt — sinh viên tự đổi tên/tạo repo khi nộp, xem `docs/bao-cao/quy-dinh.md` mục 5)_ |
 
 Bản báo cáo đồ án đầy đủ (`.docx`/`.pdf`, sinh tự động từ Markdown nguồn ở `docs/bao-cao/`):
 xem [`thesis/`](./thesis/). Báo cáo tiến độ: xem [`progress-report/`](./progress-report/)

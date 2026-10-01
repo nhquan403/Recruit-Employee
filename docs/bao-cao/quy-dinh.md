@@ -90,10 +90,14 @@ dòng): "Website kết nối việc làm thêm" (30 ký tự, không xuống dò
 
 ## 5. Tên GitHub repo nộp bài (mục 4.1 PDF)
 
-Cú pháp cơ sở ngành: `csn-<malop>-<hotenkhongdau>-<shortname>` → `csn-dx23tt11-buianhkhoa-<shortname>`.
+Cú pháp cơ sở ngành: `csn-<malop>-<hotenkhongdau>-<shortname>` → tên đầy đủ đã chốt:
+**`csn-dx23tt11-buianhkhoa-parttime-jobs`**.
 
-**Còn thiếu:** `shortname` cụ thể và việc dùng lại repo `Recruit-Employee` hay tạo repo nộp
-riêng — hỏi người dùng ở đầu Phase 10, không chặn Phase 1-9.
+**Đã hỏi người dùng (đầu Phase 10):** không đổi tên repo `Recruit-Employee` hiện tại và không
+tạo repo nộp bài riêng — người dùng tự thực hiện việc đổi tên/tạo repo nộp bài này sau, khi cần
+nộp, dùng đúng tên đã chốt ở trên. Đây là thao tác GitHub thật (đổi tên repo, mời Collaborator),
+không tự động hóa được từ phiên làm việc này (xem thêm mục "việc phải làm tay" cuối cùng gửi
+người dùng).
 
 ## 6. Những gì PDF b0651a67 KHÔNG tự quy định (đã được BM5 làm rõ — xem mục 3)
 
