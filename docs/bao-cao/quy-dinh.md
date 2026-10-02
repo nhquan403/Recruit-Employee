@@ -16,7 +16,7 @@ thức BM5 do người dùng gửi, đọc toàn bộ — nguồn có thẩm quy
 | Mục | Giá trị |
 |---|---|
 | Trường | Trường Đại học Trà Vinh |
-| Đơn vị trực thuộc | Trường Kỹ thuật và Công nghệ |
+| Đơn vị trực thuộc | Khoa Kỹ thuật và Công nghệ |
 | Khoa | Khoa Công nghệ Thông tin |
 | Tên đề tài | XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG |
 | Sinh viên thực hiện (SVTH) | Bùi Anh Khoa |
@@ -24,7 +24,7 @@ thức BM5 do người dùng gửi, đọc toàn bộ — nguồn có thẩm quy
 | Lớp | DX23TT11 |
 | Khóa | 2023–2027 |
 | Giảng viên hướng dẫn (GVHD) | ThS. Trầm Hoàng Nam |
-| Địa điểm - thời gian | Vĩnh Long, tháng 9 năm 2026 |
+| Địa điểm - thời gian | TP. Hồ Chí Minh, tháng 9 năm 2026 |
 | Loại đồ án | Cơ sở ngành |
 
 **Tiêu đề ngắn cho đầu trang** (để tránh bẫy OOXML #3 — tab stop hỏng nếu tiêu đề dài xuống 2
@@ -57,6 +57,8 @@ dòng): "Website kết nối việc làm thêm" (30 ký tự, không xuống dò
 | Trang "NHẬN XÉT của cơ quan thực tập" (BM5 ghi "nếu có") | **Không thêm** | Đồ án không thực tập tại doanh nghiệp nào |
 | Trang "NHẬN XÉT của GVHD" | **Thêm cả 2 kiểu** — (a) trang văn xuôi ngắn "NHẬN XÉT" và (b) biểu mẫu đầy đủ "BẢN NHẬN XÉT ĐỒ ÁN..." có tiêu đề UBND/Trường + 8 mục chấm điểm | Cả hai để TRỐNG phần nội dung/chữ ký — GVHD tự điền tay, script không tự sinh nhận xét |
 | Trang "NHẬN XÉT của giảng viên chấm/cán bộ chấm" | **Thêm cả 2 kiểu**, cùng logic như trên | Theo đúng BM5 |
+| Đơn vị trực thuộc trên bìa | **ĐÃ SỬA (02/10) theo người dùng**: "Khoa Kỹ thuật và Công nghệ" (không phải "Trường Kỹ thuật và Công nghệ") | Người dùng xác nhận trực tiếp tên đơn vị thật — ghi đè suy luận trước đó dựa trên đề cương |
+| Địa điểm trên bìa (dòng ngày tháng cuối) | **ĐÃ SỬA (02/10) theo người dùng**: "TP. Hồ Chí Minh" (không phải "Vĩnh Long") | Người dùng xác nhận trực tiếp |
 
 ### Các quy tắc mới rút ra từ BM5 (không có trong PDF b0651a67, không mâu thuẫn với PDF đó)
 

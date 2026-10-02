@@ -5,7 +5,7 @@ văn ở plans/260927-0624-bao-cao-do-an/nguon/bieu-mau-bm5-trich-xuat.txt) + qu
 
 # TRƯỜNG ĐẠI HỌC TRÀ VINH
 
-# TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ
+# KHOA KỸ THUẬT VÀ CÔNG NGHỆ
 
 \logo
 
@@ -42,7 +42,11 @@ Khoá: **2023–2027**
 
 \khoangtrang
 
-**Vĩnh Long, tháng 9 năm 2026**
+\khoangtrang
+
+\khoangtrang
+
+**TP. Hồ Chí Minh, tháng 9 năm 2026**
 
 \hetcanle
 
@@ -52,7 +56,7 @@ Khoá: **2023–2027**
 
 # TRƯỜNG ĐẠI HỌC TRÀ VINH
 
-# TRƯỜNG KỸ THUẬT VÀ CÔNG NGHỆ
+# KHOA KỸ THUẬT VÀ CÔNG NGHỆ
 
 \logo
 
@@ -89,7 +93,11 @@ Khoá: **2023–2027**
 
 \khoangtrang
 
-**Vĩnh Long, tháng 9 năm 2026**
+\khoangtrang
+
+\khoangtrang
+
+**TP. Hồ Chí Minh, tháng 9 năm 2026**
 
 \hetcanle
 
@@ -257,7 +265,7 @@ Em xin chân thành cảm ơn ThS. Trầm Hoàng Nam, giảng viên hướng d�
 hướng đề tài, góp ý về kiến trúc hệ thống và cách trình bày báo cáo trong suốt quá trình thực
 hiện đồ án.
 
-Em cũng xin cảm ơn quý thầy cô Khoa Công nghệ Thông tin, Trường Kỹ thuật và Công nghệ, Trường
+Em cũng xin cảm ơn quý thầy cô Khoa Công nghệ Thông tin, Khoa Kỹ thuật và Công nghệ, Trường
 Đại học Trà Vinh đã truyền đạt kiến thức nền tảng làm cơ sở để em hoàn thành đồ án này.
 
 Do thời gian thực hiện có hạn và kinh nghiệm thực tế còn hạn chế, đồ án khó tránh khỏi thiếu

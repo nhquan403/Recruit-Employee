@@ -9,7 +9,7 @@ kịch bản UAT tại [`docs/uat-script.md`](./docs/uat-script.md).
 
 ## Thông tin đồ án
 
-Đồ án Thực tập Cơ sở ngành — Trường Đại học Trà Vinh, Trường Kỹ thuật và Công nghệ, Khoa
+Đồ án Thực tập Cơ sở ngành — Trường Đại học Trà Vinh, Khoa Kỹ thuật và Công nghệ, Khoa
 Công nghệ Thông tin.
 
 | | |
