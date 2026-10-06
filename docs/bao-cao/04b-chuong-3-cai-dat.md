@@ -134,3 +134,40 @@ tài khoản của mình.
 
 [Hình 3.5]
 Nguồn: chụp từ hệ thống
+
+## 3.8. Xử lý lỗi và kiểm tra hợp lệ đầu vào
+
+Cơ sở lý thuyết cho mục này đã trình bày ở mục 2.7 (nguyên tắc không tin dữ liệu từ client) và
+2.8 (ràng buộc toàn vẹn ở tầng cơ sở dữ liệu). Mục này mô tả cụ thể cách hai nguyên tắc đó được
+hiện thực trong mã nguồn thật của hệ thống, cùng một ví dụ lỗi thật phát hiện được khi kiểm thử
+thủ công luồng đăng nhập.
+
+Khi một DTO (mục 2.7) từ chối dữ liệu đầu vào, `ValidationPipe` của NestJS tự trả về mã trạng
+thái HTTP 400 kèm một mảng thông điệp lỗi liệt kê đúng những trường không hợp lệ, theo định dạng
+mặc định của framework, ví dụ với một yêu cầu đăng nhập thiếu cả email lẫn mật khẩu:
+
+```json
+{
+  "statusCode": 400,
+  "message": ["email must be an email", "password must be longer than or equal to 1 characters"],
+  "error": "Bad Request"
+}
+```
+
+Phản hồi này được quan sát thật trong lúc kiểm thử thủ công luồng đăng nhập bằng Playwright khi
+dựng kịch bản ghi video demo (mục 4.5): kịch bản tự động điền form ngay sau khi điều hướng sang
+trang `/dang-nhap`, trước khi React kịp gắn trình xử lý sự kiện cho các ô nhập liệu (một tình
+huống tranh chấp thời gian — race condition — đặc thù của kiểm thử tự động, không xảy ra với
+người dùng thật vì luôn có độ trễ tự nhiên giữa lúc trang hiện ra và lúc họ bắt đầu gõ), khiến
+giá trị DOM được điền nhưng state của React vẫn rỗng, dẫn tới yêu cầu gửi đi với email/mật khẩu
+rỗng. `ValidationPipe` từ chối đúng yêu cầu rỗng này với thông điệp lỗi ở trên thay vì để lọt
+xuống tầng service và gây lỗi khó hiểu hơn ở sâu hơn trong hệ thống — đúng vai trò của một lớp
+kiểm tra đầu vào tập trung. Lỗi gốc (race condition trong kịch bản kiểm thử, không phải lỗi của
+form thật) được sửa bằng cách thêm một khoảng chờ ngắn sau khi điều hướng, trước khi điền form.
+
+Ở phía front-end, mọi lời gọi API đều được bọc trong khối `try/catch`; khi nhận phản hồi lỗi (mã
+trạng thái từ 400 trở lên), giao diện đọc trường `message` trong phần thân phản hồi JSON và hiển
+thị trực tiếp nội dung đó thành thông báo cho người dùng (ví dụ dưới dạng toast hoặc dòng chữ đỏ
+cạnh ô nhập liệu sai), thay vì chỉ hiển thị một thông báo lỗi chung chung như "Có lỗi xảy ra" —
+cách làm này tận dụng lại đúng thông điệp lỗi chi tiết mà `ValidationPipe` đã sinh ra ở phía máy
+chủ, không phải viết lại một tập thông điệp lỗi riêng ở phía giao diện.

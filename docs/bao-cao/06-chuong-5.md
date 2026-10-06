@@ -36,3 +36,6 @@ phát triển tiếp theo.
   đủ lớn để độ trễ 20 giây trở thành vấn đề thực sự, đúng như đã cân nhắc ở mục 2.6.
 - Triển khai bản demo công khai bằng Docker Compose trên một máy chủ thật, hoàn tất phần còn
   thiếu đã nêu ở mục 4.4.
+- Thu hẹp cấu hình CORS về đúng domain thật và bổ sung giới hạn số lần thử đăng nhập sai (rate
+  limiting, ví dụ bằng `@nestjs/throttler`) trước khi đưa hệ thống ra khỏi môi trường demo — hai
+  điểm đã nêu là đánh đổi phạm vi có chủ đích ở mục 2.11.

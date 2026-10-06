@@ -44,7 +44,7 @@ dòng): "Website kết nối việc làm thêm" (30 ký tự, không xuống dò
 | Vị trí số trang | Góc phải dưới |
 | Đánh số chương/mục | Số Ả-rập, không La Mã; `Chương 3` → `3.1.` → `3.1.1.` → `3.1.2.` → `3.2.` |
 | Định dạng tài liệu tham khảo | IEEE, đánh số theo **thứ tự từ điển** (alphabet theo tên tác giả/tổ chức đầu mục) |
-| Số trang nội dung | Tối thiểu 30, không nên vượt quá 50 (không kể bìa/cảm ơn/mục lục/TLTK) — mục tiêu người dùng: ~45 |
+| Số trang nội dung | Tối thiểu 30, không nên vượt quá 50 (không kể bìa/cảm ơn/mục lục/TLTK) — **ĐÃ SIẾT LẠI (06/10) theo yêu cầu trực tiếp người dùng: phải HƠN 45 và NHỎ HƠN 50** (46-49 trang); thực tế đo được sau khi mở rộng nội dung: 47 trang (đếm từ Chương 1 = trang 1 tới hết Phụ lục B = trang 47, đúng cách đếm "số trang nội dung" đã dùng xuyên suốt tài liệu này) |
 
 ## 3. Các quyết định đã chốt (một số đã ĐỔI LẠI sau khi có biểu mẫu BM5 chính thức)
 
@@ -231,3 +231,66 @@ Danh mục Hình hiển thị không theo đúng thứ tự số chương (ra H�
 trước (xác nhận bằng cách so bản PDF cũ, lỗi y hệt), không phải do lần gộp danh mục này gây ra.
 Nguyên nhân nằm ở `thu_thap_hinh_bang()` trong `xuat-ban-word.py` — chưa điều tra sâu, cần một
 lượt riêng nếu muốn sửa.
+
+## 9. Mở rộng nội dung lên 46-49 trang theo yêu cầu trực tiếp người dùng (06/10)
+
+Người dùng yêu cầu rõ: "nội dung đồ án của tôi phải hơn 45 trang và nhỏ hơn 50 trang". Đo thật
+trước khi sửa (dựng `.pdf`, đọc số trang ở chân trang cuối cùng): **38 trang** — dưới ngưỡng yêu
+cầu, cần viết thêm nội dung THẬT (không phải giãn dòng/đệm chữ) để đạt khoảng 46-49 trang.
+
+**Nguyên tắc khi thêm nội dung:** mọi đoạn thêm vào đều phải trích dẫn được từ mã nguồn thật
+(đường dẫn file, tên hàm/decorator/bảng thật) hoặc một nguồn tham khảo thật có thể kiểm chứng —
+không thêm số liệu, kết quả đo, hay hành vi hệ thống không có thật, đúng kỷ luật đo lường đã
+xuyên suốt tài liệu này.
+
+**Nội dung đã thêm (grounded, đã xác minh lại từng chi tiết với mã nguồn thật trước khi viết):**
+
+- **Mục 2.7** "Kiểm tra hợp lệ dữ liệu đầu vào" — mô tả `class-validator`/DTO/`ValidationPipe`
+  (`backend/src/main.ts`), có ví dụ thật từ `CreateJobDto`, `CreateApplicationDto`.
+- **Mục 2.8** "Nguyên tắc chuẩn hóa dữ liệu quan hệ và ràng buộc toàn vẹn" — áp dụng lý thuyết
+  chuẩn hóa (1NF-3NF) vào đúng 5 bảng thật, trích ràng buộc `@unique`/`@@unique` thật từ
+  `schema.prisma`.
+- **Mục 2.9** "Kiểm thử phần mềm: kiểm thử đơn vị và kiểm thử tích hợp" — lý thuyết mô hình kim
+  tự tháp kiểm thử, áp dụng vào đúng cấu trúc thư mục kiểm thử thật của dự án.
+- **Mục 2.10** "REST so với các kiểu kiến trúc API khác" — so sánh REST/GraphQL/gRPC, lý giải
+  lựa chọn REST cho quy mô đồ án.
+- **Mục 2.11** "Bảo mật ứng dụng web: đối chiếu với OWASP Top 10" — bảng đối chiếu 6 nhóm rủi ro
+  liên quan với biện pháp đã cài đặt thật, **nêu rõ cả 2 điểm CHƯA có** (CORS chưa giới hạn
+  origin, chưa có rate limiting) thay vì chỉ liệt kê điểm mạnh — khớp đúng kỷ luật "không che
+  giấu hạn chế" đã áp dụng từ Chương 4; đã bổ sung 2 gạch đầu dòng tương ứng vào mục 5.2 (Hướng
+  phát triển) để nhất quán.
+- **Mục 3.8** "Xử lý lỗi và kiểm tra hợp lệ đầu vào" — nối lý thuyết 2.7 với cài đặt thật, dùng
+  lại đúng ví dụ lỗi thật `{"message":["email must be an email",...]}` đã phát hiện khi quay
+  video demo (06/10, mục 7) làm minh hoạ.
+- **Mục 4.5** "Phạm vi kiểm thử theo nhóm chức năng" — bảng đối chiếu 7 use case với file kiểm
+  thử thật bao phủ từng use case; phát hiện và ghi nhận thêm MỘT hạn chế thật khi viết mục này
+  (UC07 — thông báo — không có kiểm thử front-end riêng cho phần hiển thị/polling, chỉ được xác
+  nhận gián tiếp qua back-end), đã bổ sung vào mục 4.4.
+- **Mục 4.6** "Đánh giá khả năng mở rộng hệ thống" — phân tích scalability dựa trên các lựa chọn
+  kiến trúc đã trình bày (JWT stateless, polling, Prisma connection pool).
+- **Mục 4.7** "Đối chiếu kết quả với hiện trạng ban đầu" — bảng đối chiếu 3 hạn chế nêu ở Chương
+  1 với giải pháp đã cài đặt thật tương ứng, kèm vị trí tham chiếu trong báo cáo.
+
+**Tài liệu tham khảo:** thêm 4 nguồn thật ([3] Fowler "TestPyramid", [4] GraphQL docs, [5] gRPC
+docs, [16] typestack/class-validator), chèn đúng vị trí từ điển vào danh sách 14 nguồn cũ, dịch
+lại toàn bộ số thứ tự liên quan (cũ → mới) và cập nhật khớp tất cả 15 lượt trích dẫn `[n]` nằm
+rải rác ở Chương 1-2 — đã kiểm tra lại bằng `grep` sau khi sửa, không còn số trích dẫn nào lệch.
+
+**Một lỗi thật tự phát hiện và tự sửa trong lúc viết (không phải do người dùng báo):** ban đầu
+viết mục 4.5 có khẳng định "`apply-button.test.tsx` kiểm tra phần hiển thị/polling thông báo" —
+kiểm tra lại trực tiếp nội dung file thì phát hiện file đó thực ra kiểm thử nút "Ứng tuyển"
+(UC04), không liên quan tới thông báo (UC07). Đây là một khẳng định sai chưa kịp xuất bản — sửa
+lại thành thừa nhận trung thực rằng UC07 chưa có kiểm thử front-end riêng, biến một câu sai thành
+một hạn chế thật được ghi nhận đúng.
+
+**Quy trình đo lại mục lục (2-pass → 3-pass do nội dung thêm giữa chương):** việc chèn mục 2.7-
+2.11 vào GIỮA Chương 2 (trước Chương 3) làm dịch toàn bộ số trang của Chương 3 trở đi — phải viết
+một script đo thật từng heading/Hình/Bảng bằng cách dựng `.pdf`, trích văn bản từng trang
+(`pdftotext -f N -l N`), rồi tìm trang chứa đúng câu "Hình X.Y thể hiện..." (cho Hình) hoặc đúng
+nhãn bảng (cho Bảng) — khác với lần đo trước (chỉ cần khớp dòng mục lục). Đã chạy đủ 3 vòng
+dựng-đo-dựng lại cho tới khi khớp đủ 73/84 mục có số trang thật (11 mục còn lại là MỞ ĐẦU và các
+mục con — đúng thiết kế không đánh số, không phải đo thiếu).
+
+**Kết quả cuối:** 69 trang PDF tổng, 47 trang nội dung (Chương 1 → hết Phụ lục B) — nằm giữa
+khoảng 46-49 theo đúng yêu cầu, không sát biên trên hay biên dưới. File `.docx`/`.pdf` trong
+`thesis/doc/`, `thesis/pdf/` đã được xuất lại và đồng bộ.
