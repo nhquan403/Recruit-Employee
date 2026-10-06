@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { HeroBanner } from '@/components/hero-banner';
 import { FilterBar } from '@/components/filter-bar';
 import { JobCard } from '@/components/job-card';
 import { EmptyState } from '@/components/ui/empty-state';
@@ -53,6 +54,8 @@ export default async function HomePage({
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-10">
+      <HeroBanner />
+
       <div className="grid grid-cols-1 gap-6 md:grid-cols-[280px_1fr]">
         <FilterBar />
 

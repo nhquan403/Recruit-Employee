@@ -52,7 +52,13 @@ interface ManHinh {
 // theo quy ước tiếng Anh thường gặp — app này định tuyến bằng tiếng Việt không dấu-gạch nối).
 const DANH_SACH_MAN_HINH: ManHinh[] = [
   { file: 'hinh-1-1-trang-chu.png', route: '/', vaiTro: null },
-  { file: 'hinh-1-2-tim-kiem-loc.png', route: '/viec-lam', vaiTro: null },
+  // SỬA LỖI THẬT (06/10): '/viec-lam' không phải route có thật — chỉ có '/viec-lam/[id]'
+  // (chi tiết tin), bộ lọc nằm ngay trên trang chủ. Route cũ khiến ảnh này trước đây là một
+  // trang 404 bị chụp nhầm và chèn vào báo cáo. Dùng ô tìm kiếm q= trên trang chủ — đã kiểm
+  // tra thật qua API: shift=/area= so khớp CHÍNH XÁC (Prisma equals) nên không khớp dữ liệu
+  // mẫu hiện tại (area/shift mẫu là mô tả tự do), còn q= dùng `contains` nên chắc chắn ra
+  // kết quả thật với dữ liệu mẫu đang có.
+  { file: 'hinh-1-2-tim-kiem-loc.png', route: '/?q=b%C3%A1n+h%C3%A0ng', vaiTro: null },
   {
     file: 'hinh-1-3-chi-tiet-tin.png',
     route: '/viec-lam/00000000-0000-0000-0000-000000000002',
