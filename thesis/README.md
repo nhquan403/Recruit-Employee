@@ -15,11 +15,15 @@ chạy lại script rồi copy đè file mới vào đây — không sửa tay f
 - **`refs/`** — xem `refs/README.md`: 14 tài liệu tham khảo đều là nguồn trực tuyến (RFC,
   trang sản phẩm, tài liệu framework), trỏ thẳng tới `docs/bao-cao/07-tai-lieu-tham-khao.md`
   thay vì sao chép lại nội dung bên thứ ba vào repo.
-- **`abs/`** — `demo-user-admin.mp4` (~75 giây): video demo quay THẬT bằng Playwright điều
-  khiển trình duyệt thật trên ứng dụng đang chạy (không dựng/ghép ảnh tĩnh) — vai trò ứng
-  viên (tìm việc, lọc, xem chi tiết, đăng nhập, ứng tuyển thật, xem thông báo, hồ sơ) rồi vai
-  trò quản trị viên (tổng quan thống kê, duyệt tin thật, xem lại trạng thái sau khi duyệt).
-  Script quay: `scripts/bao_cao_hinh/quay-demo.ts`.
+- **`abs/`** — `demo-user-admin.mp4` (~117 giây): video demo quay THẬT bằng Playwright điều
+  khiển trình duyệt thật trên ứng dụng đang chạy (không dựng/ghép ảnh tĩnh), đủ ba vai trò:
+  (1) ứng viên — tìm việc, lọc, xem chi tiết, đăng nhập, ứng tuyển thật, xem thông báo, hồ sơ;
+  (2) nhà tuyển dụng — đăng tin tuyển dụng mới (điền form thật), xem "Tin của tôi", cập nhật
+  trạng thái một ứng viên; (3) quản trị viên — tổng quan thống kê, duyệt tin thật (gồm tin nhà
+  tuyển dụng vừa đăng), xem lại trạng thái sau khi duyệt, danh sách người dùng. Có con trỏ
+  chuột hiển thị trong video (tiêm qua `context.addInitScript`, Playwright không vẽ cursor theo
+  mặc định) và gõ form từng ký tự như người thật (`locator.pressSequentially`, không dùng
+  `.fill()`). Script quay: `scripts/bao_cao_hinh/quay-demo.ts`.
 
 ## Không tạo (nêu rõ lý do, không bỏ sót)
 

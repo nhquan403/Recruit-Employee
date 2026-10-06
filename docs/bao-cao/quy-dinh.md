@@ -136,7 +136,26 @@ demo" — quá trình thực hiện (không phải đọc code suông) phát hi�
    00000000000N`), xoá dữ liệu cũ, seed lại, cập nhật các script tham chiếu ID cũ
    (`chup-man-hinh.ts`, `quay-demo.ts`) — đã xác minh lại thật: `POST /applications` trả về
    `201`, đơn ứng tuyển xuất hiện thật trong database.
+3. **Form đăng nhập gửi email/mật khẩu rỗng nếu điền ngay sau khi điều hướng trang.** Đây là
+   race condition giữa Playwright điền DOM và React gắn event handler cho controlled input:
+   điều hướng bằng `waitUntil: 'domcontentloaded'` xong điền form ngay thì giá trị DOM được set
+   nhưng state React (và do đó payload gửi đi) vẫn rỗng — xác nhận qua response thật
+   `{"message":["email must be an email","password must be longer than or equal to 1
+   characters"],...}`. Không phải lỗi logic ứng dụng (người dùng thật gõ bằng tay luôn có độ
+   trễ tự nhiên đủ để React kịp gắn handler) — chỉ lộ ra khi script tự động hoá điền form ngay
+   lập tức. Sửa trong `quay-demo.ts` bằng cách chờ 1.5s sau khi vào `/dang-nhap` trước khi điền.
+4. **Script quay demo (`quay-demo.ts`) không chạy được do repo không có `package.json`
+   `"type"` cố định.** `npx ts-node` với repo này đôi lúc biên dịch TypeScript ra CommonJS, đôi
+   lúc Node tự "reparse as ES module" tuỳ cú pháp phát hiện trong file — không nhất quán. Hệ quả:
+   hàm tiêm con trỏ chuột (chạy trong ngữ cảnh trình duyệt qua `addInitScript`) không type-check
+   được vì tsconfig thiếu lib `dom`; import kiểu `Page`/`Locator` (chỉ dùng làm type) bị coi là
+   import giá trị thật dưới ESM và vỡ lúc chạy ("does not provide an export named 'Locator'");
+   và `__dirname` (chỉ có ở CommonJS) lẫn `import.meta.url` (bị cấm khi biên dịch ra CommonJS)
+   đều gãy tuỳ trường hợp. Sửa bằng cách: viết script con trỏ dưới dạng chuỗi JS thuần (không
+   qua type-check), tách `import type { Page, Locator }` riêng khỏi `import { chromium }`, và
+   dùng `path.resolve(process.cwd())` thay cho `__dirname`/`import.meta.url` — chạy ổn định
+   dưới cả hai chế độ biên dịch.
 
-Cả hai đều là lỗi thật trong code/dữ liệu mẫu đã tồn tại từ trước, không phải do thay đổi lần
-này gây ra — chỉ được phát hiện vì lần này THỬ THẬT (chạy ứng dụng, bấm nút, đọc response) thay
-vì chỉ đọc code.
+Cả bốn đều là lỗi thật trong code/dữ liệu mẫu/script đã tồn tại từ trước hoặc lộ ra khi mở rộng
+script quay demo sang vai trò nhà tuyển dụng, không phải do thay đổi giao diện gây ra — chỉ được
+phát hiện vì lần này THỬ THẬT (chạy ứng dụng, bấm nút, đọc response) thay vì chỉ đọc code.
