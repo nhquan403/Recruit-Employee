@@ -3,7 +3,14 @@
  * của quy trình báo cáo — tách khỏi backend/prisma/seed.ts (seed đó chỉ tạo tài khoản admin).
  * Idempotent: chạy lại không tạo trùng, chỉ upsert theo email/tiêu đề.
  *
- * Chạy: cd backend && npx ts-node ../scripts/bao_cao_hinh/seed-demo.ts
+ * ID các Job cố định dạng `a0000000-0000-4000-8000-00000000000N` để script chụp ảnh/quay demo
+ * tham chiếu được — PHẢI đúng định dạng UUID v4 thật (nibble "4" ở nhóm 3, "8" ở nhóm 4), vì
+ * `CreateApplicationDto.jobId` dùng `@IsUUID()` (class-validator) kiểm tra đúng version. Lỗi
+ * thật đã gặp (06/10): ID cũ `00000000-...-00000000000N` có version nibble "0" — không phải
+ * UUID hợp lệ — khiến MỌI lần gọi POST /applications với job này trả về 400 "jobId must be a
+ * UUID", làm tính năng Ứng tuyển không demo được dù giao diện/luồng đều đúng.
+ *
+ * Chạy: cd backend && npx ts-node prisma/seed-demo.ts
  */
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
@@ -49,7 +56,7 @@ async function main() {
   });
 
   const jobDangChoDuyet = await prisma.job.upsert({
-    where: { id: '00000000-0000-0000-0000-000000000001' },
+    where: { id: 'a0000000-0000-4000-8000-000000000001' },
     update: {
       title: 'Nhân viên phục vụ quán cà phê cuối tuần',
       description:
@@ -62,7 +69,7 @@ async function main() {
       employerId: employer.id,
     },
     create: {
-      id: '00000000-0000-0000-0000-000000000001',
+      id: 'a0000000-0000-4000-8000-000000000001',
       title: 'Nhân viên phục vụ quán cà phê cuối tuần',
       description:
         'Phục vụ đồ uống, dọn dẹp bàn, hỗ trợ pha chế cơ bản vào ca cuối tuần. Không yêu cầu kinh nghiệm, được đào tạo tại chỗ.',
@@ -76,7 +83,7 @@ async function main() {
   });
 
   const jobDaDuyet = await prisma.job.upsert({
-    where: { id: '00000000-0000-0000-0000-000000000002' },
+    where: { id: 'a0000000-0000-4000-8000-000000000002' },
     update: {
       title: 'Nhân viên bán hàng thời vụ dịp lễ',
       description:
@@ -89,7 +96,7 @@ async function main() {
       employerId: employer.id,
     },
     create: {
-      id: '00000000-0000-0000-0000-000000000002',
+      id: 'a0000000-0000-4000-8000-000000000002',
       title: 'Nhân viên bán hàng thời vụ dịp lễ',
       description:
         'Hỗ trợ bán hàng, tư vấn khách, sắp xếp quầy kệ trong đợt cao điểm dịp lễ. Ưu tiên sinh viên rảnh buổi tối.',
@@ -103,10 +110,10 @@ async function main() {
   });
 
   await prisma.job.upsert({
-    where: { id: '00000000-0000-0000-0000-000000000003' },
+    where: { id: 'a0000000-0000-4000-8000-000000000003' },
     update: {},
     create: {
-      id: '00000000-0000-0000-0000-000000000003',
+      id: 'a0000000-0000-4000-8000-000000000003',
       title: 'Nhân viên giao hàng bán thời gian',
       description:
         'Giao hàng khu vực nội thành bằng xe máy, chủ động thời gian, thanh toán theo đơn.',
@@ -120,10 +127,10 @@ async function main() {
   });
 
   await prisma.job.upsert({
-    where: { id: '00000000-0000-0000-0000-000000000004' },
+    where: { id: 'a0000000-0000-4000-8000-000000000004' },
     update: {},
     create: {
-      id: '00000000-0000-0000-0000-000000000004',
+      id: 'a0000000-0000-4000-8000-000000000004',
       title: 'Gia sư dạy kèm buổi tối',
       description:
         'Dạy kèm học sinh cấp 2, các buổi tối trong tuần, ưu tiên sinh viên sư phạm hoặc CNTT.',

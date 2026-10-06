@@ -61,7 +61,7 @@ const DANH_SACH_MAN_HINH: ManHinh[] = [
   { file: 'hinh-1-2-tim-kiem-loc.png', route: '/?q=b%C3%A1n+h%C3%A0ng', vaiTro: null },
   {
     file: 'hinh-1-3-chi-tiet-tin.png',
-    route: '/viec-lam/00000000-0000-0000-0000-000000000002',
+    route: '/viec-lam/a0000000-0000-4000-8000-000000000002',
     vaiTro: null,
   },
   {
@@ -75,7 +75,7 @@ const DANH_SACH_MAN_HINH: ManHinh[] = [
   },
   { file: 'hinh-3-5-ho-so-ung-vien.png', route: '/ho-so', vaiTro: 'candidate' },
   { file: 'hinh-3-1-dang-tin.png', route: '/nha-tuyen-dung/dang-tin', vaiTro: 'employer' },
-  { file: 'hinh-3-2-quan-ly-ung-vien.png', route: '/nha-tuyen-dung/tin/00000000-0000-0000-0000-000000000002/ung-vien', vaiTro: 'employer' },
+  { file: 'hinh-3-2-quan-ly-ung-vien.png', route: '/nha-tuyen-dung/tin/a0000000-0000-4000-8000-000000000002/ung-vien', vaiTro: 'employer' },
   { file: 'hinh-3-3-duyet-tin-admin.png', route: '/quan-tri', vaiTro: 'admin' },
 ];
 

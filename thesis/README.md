@@ -15,10 +15,13 @@ chạy lại script rồi copy đè file mới vào đây — không sửa tay f
 - **`refs/`** — xem `refs/README.md`: 14 tài liệu tham khảo đều là nguồn trực tuyến (RFC,
   trang sản phẩm, tài liệu framework), trỏ thẳng tới `docs/bao-cao/07-tai-lieu-tham-khao.md`
   thay vì sao chép lại nội dung bên thứ ba vào repo.
+- **`abs/`** — `demo-user-admin.mp4` (~75 giây): video demo quay THẬT bằng Playwright điều
+  khiển trình duyệt thật trên ứng dụng đang chạy (không dựng/ghép ảnh tĩnh) — vai trò ứng
+  viên (tìm việc, lọc, xem chi tiết, đăng nhập, ứng tuyển thật, xem thông báo, hồ sơ) rồi vai
+  trò quản trị viên (tổng quan thống kê, duyệt tin thật, xem lại trạng thái sau khi duyệt).
+  Script quay: `scripts/bao_cao_hinh/quay-demo.ts`.
 
 ## Không tạo (nêu rõ lý do, không bỏ sót)
 
 - **`html/`** — quy định liệt kê thư mục này cho "tài liệu dạng web"; đồ án này không có bản
   xuất HTML riêng (chỉ có `.docx`/`.pdf`), nên không tạo thư mục rỗng.
-- **`abs/`** — quy định dùng cho slide thuyết trình (`.PPT`, `.AVI`); chưa có slide thuyết
-  trình nào được yêu cầu/soạn trong phạm vi công việc đã làm. Nếu cần, hãy yêu cầu tạo riêng.

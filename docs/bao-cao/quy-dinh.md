@@ -113,3 +113,30 @@ người dùng).
 Không còn điểm nào trong 4 mục trên là "tự suy đoán" nữa — tất cả đã có bằng chứng trực tiếp
 từ biểu mẫu chính thức BM5. Điểm còn lại chưa giải quyết dứt điểm: định dạng tài liệu tham khảo
 (xem "Mâu thuẫn CHƯA GIẢI QUYẾT" ở mục 3).
+
+## 7. Lỗi thật phát hiện khi làm đẹp giao diện + quay video demo (06/10)
+
+Theo yêu cầu người dùng "làm đẹp giao diện web thật, chụp lại ảnh thật cho báo cáo, quay video
+demo" — quá trình thực hiện (không phải đọc code suông) phát hiện 2 lỗi thật, đã sửa:
+
+1. **"Hình 1.2" trong báo cáo thực ra là ảnh chụp trang lỗi 404.** Script chụp ảnh cũ trỏ vào
+   route `/viec-lam` — route này không tồn tại (chỉ có `/viec-lam/[id]` cho chi tiết tin, bộ
+   lọc nằm ngay trên trang chủ). Đã kiểm tra `area`/`shift` filter dùng so khớp CHÍNH XÁC
+   (Prisma `equals`) nên không ra kết quả với dữ liệu mẫu hiện tại (area/shift mẫu là mô tả tự
+   do, không khớp các giá trị cố định trong UI) — chỉ `q=` (tìm kiếm, dùng `contains`) chắc
+   chắn ra kết quả thật. Đã sửa route chụp ảnh sang trang chủ với `q=bán hàng` (đã xác minh qua
+   API thật trước khi dùng), chụp lại toàn bộ 8 ảnh có vai trò, build lại báo cáo.
+2. **Tính năng "Ứng tuyển" lỗi 400 với MỌI job trong dữ liệu mẫu.** `CreateApplicationDto.jobId`
+   dùng `@IsUUID()` (class-validator), kiểm tra đúng version UUID. ID job mẫu cũ dạng
+   `00000000-0000-0000-0000-00000000000N` có version nibble "0" — không phải UUID hợp lệ theo
+   bất kỳ version nào (1-5) — nên MỌI lần gọi `POST /applications` với các job này đều bị từ
+   chối ngay ở bước validate, dù giao diện/luồng code đều đúng. Phát hiện khi quay video demo
+   live (click "Ứng tuyển ngay" không tạo được đơn ứng tuyển thật). Đã đổi ID 4 job mẫu trong
+   `backend/prisma/seed-demo.ts` sang đúng định dạng UUID v4 (`a0000000-0000-4000-8000-
+   00000000000N`), xoá dữ liệu cũ, seed lại, cập nhật các script tham chiếu ID cũ
+   (`chup-man-hinh.ts`, `quay-demo.ts`) — đã xác minh lại thật: `POST /applications` trả về
+   `201`, đơn ứng tuyển xuất hiện thật trong database.
+
+Cả hai đều là lỗi thật trong code/dữ liệu mẫu đã tồn tại từ trước, không phải do thay đổi lần
+này gây ra — chỉ được phát hiện vì lần này THỬ THẬT (chạy ứng dụng, bấm nút, đọc response) thay
+vì chỉ đọc code.
