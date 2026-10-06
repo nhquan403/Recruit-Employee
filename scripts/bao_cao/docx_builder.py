@@ -213,8 +213,9 @@ class BaoCaoBuilder:
 
     @staticmethod
     def _dat_so_trang_bat_dau_lai_tu_1(section) -> None:
-        """`quy-dinh.md` §3: bắt đầu đánh số từ MỞ ĐẦU = trang 1 — đặt lại `w:pgNumType`
-        của section nội dung, không tin giá trị mặc định của Word."""
+        """`quy-dinh.md` §3: bắt đầu đánh số từ CHƯƠNG 1 = trang 1 (MỞ ĐẦU và mọi trang trước
+        đó không đánh số) — đặt lại `w:pgNumType` của section nội dung, không tin giá trị mặc
+        định của Word."""
         sect_pr = section._sectPr
         pg_num_type = sect_pr.find(qn("w:pgNumType"))
         if pg_num_type is None:

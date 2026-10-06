@@ -159,3 +159,75 @@ demo" — quá trình thực hiện (không phải đọc code suông) phát hi�
 Cả bốn đều là lỗi thật trong code/dữ liệu mẫu/script đã tồn tại từ trước hoặc lộ ra khi mở rộng
 script quay demo sang vai trò nhà tuyển dụng, không phải do thay đổi giao diện gây ra — chỉ được
 phát hiện vì lần này THỬ THẬT (chạy ứng dụng, bấm nút, đọc response) thay vì chỉ đọc code.
+
+## 8. Sắp xếp lại thứ tự "phần đầu" theo đúng biểu mẫu BM5 gốc (06/10)
+
+Người dùng gửi lại đúng file `.docx` gốc của biểu mẫu trình bày (cùng file đã dùng cho trang
+bìa ở Phase 4) và yêu cầu: "trừ trang bìa ra, thay thế các trang khác vào đồ án hiện tại", kèm
+nghi vấn "hiện tại hình như chưa có đánh số trang từ phần nội dung".
+
+**Kiểm tra số trang (kết quả: KHÔNG phải lỗi).** Dựng thật `.docx` → `.pdf` qua LibreOffice
+headless, chụp ảnh thật từng trang: trang ngay trước CHƯƠNG 1 (lúc đó là trang tuyệt đối 20-21
+của PDF, thuộc MỞ ĐẦU) đúng là không có chân trang — nhưng đây là THEO ĐÚNG THIẾT KẾ đã chốt
+("mọi trang trước Chương 1 ... đều không đánh số", mục 3), không phải lỗi. Trang CHƯƠNG 1 (PDF
+trang 22) có chân trang đầy đủ: "GVHD: ThS. Trầm Hoàng Nam · SVTH: Bùi Anh Khoa · 1" — số trang
+hoạt động đúng. Người dùng hẳn đã xem đúng một trang MỞ ĐẦU (hợp lệ không có số) mà tưởng là
+lỗi lan ra toàn bộ phần nội dung.
+
+**Đọc toàn văn biểu mẫu BM5 bằng python-docx** (không chỉ trang bìa như Phase 4 trước đó) phát
+hiện mỗi trang mẫu đều có ghi chú vị trí thật dạng "xếp sau trang X" — đây là bằng chứng trực
+tiếp về THỨ TỰ các trang "phần đầu", trước nay repo chưa đối chiếu:
+
+- LỜI MỞ ĐẦU: "xếp sau trang lót"
+- LỜI CẢM ƠN: "xếp sau trang lời mở đầu"
+- NHẬN XÉT (của cơ quan thực tập, nếu có): "xếp sau trang Lời cảm ơn"
+- NHẬN XÉT (của GVHD): "xếp sau trang nhận xét của cơ quan thực tập"
+- NHẬN XÉT (của giảng viên chấm): "xếp sau trang Nhận xét của giảng viên hướng dẫn"
+- DANH MỤC CÁC BẢNG, SƠ ĐỒ, HÌNH: "Xếp sau trang Mục lục"
+- KÍ HIỆU CÁC CỤM TỪ VIẾT TẮT: "Được xếp sau trang Danh mục Các bảng, sơ đồ, hình"
+
+Suy ra thứ tự đầy đủ: Bìa → Lót → **MỞ ĐẦU** → **LỜI CẢM ƠN** → NHẬN XÉT (GVHD) → NHẬN XÉT
+(giảng viên chấm) → MỤC LỤC → DANH MỤC BẢNG/HÌNH → KÍ HIỆU VIẾT TẮT → [Chương 1...].
+
+Thứ tự ĐANG CÓ trong repo (từ Phase 4, dựng trước khi đọc kỹ các ghi chú "xếp sau" này) lại là:
+Bìa → Lót → NHẬN XÉT (GVHD) → NHẬN XÉT (giảng viên chấm) → LỜI CẢM ƠN → MỤC LỤC → DANH MỤC HÌNH
+→ DANH MỤC BẢNG → KÍ HIỆU VIẾT TẮT → TÓM TẮT → **MỞ ĐẦU** (ngay trước Chương 1) — sai 2 điểm:
+MỞ ĐẦU bị đẩy xuống cuối thay vì đứng ngay sau trang lót, và khối NHẬN XÉT đứng trước LỜI CẢM
+ƠN thay vì sau.
+
+**Đã sửa (06/10):**
+
+1. Tách `00-phan-dau.md` (trước đây chứa toàn bộ "phần đầu") thành 2 file: `00-phan-dau.md` chỉ
+   còn bìa + trang lót; phần còn lại (cảm ơn/nhận xét/mục lục/danh mục/kí hiệu/tóm tắt) chuyển
+   sang `01b-phan-sau-mo-dau.md` — xử lý SAU `01-mo-dau.md` (MỞ ĐẦU) trong
+   `scripts/xuat-ban-word.py` (hằng số `FILE_PHAN_SAU_MO_DAU`), đúng thứ tự BM5 ở trên.
+2. Gộp "DANH MỤC CÁC HÌNH" + "DANH MỤC CÁC BẢNG" (2 trang tách riêng trước đây) thành MỘT trang
+   "DANH MỤC CÁC BẢNG, HÌNH" (đúng BM5: một danh mục duy nhất) — vẫn giữ quyết định đơn giản hoá
+   trước đó (gộp Sơ đồ vào chung Hình, không tách danh mục Sơ đồ riêng — xem mục 3).
+3. Không tạo trang "NHẬN XÉT của cơ quan thực tập" (đã chốt trước đó — đồ án không thực tập ở
+   doanh nghiệp nào), nên NHẬN XÉT (GVHD) xếp ngay sau LỜI CẢM ƠN.
+4. TÓM TẮT (không có trong BM5, tự thêm vì hợp lý cho một báo cáo ~45 trang) giữ nguyên vị trí
+   cuối cùng của phần đầu, ngay trước Chương 1 — BM5 không đề cập nên không có "xếp sau" nào
+   ràng buộc vị trí này.
+
+**Lỗi thật phát hiện khi dựng lại (đã sửa trước khi xuất bản):** lần dựng đầu tạo ra MỘT TRANG
+TRẮNG thật giữa MỞ ĐẦU và LỜI CẢM ƠN (PDF 61 trang thay vì đúng 60) — nguyên nhân: vòng lặp xử
+lý `01-mo-dau.md` trong `xuat-ban-word.py` đã tự gọi `builder.ngat_trang()` (ngắt trang) sau khi
+xử lý xong file, và `01b-phan-sau-mo-dau.md` (file mới) LẠI có thêm một dòng `\pagebreak` mở đầu
+— hai lần ngắt trang liên tiếp ra một trang trắng. Xác nhận bằng cách chụp ảnh thật trang nghi
+ngờ (hoàn toàn trống) rồi xoá dòng `\pagebreak` thừa, dựng lại, xác nhận còn đúng 60 trang,
+không còn trang trắng.
+
+**Đã xác minh lại bằng ảnh chụp thật PDF sau khi sửa:** bìa (trang 1, không đổi), trang lót
+(trang 2), MỞ ĐẦU (trang 3-8), LỜI CẢM ƠN (trang 9), NHẬN XÉT GVHD + bản đầy đủ (trang 10-12),
+NHẬN XÉT giảng viên chấm + bản đầy đủ (trang 13-15), MỤC LỤC (trang 16-18, không lẫn tiêu đề
+phần đầu nào), DANH MỤC CÁC BẢNG, HÌNH gộp một trang/hai trang (trang 19-20), KÍ HIỆU VIẾT TẮT
+(trang 21), TÓM TẮT (trang 22), CHƯƠNG 1 bắt đầu trang 23 với chân trang "GVHD: ... · SVTH: ...
+· 1" đúng như thiết kế.
+
+**Vấn đề nhỏ CHƯA sửa, biết nhưng để nguyên trong lần này (ngoài phạm vi yêu cầu hôm nay):**
+Danh mục Hình hiển thị không theo đúng thứ tự số chương (ra Hình 2.1, 2.2, 2.3, 3.1, **1.1**,
+1.2, 1.3, 3.2, 3.3, 3.4 thay vì 1.1 → 1.2 → ... → 2.1 → ... → 3.1 → ...) — lỗi thật đã có từ
+trước (xác nhận bằng cách so bản PDF cũ, lỗi y hệt), không phải do lần gộp danh mục này gây ra.
+Nguyên nhân nằm ở `thu_thap_hinh_bang()` trong `xuat-ban-word.py` — chưa điều tra sâu, cần một
+lượt riêng nếu muốn sửa.

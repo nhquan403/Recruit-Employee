@@ -26,10 +26,17 @@ from bao_cao.markdown_parser import Node, parse_file  # noqa: E402
 from bao_cao.muc_luc import dung_danh_sach_co_so_trang, dung_muc_luc  # noqa: E402
 
 # Thứ tự file đúng bố cục PDF quy định (mục 2) + kiến trúc thư mục đã chốt trong plan.md.
+# 06/10: FILE_PHAN_DAU chỉ còn bìa + trang lót — phần "cảm ơn/nhận xét/mục lục/danh mục/kí
+# hiệu/tóm tắt" đã dời sang FILE_PHAN_SAU_MO_DAU, xử lý SAU 01-mo-dau.md (MỞ ĐẦU) đúng thứ tự
+# "xếp sau..." mà biểu mẫu BM5 ghi cho từng trang mẫu — xem đầu 01b-phan-sau-mo-dau.md.
 FILE_PHAN_DAU = "00-phan-dau.md"
+FILE_PHAN_SAU_MO_DAU = "01b-phan-sau-mo-dau.md"
 
 # BM5 (biểu mẫu chính thức): "Bắt đầu đánh số trang từ chương 1" — MỞ ĐẦU vẫn KHÔNG đánh số,
 # nên nằm chung nhóm "chưa đánh số" với 00-phan-dau.md, không phải nhóm "đánh số từ Chương 1".
+# Chỉ 01-mo-dau.md được quét heading (tiêu đề con của MỞ ĐẦU xuất hiện trong mục lục, đúng mẫu
+# BM5 "Lời mở đầu: ... Trang"); FILE_PHAN_DAU và FILE_PHAN_SAU_MO_DAU KHÔNG được quét (tiêu đề
+# "LỜI CẢM ƠN"/"NHẬN XÉT"/... không xuất hiện trong mục lục).
 FILE_CHUA_DANH_SO = [
     "01-mo-dau.md",
 ]
@@ -207,10 +214,12 @@ def main() -> None:
     quy_dinh = doc_quy_dinh()
     builder = BaoCaoBuilder(quy_dinh, thu_muc_anh)
 
-    # --- Section 1: bìa/nhận xét/cảm ơn/mục lục/tóm tắt/MỞ ĐẦU — không đầu/chân trang, không
-    # số trang. Theo biểu mẫu chính thức BM5 ("Bắt đầu đánh số trang từ chương 1"), MỞ ĐẦU nằm
-    # trong nhóm KHÔNG đánh số này, không phải điểm bắt đầu đánh số (đã sửa so với quyết định
-    # ban đầu — xem docs/bao-cao/quy-dinh.md mục 3).
+    # --- Section 1: bìa/lót/MỞ ĐẦU/cảm ơn/nhận xét/mục lục/danh mục/kí hiệu/tóm tắt — không
+    # đầu/chân trang, không số trang. Theo biểu mẫu chính thức BM5 ("Bắt đầu đánh số trang từ
+    # chương 1"), toàn bộ nhóm này nằm trong nhóm KHÔNG đánh số, không phải điểm bắt đầu đánh số
+    # (đã sửa so với quyết định ban đầu — xem docs/bao-cao/quy-dinh.md mục 3). Thứ tự xử lý BÊN
+    # TRONG nhóm này (bìa/lót → MỞ ĐẦU → phần sau) khớp đúng chuỗi "xếp sau..." mà BM5 ghi cho
+    # từng trang mẫu — xem đầu 01b-phan-sau-mo-dau.md (06/10).
     phan_dau_path = docs_dir / FILE_PHAN_DAU
     if not phan_dau_path.exists():
         raise FileNotFoundError(
@@ -228,6 +237,14 @@ def main() -> None:
         for node in parse_file(duong_dan):
             xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu, danh_sach_hinh, danh_sach_bang)
         builder.ngat_trang()
+
+    phan_sau_mo_dau_path = docs_dir / FILE_PHAN_SAU_MO_DAU
+    if not phan_sau_mo_dau_path.exists():
+        raise FileNotFoundError(
+            f"Chưa có {phan_sau_mo_dau_path} — tách từ 00-phan-dau.md ngày 06/10, kiểm tra lại."
+        )
+    for node in parse_file(phan_sau_mo_dau_path):
+        xu_ly_node(builder, node, thu_muc_anh, toan_bo_heading, muc_luc_du_lieu, danh_sach_hinh, danh_sach_bang)
 
     # --- Section 2: CHƯƠNG 1 trở đi — đánh số trang bắt đầu lại từ 1 (đúng BM5)
     builder.bat_dau_section_noi_dung()
