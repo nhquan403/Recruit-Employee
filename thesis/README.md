@@ -29,3 +29,17 @@ chạy lại script rồi copy đè file mới vào đây — không sửa tay f
 
 - **`html/`** — quy định liệt kê thư mục này cho "tài liệu dạng web"; đồ án này không có bản
   xuất HTML riêng (chỉ có `.docx`/`.pdf`), nên không tạo thư mục rỗng.
+
+## Hai thư mục thêm 19/10 — KHÔNG thuộc danh sách bắt buộc mục 4.3 ở trên
+
+Phục vụ một yêu cầu nộp bài RIÊNG của học phần (mục 6.3 hướng dẫn học phần: nộp 1 file nén gồm
+báo cáo Word + bản thuyết trình PowerPoint có link video + mã nguồn lên LMS) — không nhầm với
+cấu trúc `thesis/` mục 4.3 ở trên.
+
+- **`pptx/`** — bản thuyết trình `.pptx`, dựng từ `scripts/noi-dung-slide.py` (nguồn nội dung
+  duy nhất) bằng `scripts/tao-slide.py`.
+- **`kich-ban/`** — kịch bản nói (`.md`/`.docx`/`.pdf`), dựng từ cùng nguồn bằng
+  `scripts/tao-kich-ban.py` + `scripts/xuat-kich-ban-in.py`.
+
+Xem `docs/huong-dan-nop-bai.md` cho quy trình nộp bài đầy đủ, và
+`scripts/dong-goi-nop-bai.sh` để đóng gói file nén nộp LMS.

@@ -54,6 +54,7 @@ class ThongTinDeTai:
     truong: str
     don_vi_truc_thuoc: str
     khoa: str
+    nganh: str
     ten_de_tai: str
     svth: str
     mssv: str
@@ -107,6 +108,7 @@ def doc_quy_dinh(duong_dan: Path | None = None) -> QuyDinh:
         truong=_strip_md(raw["Trường"]),
         don_vi_truc_thuoc=_strip_md(raw["Đơn vị trực thuộc"]),
         khoa=_strip_md(raw["Khoa"]),
+        nganh=_strip_md(raw["Ngành"]),
         ten_de_tai=_strip_md(raw["Tên đề tài"]),
         svth=_strip_md(raw["Sinh viên thực hiện (SVTH)"]),
         mssv=_strip_md(raw["MSSV"]),

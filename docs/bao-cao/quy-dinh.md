@@ -18,6 +18,7 @@ thức BM5 do người dùng gửi, đọc toàn bộ — nguồn có thẩm quy
 | Trường | Trường Đại học Trà Vinh |
 | Đơn vị trực thuộc | Khoa Kỹ thuật và Công nghệ |
 | Khoa | Khoa Công nghệ Thông tin |
+| Ngành | Công nghệ Thông tin |
 | Tên đề tài | XÂY DỰNG WEBSITE KẾT NỐI NGƯỜI TÌM VIỆC LÀM THÊM VỚI NHÀ TUYỂN DỤNG |
 | Sinh viên thực hiện (SVTH) | Bùi Anh Khoa |
 | MSSV | 170123594 |
@@ -26,6 +27,11 @@ thức BM5 do người dùng gửi, đọc toàn bộ — nguồn có thẩm quy
 | Giảng viên hướng dẫn (GVHD) | ThS. Trầm Hoàng Nam |
 | Địa điểm - thời gian | TP. Hồ Chí Minh, tháng 9 năm 2026 |
 | Loại đồ án | Cơ sở ngành |
+
+**Dòng "Ngành" (thêm 19/10):** đề cương gốc không ghi field "Ngành" riêng, chỉ có "Khoa: Khoa
+Công nghệ Thông tin" — suy ra "Công nghệ Thông tin" bằng cách bỏ chữ "Khoa", khớp với dòng đã
+viết tay sẵn ở `01b-phan-sau-mo-dau.md` ("Ngành: Công nghệ Thông tin"). Đã hỏi và người dùng xác
+nhận giá trị này đúng trước khi thêm vào đây.
 
 **Tiêu đề ngắn cho đầu trang** (để tránh bẫy OOXML #3 — tab stop hỏng nếu tiêu đề dài xuống 2
 dòng): "Website kết nối việc làm thêm" (30 ký tự, không xuống dòng ở khổ A4/Times 13pt).

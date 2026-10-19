@@ -39,3 +39,14 @@ phát triển tiếp theo.
 - Thu hẹp cấu hình CORS về đúng domain thật và bổ sung giới hạn số lần thử đăng nhập sai (rate
   limiting, ví dụ bằng `@nestjs/throttler`) trước khi đưa hệ thống ra khỏi môi trường demo — hai
   điểm đã nêu là đánh đổi phạm vi có chủ đích ở mục 2.11.
+
+## 5.3. Mã nguồn và sản phẩm bàn giao
+
+Toàn bộ mã nguồn, lịch sử phát triển và tài liệu thiết kế đầy đủ của đồ án được công khai tại:
+
+**https://github.com/nhquan403/Recruit-Employee**
+
+Repo gồm mã nguồn front-end (Next.js) và back-end (NestJS), cấu hình Docker Compose để chạy thử
+toàn bộ hệ thống, bộ kiểm thử tự động (xem Chương 4), và nguồn Markdown dựng ra chính báo cáo
+này (`docs/bao-cao/`, xem `docs/bao-cao/quy-dinh.md` để biết quy trình xuất bản). Video thuyết
+trình đồ án đính kèm trong bản thuyết trình PowerPoint nộp cùng báo cáo này.
